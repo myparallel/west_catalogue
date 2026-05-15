@@ -98,10 +98,29 @@ var products = [
   { sku: "WE-X280", page: 4, name: "Industrial Edge Computing Gateway", desc: "4G/LoRa/RS485 edge gateway, 128 devices, 16 I/O.", docs: 3 }
 ];
 
+function skuKey(sku) { return sku.replace(/-/g, ""); }
+
+function liveDocCount(p) {
+  try {
+    var raw = localStorage.getItem("doc_count_" + skuKey(p.sku));
+    if (raw !== null) return JSON.parse(raw);
+  } catch(e) {}
+  return p.docs;
+}
+
+function liveImgCount(sku) {
+  try {
+    var raw = localStorage.getItem("img_count_" + skuKey(sku));
+    if (raw !== null) return JSON.parse(raw);
+  } catch(e) {}
+  return -1;
+}
+
 function buildTable() {
   var list = document.getElementById("product-list");
   list.innerHTML = "";
-  document.getElementById("product-count").textContent = products.length + " product" + (products.length > 1 ? "s" : "");
+  var count = products.length;
+  document.getElementById("product-count").textContent = count + " product" + (count > 1 ? "s" : "");
 
   // Header
   var header = document.createElement("div");
@@ -110,8 +129,9 @@ function buildTable() {
     '<div class="catalog-index__cell catalog-index__cell--page"><span lang="en">Page</span><span lang="zh" hidden>页码</span></div>' +
     '<div class="catalog-index__cell catalog-index__cell--sku"><span lang="en">Model</span><span lang="zh" hidden>型号</span><span class="hdr-name-mobile"><span lang="en"> / Product Name</span><span lang="zh" hidden> / 产品名称</span></span></div>' +
     '<div class="catalog-index__cell catalog-index__cell--name"><span lang="en">Product Name</span><span lang="zh" hidden>产品名称</span></div>' +
-    '<div class="catalog-index__cell catalog-index__cell--actions"><span lang="en">PDF</span><span lang="zh" hidden>PDF</span></div>' +
-    '<div class="catalog-index__cell catalog-index__cell--actions"><span lang="en">Docs</span><span lang="zh" hidden>文档下载</span></div>';
+    '<div class="catalog-index__cell catalog-index__cell--actions"><span lang="en">Print</span><span lang="zh" hidden>打印</span></div>' +
+    '<div class="catalog-index__cell catalog-index__cell--actions"><span lang="en">Docs</span><span lang="zh" hidden>文档下载</span></div>' +
+    '<div class="catalog-index__cell catalog-index__cell--actions"></div>';
   list.appendChild(header);
 
   products.forEach(function(p) {
@@ -119,8 +139,9 @@ function buildTable() {
     row.className = "catalog-index__row";
     var detailUrl = "products/" + p.sku + "/";
     var pdfUrl = detailUrl + "?dl=1";
-    var docsBtn = p.docs > 0
-      ? '<a class="catalog-index__dl" href="' + detailUrl + '#downloads">PDF (' + p.docs + ')</a>'
+    var lc = liveDocCount(p);
+    var docsBtn = lc > 0
+      ? '<a class="catalog-index__dl" href="' + detailUrl + '#downloads"><span lang="en">Data Download</span><span lang="zh" hidden>资料下载</span> (' + lc + ')</a>'
       : '<span class="catalog-index__dl catalog-index__dl--na">—</span>';
 
     row.innerHTML =
@@ -128,9 +149,34 @@ function buildTable() {
       '<div class="catalog-index__cell catalog-index__cell--sku"><a href="' + detailUrl + '">' + p.sku + '</a><div class="prod-name-mobile"><a href="' + detailUrl + '">' + p.name + '</a></div></div>' +
       '<div class="catalog-index__cell catalog-index__cell--name"><a href="' + detailUrl + '">' + p.name + '</a></div>' +
       '<div class="catalog-index__cell catalog-index__cell--actions"><a class="catalog-index__dl" href="' + pdfUrl + '" target="_blank">PRINT</a></div>' +
-      '<div class="catalog-index__cell catalog-index__cell--actions">' + docsBtn + '</div>';
+      '<div class="catalog-index__cell catalog-index__cell--actions">' + docsBtn + '</div>' +
+      '<div class="catalog-index__cell catalog-index__cell--actions"><button type="button" class="catalog-del-btn" data-sku="' + p.sku + '" title="Delete">&times;</button></div>';
 
     list.appendChild(row);
+  });
+
+  // Bind delete buttons
+  list.querySelectorAll(".catalog-del-btn").forEach(function(btn) {
+    btn.addEventListener("click", function(e) {
+      e.stopPropagation();
+      var sku = btn.getAttribute("data-sku");
+      // clear localStorage for this product
+      var key = skuKey(sku);
+      try { localStorage.removeItem("gallery_" + key); } catch(e) {}
+      try { localStorage.removeItem("docs_" + key); } catch(e) {}
+      try { localStorage.removeItem("videos_" + key); } catch(e) {}
+      try { localStorage.removeItem("doc_count_" + key); } catch(e) {}
+      try { localStorage.removeItem("img_count_" + key); } catch(e) {}
+      try { localStorage.removeItem("video_count_" + key); } catch(e) {}
+      // remove from array
+      var idx = -1;
+      for (var i = 0; i < products.length; i++) {
+        if (products[i].sku === sku) { idx = i; break; }
+      }
+      if (idx > -1) products.splice(idx, 1);
+      // rebuild table
+      buildTable();
+    });
   });
 }
 

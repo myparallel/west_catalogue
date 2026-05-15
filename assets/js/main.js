@@ -103,8 +103,16 @@
     return result;
   }
 
+  function storeLiveCounts(n) {
+    var sku = (window.__PRODUCT_CONFIG__ && window.__PRODUCT_CONFIG__.sku) || "";
+    if (sku) {
+      try { localStorage.setItem("img_count_" + sku.replace(/-/g, ""), JSON.stringify(n)); } catch(e) {}
+    }
+  }
+
   function render() {
     var all = getAllImages();
+    storeLiveCounts(all.length);
     updateHeroImage();
     // toggle empty / content
     var emptyEl = document.getElementById("gallery-empty");
@@ -472,8 +480,16 @@
     document.body.removeChild(a);
   }
 
+  function storeLiveDocCount(n) {
+    var sku = (window.__PRODUCT_CONFIG__ && window.__PRODUCT_CONFIG__.sku) || "";
+    if (sku) {
+      try { localStorage.setItem("doc_count_" + sku.replace(/-/g, ""), JSON.stringify(n)); } catch(e) {}
+    }
+  }
+
   function render() {
     var all = getAllDocs();
+    storeLiveDocCount(all.length);
     updateHeroSection();
     // toggle empty / content
     var emptyEl = document.getElementById("doc-empty");
@@ -767,8 +783,16 @@
     if (placeholder) placeholder.hidden = true;
   }
 
+  function storeLiveVideoCount(n) {
+    var sku = (window.__PRODUCT_CONFIG__ && window.__PRODUCT_CONFIG__.sku) || "";
+    if (sku) {
+      try { localStorage.setItem("video_count_" + sku.replace(/-/g, ""), JSON.stringify(n)); } catch(e) {}
+    }
+  }
+
   function render() {
     var all = getAllVideos();
+    storeLiveVideoCount(all.length);
     // toggle empty / content
     var emptyEl = document.getElementById("video-empty");
     var contentEl = document.getElementById("video-content");

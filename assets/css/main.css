@@ -1338,7 +1338,7 @@ body.modal-open {
 
 .catalog-index__row {
   display: grid;
-  grid-template-columns: 48px 1fr 2.2fr 80px 80px;
+  grid-template-columns: 48px 1fr 2.2fr 80px 80px 44px;
   align-items: center;
   border-bottom: 1px solid var(--border);
   transition: background 0.12s ease;
@@ -1423,6 +1423,29 @@ body.modal-open {
   font-weight: 400;
 }
 
+.catalog-del-btn {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #dc2626;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s ease, color 0.12s ease;
+  opacity: 0.5;
+}
+
+.catalog-del-btn:hover {
+  background: #dc2626;
+  color: #fff;
+  opacity: 1;
+}
+
 .prod-name-mobile,
 .hdr-name-mobile {
   display: none;
@@ -1430,7 +1453,7 @@ body.modal-open {
 
 @media (max-width: 700px) {
   .catalog-index__row {
-    grid-template-columns: 36px 1fr 60px 60px;
+    grid-template-columns: 36px 1fr 60px 60px 40px;
   }
   .catalog-index__cell--name {
     display: none;

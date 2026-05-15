@@ -900,6 +900,173 @@ body.modal-open {
 }
 
 /* ========================================
+   PDF mode — applied before html2canvas capture
+   ======================================== */
+body.pdf-mode .site-header,
+body.pdf-mode .site-footer,
+body.pdf-mode .quote-modal,
+body.pdf-mode .btn-pdf,
+body.pdf-mode #quote-open-btn,
+body.pdf-mode .dl-link,
+body.pdf-mode .doc-note,
+body.pdf-mode .menu-toggle,
+body.pdf-mode .skip-link,
+body.pdf-mode .thumbs {
+  display: none !important;
+}
+
+body.pdf-mode {
+  background: #fff !important;
+}
+
+body.pdf-mode .wrap {
+  width: 92% !important;
+  max-width: 720px !important;
+}
+
+body.pdf-mode section {
+  padding: 0.9rem 0 !important;
+}
+
+body.pdf-mode section:nth-of-type(even) {
+  background: none !important;
+  border: none !important;
+}
+
+body.pdf-mode .hero {
+  padding: 0.3rem 0 0.6rem !important;
+}
+
+body.pdf-mode .hero-grid {
+  grid-template-columns: 1fr !important;
+  gap: 0.75rem !important;
+}
+
+body.pdf-mode .hero h1 {
+  font-size: 1.25rem !important;
+  margin-bottom: 0.2rem !important;
+}
+
+body.pdf-mode .lead {
+  font-size: 0.78rem !important;
+  margin-bottom: 0.4rem !important;
+}
+
+body.pdf-mode .hero-visual {
+  box-shadow: none !important;
+  border: 0.5pt solid #ccc !important;
+  padding: 0.35rem !important;
+}
+
+body.pdf-mode .hero-visual img {
+  max-height: 2.8in !important;
+  aspect-ratio: auto !important;
+}
+
+body.pdf-mode .section-title {
+  font-size: 1.05rem !important;
+  margin-bottom: 0.15rem !important;
+}
+
+body.pdf-mode .section-sub {
+  font-size: 0.72rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+body.pdf-mode .highlights {
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0.4rem !important;
+}
+
+body.pdf-mode .card {
+  box-shadow: none !important;
+  border: 0.5pt solid #ddd !important;
+  padding: 0.45rem 0.55rem !important;
+}
+
+body.pdf-mode .card h3 {
+  font-size: 0.78rem !important;
+  margin-bottom: 0.1rem !important;
+}
+
+body.pdf-mode .card p {
+  font-size: 0.7rem !important;
+  color: #000 !important;
+}
+
+body.pdf-mode .two-col {
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0.4rem !important;
+}
+
+body.pdf-mode .stage {
+  box-shadow: none !important;
+  border: 0.5pt solid #ccc !important;
+  min-height: auto !important;
+  padding: 0.25rem !important;
+}
+
+body.pdf-mode .stage img {
+  max-height: 2.8in !important;
+}
+
+body.pdf-mode .spec-table-wrap {
+  box-shadow: none !important;
+  border: 0.5pt solid #ccc !important;
+}
+
+body.pdf-mode table.spec {
+  font-size: 0.7rem !important;
+}
+
+body.pdf-mode table.spec th,
+body.pdf-mode table.spec td {
+  padding: 0.2rem 0.35rem !important;
+  border-bottom: 0.5pt solid #eee !important;
+}
+
+body.pdf-mode .page-badge {
+  background: #eee !important;
+  color: #333 !important;
+  border: 0.5pt solid #ccc !important;
+  font-size: 0.65rem !important;
+  margin-bottom: 0.3rem !important;
+}
+
+body.pdf-mode .video-container {
+  box-shadow: none !important;
+  border: 0.5pt solid #ccc !important;
+  padding: 0.25rem !important;
+}
+
+body.pdf-mode .video-container video {
+  max-height: 2.5in !important;
+}
+
+body.pdf-mode .contact-info {
+  box-shadow: none !important;
+  border: 0.5pt solid #ccc !important;
+  padding: 0.45rem 0.65rem !important;
+  font-size: 0.72rem !important;
+  line-height: 1.4 !important;
+}
+
+body.pdf-mode .contact-info a {
+  color: #000 !important;
+}
+
+body.pdf-mode a {
+  color: #000 !important;
+  text-decoration: underline !important;
+}
+
+body.pdf-mode code {
+  background: #eee !important;
+  color: #333 !important;
+  border-color: #ddd !important;
+}
+
+/* ========================================
    Print / A4 styles
    ======================================== */
 @media print {

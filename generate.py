@@ -346,16 +346,19 @@ window.__PRODUCT_CONFIG__ = {{
     var filename = sku + "-catalogue.pdf";
 
     function generatePDF() {{
-        console.log("PDF generation started");
+        var body = document.body;
+        body.classList.add("pdf-mode");
         var opt = {{
-            margin:       0.4,
+            margin:       [0.3, 0.25, 0.3, 0.25],
             filename:     filename,
             image:        {{ type: 'jpeg', quality: 0.95 }},
-            html2canvas:  {{ scale: 2, useCORS: true, logging: true, allowTaint: false }},
+            html2canvas:  {{ scale: 2, windowWidth: 794, useCORS: true, logging: false }},
             jsPDF:        {{ unit: 'in', format: 'a4', orientation: 'portrait' }}
         }};
         var el = document.getElementById("main");
-        html2pdf().set(opt).from(el).save();
+        html2pdf().set(opt).from(el).save().then(function() {{
+            body.classList.remove("pdf-mode");
+        }});
     }}
 
     btns.forEach(function(b) {{

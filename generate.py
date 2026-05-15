@@ -116,12 +116,9 @@ def build_hero(cfg):
     manual_pdf = cfg.get("manual_pdf", "")
     dl = os.path.basename(manual_pdf) if manual_pdf else ""
     page_num = p.get("page_number", 1)
-    manual_btn = f'<a class="btn btn-primary dl-link" href="{esc(manual_pdf)}" download="{esc(dl)}"><span lang="en">Download Manual (PDF)</span><span lang="zh" hidden>下载手册 (PDF)</span></a>' if manual_pdf else ""
     docs_dropdown, docs_suffix = build_docs_dropdown(cfg)
     doc_note_en = "For technical support or customized OEM versions, email us from <a href=\"#contact\">Contact Information</a>."
     doc_note_zh = "如需技术支持或定制OEM版本，请通过<a href=\"#contact\">联系方式</a>发送邮件。"
-    if manual_pdf:
-        doc_note_en = "English PDF manual. " + doc_note_en
     return f"""<section class="hero wrap" id="overview">
   <div class="hero-grid">
     <div>
@@ -131,7 +128,6 @@ def build_hero(cfg):
       <div class="hero-actions">
         <button type="button" class="btn btn-primary btn-pdf"><span lang="en">Print</span><span lang="zh" hidden>打印</span></button>
         {docs_dropdown}
-        {manual_btn}
         <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote><span lang="en">Request Quote</span><span lang="zh" hidden>获取报价</span></button>
       </div>
       <p class="doc-note"><span lang="en">{doc_note_en}</span><span lang="zh" hidden>{doc_note_zh}</span>{docs_suffix}</p>

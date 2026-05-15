@@ -403,6 +403,7 @@ var currentLang = "en";
 function applyLang(lang) {
   currentLang = lang;
   document.querySelectorAll("[lang]").forEach(function(el) {
+    if (el.tagName === "HTML") return;
     el.hidden = el.getAttribute("lang") !== lang;
   });
   var tb = document.getElementById("lang-toggle");

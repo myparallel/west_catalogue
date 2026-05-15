@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>WES Product Catalogue</title>
-<meta name="description" content="WES IoT sensor product catalogue - Professional agricultural and environmental monitoring solutions." />
+<meta name="description" content="WES IoT sensor product catalogue — professional agricultural and environmental monitoring solutions." />
 <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 <body>
@@ -13,6 +13,9 @@
 <header class="site-header">
   <div class="wrap inner">
     <a class="logo" href="#">WES <span>Catalogue</span></a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <nav class="nav" id="main-nav" aria-label="Primary">
       <a href="#products">Products</a>
       <a href="#about">About</a>
@@ -22,21 +25,23 @@
 </header>
 
 <main id="main">
-  <section class="hero wrap" id="overview">
-    <div class="hero-grid" style="grid-template-columns:1fr">
-      <div style="text-align:center">
-        <h1>WES Product Catalogue</h1>
-        <p class="lead" style="margin-inline:auto">Professional IoT sensing solutions for precision agriculture, environmental monitoring, and smart farming.</p>
-      </div>
+  <section class="catalog-hero">
+    <div class="wrap" style="text-align:center">
+      <h1 class="catalog-hero__title">WES <span>Product Catalogue</span></h1>
+      <p class="catalog-hero__lead">Professional IoT sensing solutions for precision agriculture, environmental monitoring, and smart farming.</p>
+      <p class="catalog-hero__count" id="product-count"></p>
     </div>
   </section>
 
   <section class="wrap" id="products">
-    <h2 class="section-title">Products</h2>
-    <p class="section-sub">Browse our complete range of IoT sensor products.</p>
-    <div class="highlights" id="product-list">
-      <!-- Products are listed here -->
+    <div class="catalog-toolbar">
+      <h2 class="section-title" style="margin:0">Products</h2>
+      <div class="catalog-toolbar__actions">
+        <button type="button" class="btn btn-secondary" id="download-all-pdf">Download All as PDF</button>
+      </div>
     </div>
+    <p class="section-sub">Click a product to view details, or download individual PDFs.</p>
+    <div class="catalog-grid" id="product-list"></div>
   </section>
 
   <section class="wrap" id="about">
@@ -62,28 +67,75 @@
 <footer class="site-footer">
   <div class="wrap footer-meta">
     <span>Hainan World Electronic Science And Technology Co., Ltd.</span>
-    <span>Product Catalogue</span>
+    <span>Product Catalogue &middot; Page 1 (Index)</span>
   </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
-// Auto-discover products by fetching product list
 var products = [
-  { sku: "WE-T214", name: "3-in-1 Soil Sensor Transmitter", desc: "Temperature, Moisture & EC monitoring with dual 4G/LoRa", img: "products/WE-T214/images/hero_800.png" },
-  { sku: "WE-W200", name: "Professional Weather Station", desc: "7-in-1 environmental monitoring with solar power", img: "products/WE-W200/images/hero_800.png" }
+  {
+    sku: "WE-T214",
+    page: 1,
+    name: "3-in-1 Soil Sensor Transmitter",
+    desc: "Temperature, Moisture &amp; EC monitoring with dual 4G/LoRa connectivity.",
+    long: "Simultaneously monitors soil temperature, volumetric moisture content, and electrical conductivity (EC). Supports dual 4G and LoRaWAN for remote data backhaul.",
+    img: "products/WE-T214/images/hero_800.png",
+    tags: ["Soil", "LoRa", "4G", "IP67"]
+  },
+  {
+    sku: "WE-W200",
+    page: 2,
+    name: "Professional Weather Station",
+    desc: "7-in-1 environmental monitoring with solar power.",
+    long: "Measures wind speed, wind direction, rainfall, temperature, humidity, barometric pressure, and solar radiation. Solar-powered for true off-grid operation.",
+    img: "products/WE-W200/images/hero_800.png",
+    tags: ["Weather", "Solar", "LoRa", "7-in-1"]
+  }
 ];
 
 var list = document.getElementById("product-list");
+document.getElementById("product-count").textContent = products.length + " product" + (products.length > 1 ? "s" : "");
+
 products.forEach(function(p) {
-  var card = document.createElement("div");
-  card.className = "card";
-  card.style.cursor = "pointer";
-  card.onclick = function() { window.location = "products/" + p.sku + "/"; };
-  card.innerHTML = '<div style="display:flex;gap:1rem;align-items:center">' +
-    '<img src="' + p.img + '" alt="" style="width:80px;height:80px;object-fit:contain;border-radius:8px;border:1px solid var(--border);flex-shrink:0" />' +
-    '<div><h3 style="margin:0 0 0.25rem">' + p.sku + ' - ' + p.name + '</h3>' +
-    '<p style="margin:0;color:var(--muted)">' + p.desc + '</p></div></div>';
-  list.appendChild(card);
+  var col = document.createElement("div");
+  col.className = "catalog-card";
+
+  var tagsHTML = p.tags.map(function(t) { return '<span class="tag">' + t + '</span>'; }).join("");
+
+  col.innerHTML =
+    '<div class="catalog-card__img">' +
+      '<img src="' + p.img + '" alt="' + p.sku + '" loading="lazy" />' +
+    '</div>' +
+    '<div class="catalog-card__body">' +
+      '<div class="catalog-card__page">Page ' + p.page + '</div>' +
+      '<h3 class="catalog-card__sku">' + p.sku + '</h3>' +
+      '<h4 class="catalog-card__name">' + p.name + '</h4>' +
+      '<p class="catalog-card__desc">' + p.long + '</p>' +
+      '<div class="catalog-card__tags">' + tagsHTML + '</div>' +
+      '<div class="catalog-card__actions">' +
+        '<a class="btn btn-primary" href="products/' + p.sku + '/">View Details</a>' +
+        '<button type="button" class="btn btn-secondary btn-dl-pdf" data-sku="' + p.sku + '">Download PDF</button>' +
+      '</div>' +
+    '</div>';
+
+  list.appendChild(col);
+});
+
+// Individual PDF download from catalog
+document.querySelectorAll(".btn-dl-pdf").forEach(function(btn) {
+  btn.addEventListener("click", function(e) {
+    e.stopPropagation();
+    var sku = btn.getAttribute("data-sku");
+    window.open("products/" + sku + "/?dl=1", "_blank");
+  });
+});
+
+// Download all as PDF - opens each product then triggers dl
+document.getElementById("download-all-pdf").addEventListener("click", function() {
+  products.forEach(function(p) {
+    window.open("products/" + p.sku + "/?dl=1", "_blank");
+  });
 });
 </script>
 </body>

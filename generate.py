@@ -73,12 +73,15 @@ def build_hero(cfg):
     hero_img = cfg.get("hero_image") or cfg["images"][0]["src"]
     manual_pdf = cfg.get("manual_pdf", "")
     dl = os.path.basename(manual_pdf) if manual_pdf else ""
+    page_num = p.get("page_number", 1)
     return f"""<section class="hero wrap" id="overview">
   <div class="hero-grid">
     <div>
+      <div class="page-badge">Page {page_num}</div>
       <h1>{esc(p.get("name",""))}</h1>
       <p class="lead">{esc(p.get("lead",""))}</p>
       <div class="hero-actions">
+        <button type="button" class="btn btn-primary btn-pdf" data-sku="{esc(p.get("sku",""))}">Download as PDF</button>
         <a class="btn btn-primary dl-link" href="{esc(manual_pdf)}" download="{esc(dl)}">Download Manual (PDF)</a>
         <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote>Request Quote</button>
       </div>
@@ -241,10 +244,11 @@ def build_contact(cfg):
 
 def build_footer(cfg):
     p = cfg["product"]
+    page_num = p.get("page_number", 1)
     return f"""<footer class="site-footer">
   <div class="wrap footer-meta">
     <span>{esc(p.get("manufacturer",""))} &middot; SKU {esc(p.get("sku",""))}</span>
-    <span>Standard Version</span>
+    <span>Page {page_num} &middot; Product Catalogue</span>
   </div>
 </footer>"""
 
@@ -305,6 +309,7 @@ def generate_html(cfg):
     email = esc_js(cfg.get("contact", {}).get("email", ""))
     prod_name = esc_js(p.get("name", ""))
     prod_sku = esc_js(p.get("sku", ""))
+    prod_sku_short = esc_js(p.get("sku", "product"))
 
     inline_config = f"""<script>
 window.__PRODUCT_CONFIG__ = {{
@@ -332,6 +337,35 @@ window.__PRODUCT_CONFIG__ = {{
     css_path = "../../assets/css/main.css"
     js_path = "../../assets/js/main.js"
     logo_href = "../../index.html"
+
+    pdf_script = f"""<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+(function() {{
+    var sku = "{prod_sku_short}";
+    var btns = document.querySelectorAll(".btn-pdf");
+    var filename = sku + "-catalogue.pdf";
+
+    function generatePDF() {{
+        var opt = {{
+            margin:       [0.5, 0.5, 0.5, 0.5],
+            filename:     filename,
+            image:        {{ type: 'jpeg', quality: 0.98 }},
+            html2canvas:  {{ scale: 2, letterRendering: true, useCORS: true, logging: false }},
+            jsPDF:        {{ unit: 'in', format: 'a4', orientation: 'portrait' }}
+        }};
+        var el = document.getElementById("main");
+        html2pdf().set(opt).from(el).save();
+    }}
+
+    btns.forEach(function(b) {{
+        b.addEventListener("click", generatePDF);
+    }});
+
+    if (window.location.search.indexOf("dl=1") > -1) {{
+        setTimeout(generatePDF, 800);
+    }}
+}})();
+</script>"""
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -378,6 +412,7 @@ window.__PRODUCT_CONFIG__ = {{
 {quote_modal}
 
 {inline_config}
+{pdf_script}
 <script src="{js_path}" defer></script>
 </body>
 </html>"""

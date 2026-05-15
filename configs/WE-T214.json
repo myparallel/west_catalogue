@@ -7,6 +7,7 @@
     "manufacturer": "Hainan World Electronic Science And Technology Co., Ltd.",
     "description": "Industrial soil transmitter for Temperature, Moisture, and EC monitoring with dual 4G and LoRa connectivity, IP67 enclosure, and GNSS positioning.",
     "lead": "A rugged, field-ready transmitter for precision agriculture. Simultaneously monitors soil temperature, volumetric moisture content, and electrical conductivity (EC). Supports dual 4G and LoRaWAN connectivity for reliable data backhaul in remote areas.",
+    "page_number": 1,
     "og_title": "WE-T214 3-in-1 Soil Sensor Transmitter",
     "og_description": "Integrated soil monitor for Temp, Moisture, and EC with dual 4G/LoRa connectivity."
   },

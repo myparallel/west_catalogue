@@ -43,9 +43,11 @@
 <section class="hero wrap" id="overview">
   <div class="hero-grid">
     <div>
+      <div class="page-badge">Page 1</div>
       <h1>WE-T214 3-in-1 Soil Sensor Transmitter</h1>
       <p class="lead">A rugged, field-ready transmitter for precision agriculture. Simultaneously monitors soil temperature, volumetric moisture content, and electrical conductivity (EC). Supports dual 4G and LoRaWAN connectivity for reliable data backhaul in remote areas.</p>
       <div class="hero-actions">
+        <button type="button" class="btn btn-primary btn-pdf" data-sku="WE-T214">Download as PDF</button>
         <a class="btn btn-primary dl-link" href="WE-T214-manual.pdf" download="WE-T214-manual.pdf">Download Manual (PDF)</a>
         <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote>Request Quote</button>
       </div>
@@ -168,7 +170,7 @@
 <footer class="site-footer">
   <div class="wrap footer-meta">
     <span>Hainan World Electronic Science And Technology Co., Ltd. &middot; SKU WE-T214</span>
-    <span>Standard Version</span>
+    <span>Page 1 &middot; Product Catalogue</span>
   </div>
 </footer>
 <div class="quote-modal" id="quote-modal" role="dialog" aria-modal="true" aria-labelledby="quote-modal-title" aria-hidden="true">
@@ -219,6 +221,34 @@ window.__PRODUCT_CONFIG__ = {
     name: "WE-T214 3-in-1 Soil Sensor Transmitter",
     sku: "WE-T214"
 };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+(function() {
+    var sku = "WE-T214";
+    var btns = document.querySelectorAll(".btn-pdf");
+    var filename = sku + "-catalogue.pdf";
+
+    function generatePDF() {
+        var opt = {
+            margin:       [0.5, 0.5, 0.5, 0.5],
+            filename:     filename,
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, letterRendering: true, useCORS: true, logging: false },
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+        var el = document.getElementById("main");
+        html2pdf().set(opt).from(el).save();
+    }
+
+    btns.forEach(function(b) {
+        b.addEventListener("click", generatePDF);
+    });
+
+    if (window.location.search.indexOf("dl=1") > -1) {
+        setTimeout(generatePDF, 800);
+    }
+})();
 </script>
 <script src="../../assets/js/main.js" defer></script>
 </body>

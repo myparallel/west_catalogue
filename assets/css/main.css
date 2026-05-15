@@ -771,7 +771,8 @@ body.modal-open {
   font-weight: 400;
 }
 
-.prod-name-mobile {
+.prod-name-mobile,
+.hdr-name-mobile {
   display: none;
 }
 
@@ -806,6 +807,11 @@ body.modal-open {
   .prod-name-mobile a {
     color: var(--muted);
     font-weight: 400;
+  }
+  .hdr-name-mobile {
+    display: inline;
+    font-weight: 400;
+    font-size: 0.68rem;
   }
   .catalog-index__dl {
     font-size: 0.6rem;
@@ -1368,45 +1374,62 @@ body.modal-open {
   }
 }
 
-/* Quote modal mobile */
+/* Quote modal mobile — full-screen overlay style */
 @media (max-width: 480px) {
   .quote-modal {
-    padding: 0.5rem;
+    padding: 0;
+    align-items: center;
   }
   .quote-modal__dialog {
-    padding: 1rem 0.75rem;
     width: 100%;
-    border-radius: 10px;
+    max-width: 100%;
+    min-height: 100dvh;
+    margin: 0;
+    border-radius: 0;
+    padding: 1.25rem 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: none;
+    border: none;
   }
   .quote-modal__title {
-    font-size: 1.05rem;
-    margin-right: 1.5rem;
+    font-size: 1.15rem;
+    margin-right: 0;
+    padding-right: 2rem;
   }
   .quote-modal__lead {
-    font-size: 0.82rem;
-    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+  .quote-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
   .quote-form__row {
-    margin-bottom: 0.65rem;
+    margin-bottom: 0.75rem;
   }
   .quote-form__row label {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
   }
   .quote-form__row input,
   .quote-form__row textarea {
-    padding: 0.45rem 0.5rem;
-    font-size: 0.88rem;
+    padding: 0.55rem 0.6rem;
+    font-size: 0.92rem;
   }
   .quote-form__row--half {
     grid-template-columns: 1fr;
-    gap: 0.65rem;
+    gap: 0.75rem;
   }
   .quote-form__actions {
     flex-direction: column;
+    margin-top: auto;
+    padding-top: 0.5rem;
   }
   .quote-form__actions .btn {
     width: 100%;
     justify-content: center;
+    padding: 0.75rem 1rem;
   }
 }
 

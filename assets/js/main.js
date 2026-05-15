@@ -30,7 +30,7 @@
   }
 
   function saveStorage(data) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) { console.warn("localStorage full", e); }
   }
 
   function getEditData() {
@@ -300,16 +300,22 @@
         var reader = new FileReader();
         reader.onload = (function(f) {
           return function(e) {
-            var dataUrl = e.target.result;
-            var cat = "其他";
-            addAddedImage({
-              src: dataUrl,
-              alt: f.name,
-              category: cat
-            });
-            render();
+            try {
+              var dataUrl = e.target.result;
+              addAddedImage({
+                src: dataUrl,
+                alt: f.name,
+                category: "其他"
+              });
+              render();
+            } catch(err) {
+              alert("Failed to add image: " + err.message);
+            }
           };
         })(file);
+        reader.onerror = function() {
+          alert("Failed to read file: " + file.name);
+        };
         reader.readAsDataURL(file);
       }
       fileInput.value = "";
@@ -383,7 +389,7 @@
   function loadStorage() {
     try { var raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : {}; } catch(e) { return {}; }
   }
-  function saveStorage(d) { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
+  function saveStorage(d) { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); } catch(e) { console.warn("localStorage full", e); } }
 
   function setDeleted(file) {
     var d = loadStorage();
@@ -621,13 +627,20 @@
           var fmt = fmtMap[ext] || ext.toUpperCase();
           var reader = new FileReader();
           reader.onload = function(e) {
-            addDoc({
-              label: label,
-              file: e.target.result,
-              category: "支持文档",
-              format: fmt
-            });
-            render();
+            try {
+              addDoc({
+                label: label,
+                file: e.target.result,
+                category: "支持文档",
+                format: fmt
+              });
+              render();
+            } catch(err) {
+              alert("Failed to add document: " + err.message);
+            }
+          };
+          reader.onerror = function() {
+            alert("Failed to read file: " + file.name);
           };
           reader.readAsDataURL(file);
         })(files[i]);
@@ -690,7 +703,7 @@
   function loadStorage() {
     try { var raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : {}; } catch(e) { return {}; }
   }
-  function saveStorage(d) { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
+  function saveStorage(d) { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); } catch(e) { console.warn("localStorage full", e); } }
 
   function setDeleted(file) {
     var d = loadStorage();
@@ -745,7 +758,7 @@
 
   function playVideo(src, poster, label) {
     if (playerWrap) {
-      playerWrap.querySelector("source").src = src;
+      playerWrap.src = src;
       playerWrap.poster = poster || "";
       playerWrap.load();
       playerWrap.play().catch(function(){});
@@ -917,13 +930,20 @@
           var label = file.name;
           var reader = new FileReader();
           reader.onload = function(e) {
-            addVideo({
-              label: label,
-              file: e.target.result,
-              poster: "",
-              category: "产品概览"
-            });
-            render();
+            try {
+              addVideo({
+                label: label,
+                file: e.target.result,
+                poster: "",
+                category: "产品概览"
+              });
+              render();
+            } catch(err) {
+              alert("Failed to add video: " + err.message);
+            }
+          };
+          reader.onerror = function() {
+            alert("Failed to read file: " + file.name);
           };
           reader.readAsDataURL(file);
         })(files[i]);

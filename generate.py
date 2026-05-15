@@ -277,9 +277,7 @@ def build_videos(cfg):
   </div>
   <div class="video-area" id="video-content"{' hidden' if not has_content else ''}>
     <div class="video-player-wrap">
-      <video class="video-player" id="video-player" controls preload="metadata">
-        <source src="" type="video/mp4" />
-      </video>
+      <video class="video-player" id="video-player" controls preload="metadata"></video>
       <p class="video-placeholder" id="video-placeholder"><span lang="en">Select a video to play</span><span lang="zh" hidden>选择一个视频播放</span></p>
     </div>
     <div class="video-list" id="video-list">

@@ -68,6 +68,22 @@ def build_nav(cfg):
     return "".join(f'<a href="{href}">{label}</a>' for href, label in links)
 
 
+def build_docs_dropdown(cfg):
+    documents = cfg.get("documents", [])
+    if not documents:
+        return "", ""
+    items = "".join(
+        f'<a class="docs-dropdown__item" href="{esc(d["file"])}" download="{esc(os.path.basename(d["file"]))}">{esc(d["label"])}</a>'
+        for d in documents
+    )
+    html = f"""<div class="docs-dropdown">
+  <button type="button" class="btn btn-primary btn-docs" data-docs-toggle>Documents &#9660;</button>
+  <div class="docs-dropdown__menu" hidden>
+    {items}
+  </div>
+</div>"""
+    return html, " for technical documentation"
+
 def build_hero(cfg):
     p = cfg["product"]
     hero_img = cfg.get("hero_image") or cfg["images"][0]["src"]
@@ -75,6 +91,7 @@ def build_hero(cfg):
     dl = os.path.basename(manual_pdf) if manual_pdf else ""
     page_num = p.get("page_number", 1)
     manual_btn = f'<a class="btn btn-primary dl-link" href="{esc(manual_pdf)}" download="{esc(dl)}">Download Manual (PDF)</a>' if manual_pdf else ""
+    docs_dropdown, docs_suffix = build_docs_dropdown(cfg)
     doc_note = "For technical support or customized OEM versions, email us from <a href=\"#contact\">Contact Information</a>."
     if manual_pdf:
         doc_note = "English PDF manual. " + doc_note
@@ -86,10 +103,11 @@ def build_hero(cfg):
       <p class="lead">{esc(p.get("lead",""))}</p>
       <div class="hero-actions">
         <button type="button" class="btn btn-primary btn-pdf" data-sku="{esc(p.get("sku",""))}">Download as PDF</button>
+        {docs_dropdown}
         {manual_btn}
         <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote>Request Quote</button>
       </div>
-      <p class="doc-note">{doc_note}</p>
+      <p class="doc-note">{doc_note}{docs_suffix}</p>
     </div>
     <div class="hero-visual">
       <img src="{esc(hero_img)}" alt="{esc(p.get("name",""))}" width="800" height="800" fetchpriority="high" />
@@ -225,12 +243,14 @@ def build_downloads(cfg):
         return ""
     prod_name = esc(cfg["product"].get("name",""))
     items = ""
+    all_docs = []
     if manual_pdf:
-        dl = os.path.basename(manual_pdf)
-        items += f"""<a class="btn btn-primary dl-link" href="{esc(manual_pdf)}" download="{esc(dl)}">User Manual (PDF)</a>\n"""
+        all_docs.append(("User Manual (PDF)", manual_pdf))
     for doc in documents:
-        fn = os.path.basename(doc.get("file",""))
-        items += f"""<a class="btn btn-secondary dl-link" href="{esc(doc['file'])}" download="{esc(fn)}">{esc(doc['label'])}</a>\n"""
+        all_docs.append((doc["label"], doc["file"]))
+    for label, path in all_docs:
+        fn = os.path.basename(path)
+        items += f"""<a class="btn btn-secondary dl-link" href="{esc(path)}" download="{esc(fn)}">{esc(label)}</a>\n"""
     return f"""<section class="wrap" id="downloads">
   <h2 class="section-title">Downloads</h2>
   <p class="section-sub">Access technical documentation for {prod_name}.</p>
@@ -365,6 +385,27 @@ window.__PRODUCT_CONFIG__ = {{
     if (window.location.search.indexOf("dl=1") > -1) {
         setTimeout(printPage, 600);
     }
+
+    // Document dropdown toggle
+    var docTriggers = document.querySelectorAll("[data-docs-toggle]");
+    docTriggers.forEach(function(btn) {
+        btn.addEventListener("click", function(e) {
+            e.stopPropagation();
+            var menu = btn.parentElement.querySelector(".docs-dropdown__menu");
+            if (menu) {
+                var isOpen = !menu.hasAttribute("hidden");
+                menu.hidden = isOpen;
+                btn.innerHTML = isOpen ? "Documents &#9660;" : "Documents &#9650;";
+            }
+        });
+    });
+    document.addEventListener("click", function() {
+        document.querySelectorAll(".docs-dropdown__menu:not([hidden])").forEach(function(m) {
+            m.hidden = true;
+            var btn = m.parentElement.querySelector("[data-docs-toggle]");
+            if (btn) btn.innerHTML = "Documents &#9660;";
+        });
+    });
 })();
 </script>"""
 

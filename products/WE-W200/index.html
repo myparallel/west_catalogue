@@ -49,6 +49,7 @@
       <div class="hero-actions">
         <button type="button" class="btn btn-primary btn-pdf" data-sku="WE-W200">Download as PDF</button>
         
+        
         <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote>Request Quote</button>
       </div>
       <p class="doc-note">For technical support or customized OEM versions, email us from <a href="#contact">Contact Information</a>.</p>
@@ -224,6 +225,27 @@ window.__PRODUCT_CONFIG__ = {
     if (window.location.search.indexOf("dl=1") > -1) {
         setTimeout(printPage, 600);
     }
+
+    // Document dropdown toggle
+    var docTriggers = document.querySelectorAll("[data-docs-toggle]");
+    docTriggers.forEach(function(btn) {
+        btn.addEventListener("click", function(e) {
+            e.stopPropagation();
+            var menu = btn.parentElement.querySelector(".docs-dropdown__menu");
+            if (menu) {
+                var isOpen = !menu.hasAttribute("hidden");
+                menu.hidden = isOpen;
+                btn.innerHTML = isOpen ? "Documents &#9660;" : "Documents &#9650;";
+            }
+        });
+    });
+    document.addEventListener("click", function() {
+        document.querySelectorAll(".docs-dropdown__menu:not([hidden])").forEach(function(m) {
+            m.hidden = true;
+            var btn = m.parentElement.querySelector("[data-docs-toggle]");
+            if (btn) btn.innerHTML = "Documents &#9660;";
+        });
+    });
 })();
 </script>
 <script src="../../assets/js/main.js" defer></script>

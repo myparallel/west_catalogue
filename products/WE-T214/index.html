@@ -48,6 +48,7 @@
       <p class="lead">A rugged, field-ready transmitter for precision agriculture. Simultaneously monitors soil temperature, volumetric moisture content, and electrical conductivity (EC). Supports dual 4G and LoRa connectivity for reliable data backhaul in remote areas.</p>
       <div class="hero-actions">
         <button type="button" class="btn btn-primary btn-pdf" data-sku="WE-T214">Download as PDF</button>
+        
         <a class="btn btn-primary dl-link" href="WE-T214-manual.pdf" download="WE-T214-manual.pdf">Download Manual (PDF)</a>
         <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote>Request Quote</button>
       </div>
@@ -152,7 +153,7 @@
   <h2 class="section-title">Downloads</h2>
   <p class="section-sub">Access technical documentation for WE-T214 3-in-1 Soil Sensor Transmitter.</p>
   <div class="hero-actions" style="flex-direction:column;align-items:flex-start">
-    <div style="display:flex;flex-wrap:wrap;gap:0.5rem"><a class="btn btn-primary dl-link" href="WE-T214-manual.pdf" download="WE-T214-manual.pdf">User Manual (PDF)</a>
+    <div style="display:flex;flex-wrap:wrap;gap:0.5rem"><a class="btn btn-secondary dl-link" href="WE-T214-manual.pdf" download="WE-T214-manual.pdf">User Manual (PDF)</a>
 </div>
   </div>
 </section>
@@ -238,6 +239,27 @@ window.__PRODUCT_CONFIG__ = {
     if (window.location.search.indexOf("dl=1") > -1) {
         setTimeout(printPage, 600);
     }
+
+    // Document dropdown toggle
+    var docTriggers = document.querySelectorAll("[data-docs-toggle]");
+    docTriggers.forEach(function(btn) {
+        btn.addEventListener("click", function(e) {
+            e.stopPropagation();
+            var menu = btn.parentElement.querySelector(".docs-dropdown__menu");
+            if (menu) {
+                var isOpen = !menu.hasAttribute("hidden");
+                menu.hidden = isOpen;
+                btn.innerHTML = isOpen ? "Documents &#9660;" : "Documents &#9650;";
+            }
+        });
+    });
+    document.addEventListener("click", function() {
+        document.querySelectorAll(".docs-dropdown__menu:not([hidden])").forEach(function(m) {
+            m.hidden = true;
+            var btn = m.parentElement.querySelector("[data-docs-toggle]");
+            if (btn) btn.innerHTML = "Documents &#9660;";
+        });
+    });
 })();
 </script>
 <script src="../../assets/js/main.js" defer></script>

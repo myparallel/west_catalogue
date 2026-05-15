@@ -11,11 +11,11 @@
     "og_description": "Edge computing gateway with 4G/LoRa/RS485, supporting up to 128 devices and 16 I/O modules.",
     "page_number": 4
   },
-  "hero_image": "images/WE-X280_透明场景图.png",
+  "hero_image": "images/WE-X280_front.png",
   "images": [
-    { "src": "images/WE-X280_透明场景图.png", "alt": "WE-X280 edge computing gateway overview" },
-    { "src": "images/WE-T280_高清图-1.png", "alt": "WE-X280 front view" },
-    { "src": "images/WE-T280_高清图-2.png", "alt": "WE-X280 angle view" },
+    { "src": "images/WE-X280_front.png", "alt": "WE-X280 edge computing gateway front view" },
+    { "src": "images/WE-X280_angle.png", "alt": "WE-X280 angle view" },
+    { "src": "images/WE-X280_scene.png", "alt": "WE-X280 transparent scene view" },
     { "src": "images/main-5.png", "alt": "WE-X280 interface detail" },
     { "src": "images/section.png", "alt": "WE-X280 dimensional drawing" },
     { "src": "images/DID5O.png", "alt": "WE-X280 DI/DO interface diagram" },

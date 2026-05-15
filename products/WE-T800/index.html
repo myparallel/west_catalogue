@@ -48,6 +48,7 @@
       <p class="lead">A sealed IP68 field unit for distributed monitoring: 4G backhaul, RS485 Modbus-RTU, two 4–20 mA analog channels, two digital inputs, and flexible power from internal Li-ion packs or 9–30 V DC. Built for water utilities, environmental sites, and industrial IoT where reliability matters.</p>
       <div class="hero-actions">
         <button type="button" class="btn btn-primary btn-pdf" data-sku="WE-T800">Download as PDF</button>
+        
         <a class="btn btn-primary dl-link" href="WE-T800-datasheet.pdf" download="WE-T800-datasheet.pdf">Download Manual (PDF)</a>
         <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote>Request Quote</button>
       </div>
@@ -142,7 +143,7 @@
   <h2 class="section-title">Downloads</h2>
   <p class="section-sub">Access technical documentation for WE-T800 Multi-Function Field Monitor.</p>
   <div class="hero-actions" style="flex-direction:column;align-items:flex-start">
-    <div style="display:flex;flex-wrap:wrap;gap:0.5rem"><a class="btn btn-primary dl-link" href="WE-T800-datasheet.pdf" download="WE-T800-datasheet.pdf">User Manual (PDF)</a>
+    <div style="display:flex;flex-wrap:wrap;gap:0.5rem"><a class="btn btn-secondary dl-link" href="WE-T800-datasheet.pdf" download="WE-T800-datasheet.pdf">User Manual (PDF)</a>
 </div>
   </div>
 </section>
@@ -228,6 +229,27 @@ window.__PRODUCT_CONFIG__ = {
     if (window.location.search.indexOf("dl=1") > -1) {
         setTimeout(printPage, 600);
     }
+
+    // Document dropdown toggle
+    var docTriggers = document.querySelectorAll("[data-docs-toggle]");
+    docTriggers.forEach(function(btn) {
+        btn.addEventListener("click", function(e) {
+            e.stopPropagation();
+            var menu = btn.parentElement.querySelector(".docs-dropdown__menu");
+            if (menu) {
+                var isOpen = !menu.hasAttribute("hidden");
+                menu.hidden = isOpen;
+                btn.innerHTML = isOpen ? "Documents &#9660;" : "Documents &#9650;";
+            }
+        });
+    });
+    document.addEventListener("click", function() {
+        document.querySelectorAll(".docs-dropdown__menu:not([hidden])").forEach(function(m) {
+            m.hidden = true;
+            var btn = m.parentElement.querySelector("[data-docs-toggle]");
+            if (btn) btn.innerHTML = "Documents &#9660;";
+        });
+    });
 })();
 </script>
 <script src="../../assets/js/main.js" defer></script>

@@ -9,7 +9,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:title" content="WE-X280 Industrial Edge Computing Gateway" />
 <meta property="og:description" content="Edge computing gateway with 4G/LoRa/RS485, supporting up to 128 devices and 16 I/O modules." />
-<meta property="og:image" content="images/WE-X280_透明场景图.png" />
+<meta property="og:image" content="images/WE-X280_front.png" />
 <script type="application/ld+json">{
         "@context": "https://schema.org",
         "@type": "Product",
@@ -17,7 +17,7 @@
         "sku": "WE-X280",
         "description": "Industrial edge computing gateway with 4G, Ethernet, LoRa, and RS485 connectivity. Supports edge computing, up to 128 connected devices, and 16 expandable I/O modules.",
         "brand": { "@type": "Brand", "name": "WEST" },
-        "image": ["images/WE-X280_\u900f\u660e\u573a\u666f\u56fe.png", "images/WE-T280_\u9ad8\u6e05\u56fe-1.png", "images/WE-T280_\u9ad8\u6e05\u56fe-2.png", "images/main-5.png", "images/section.png", "images/DID5O.png", "images/DIDO3.png"],
+        "image": ["images/WE-X280_front.png", "images/WE-X280_angle.png", "images/WE-X280_scene.png", "images/main-5.png", "images/section.png", "images/DID5O.png", "images/DIDO3.png"],
         "manufacturer": {
             "@type": "Organization",
             "name": "Hainan Shidian Technology Co., Ltd."
@@ -48,13 +48,19 @@
       <p class="lead">A powerful industrial edge computing gateway supporting LoRa wireless and RS485 wired convergence networks. Connects up to 128 wired/wireless devices, features 4G full Netcom and Ethernet dual-channel communication, edge computing engine, and seamless integration with the WEST-AIOT cloud platform.</p>
       <div class="hero-actions">
         <button type="button" class="btn btn-primary btn-pdf" data-sku="WE-X280">Download as PDF</button>
+        <div class="docs-dropdown">
+  <button type="button" class="btn btn-primary btn-docs" data-docs-toggle>Documents &#9660;</button>
+  <div class="docs-dropdown__menu" hidden>
+    <a class="docs-dropdown__item" href="docs/WE-X280_User_Manual_EN.pdf" download="WE-X280_User_Manual_EN.pdf">User Manual (English)</a><a class="docs-dropdown__item" href="docs/WE-X280_User_Manual_CN.pdf" download="WE-X280_User_Manual_CN.pdf">User Manual (Chinese)</a><a class="docs-dropdown__item" href="docs/WE-X280_MQTT_Protocol_EN.pdf" download="WE-X280_MQTT_Protocol_EN.pdf">MQTT Protocol (English)</a>
+  </div>
+</div>
         
         <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote>Request Quote</button>
       </div>
-      <p class="doc-note">For technical support or customized OEM versions, email us from <a href="#contact">Contact Information</a>.</p>
+      <p class="doc-note">For technical support or customized OEM versions, email us from <a href="#contact">Contact Information</a>. for technical documentation</p>
     </div>
     <div class="hero-visual">
-      <img src="images/WE-X280_透明场景图.png" alt="WE-X280 Industrial Edge Computing Gateway" width="800" height="800" fetchpriority="high" />
+      <img src="images/WE-X280_front.png" alt="WE-X280 Industrial Edge Computing Gateway" width="800" height="800" fetchpriority="high" />
     </div>
   </div>
 </section>
@@ -77,9 +83,9 @@
   <div class="gallery-layout gallery-layout--v2">
     <div class="stage" id="gallery-stage" aria-live="polite"></div>
     <div class="thumbs" role="tablist" aria-label="Gallery thumbnails">
-      <button type="button" class="is-active" data-full="images/WE-X280_透明场景图.png" data-alt="WE-X280 edge computing gateway overview"><img src="images/WE-X280_透明场景图.png" alt="" width="120" height="90" loading="lazy" /></button>
-<button type="button" class="" data-full="images/WE-T280_高清图-1.png" data-alt="WE-X280 front view"><img src="images/WE-T280_高清图-1.png" alt="" width="120" height="90" loading="lazy" /></button>
-<button type="button" class="" data-full="images/WE-T280_高清图-2.png" data-alt="WE-X280 angle view"><img src="images/WE-T280_高清图-2.png" alt="" width="120" height="90" loading="lazy" /></button>
+      <button type="button" class="is-active" data-full="images/WE-X280_front.png" data-alt="WE-X280 edge computing gateway front view"><img src="images/WE-X280_front.png" alt="" width="120" height="90" loading="lazy" /></button>
+<button type="button" class="" data-full="images/WE-X280_angle.png" data-alt="WE-X280 angle view"><img src="images/WE-X280_angle.png" alt="" width="120" height="90" loading="lazy" /></button>
+<button type="button" class="" data-full="images/WE-X280_scene.png" data-alt="WE-X280 transparent scene view"><img src="images/WE-X280_scene.png" alt="" width="120" height="90" loading="lazy" /></button>
 <button type="button" class="" data-full="images/main-5.png" data-alt="WE-X280 interface detail"><img src="images/main-5.png" alt="" width="120" height="90" loading="lazy" /></button>
 <button type="button" class="" data-full="images/section.png" data-alt="WE-X280 dimensional drawing"><img src="images/section.png" alt="" width="120" height="90" loading="lazy" /></button>
 <button type="button" class="" data-full="images/DID5O.png" data-alt="WE-X280 DI/DO interface diagram"><img src="images/DID5O.png" alt="" width="120" height="90" loading="lazy" /></button>
@@ -241,6 +247,27 @@ window.__PRODUCT_CONFIG__ = {
     if (window.location.search.indexOf("dl=1") > -1) {
         setTimeout(printPage, 600);
     }
+
+    // Document dropdown toggle
+    var docTriggers = document.querySelectorAll("[data-docs-toggle]");
+    docTriggers.forEach(function(btn) {
+        btn.addEventListener("click", function(e) {
+            e.stopPropagation();
+            var menu = btn.parentElement.querySelector(".docs-dropdown__menu");
+            if (menu) {
+                var isOpen = !menu.hasAttribute("hidden");
+                menu.hidden = isOpen;
+                btn.innerHTML = isOpen ? "Documents &#9660;" : "Documents &#9650;";
+            }
+        });
+    });
+    document.addEventListener("click", function() {
+        document.querySelectorAll(".docs-dropdown__menu:not([hidden])").forEach(function(m) {
+            m.hidden = true;
+            var btn = m.parentElement.querySelector("[data-docs-toggle]");
+            if (btn) btn.innerHTML = "Documents &#9660;";
+        });
+    });
 })();
 </script>
 <script src="../../assets/js/main.js" defer></script>

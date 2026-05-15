@@ -899,6 +899,45 @@ body.modal-open {
   margin-bottom: 0.75rem;
 }
 
+/* Documents dropdown */
+.docs-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.docs-dropdown__menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 220px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+  overflow: hidden;
+}
+
+.docs-dropdown__item {
+  display: block;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.12s ease;
+}
+
+.docs-dropdown__item:last-child {
+  border-bottom: none;
+}
+
+.docs-dropdown__item:hover {
+  background: var(--blue-soft);
+  text-decoration: none;
+  color: var(--blue-hover);
+}
+
 /* ========================================
    Print / A4 styles  (used by window.print())
    ======================================== */

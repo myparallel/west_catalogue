@@ -795,12 +795,11 @@ body.modal-open {
   }
 
   .wrap {
-    width: 100% !important;
-    max-width: none !important;
+    width: min(1120px, 92vw) !important;
   }
 
   section {
-    padding: 0.5in 0 !important;
+    padding: 0.3in 0 !important;
     break-inside: avoid;
     page-break-inside: avoid;
   }

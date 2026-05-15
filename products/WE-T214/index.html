@@ -231,11 +231,12 @@ window.__PRODUCT_CONFIG__ = {
 
     function generatePDF() {
         var opt = {
-            margin:       [0.5, 0.5, 0.5, 0.5],
+            margin:       [0.4, 0.35, 0.4, 0.35],
             filename:     filename,
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2, letterRendering: true, useCORS: true, logging: false },
-            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+            image:        { type: 'jpeg', quality: 0.95 },
+            html2canvas:  { scale: 2, windowWidth: 794, letterRendering: true, useCORS: true, logging: false },
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' },
+            pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
         };
         var el = document.getElementById("main");
         html2pdf().set(opt).from(el).save();

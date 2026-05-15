@@ -51,10 +51,14 @@
       <p class="lead"><span lang="en">A professional-grade weather station for precision agriculture, meteorology, and environmental monitoring. Measures wind speed, wind direction, rainfall, temperature, humidity, barometric pressure, and solar radiation with high-accuracy sensors.</span><span lang="zh" hidden>一款专业级气象站，适用于精准农业、气象和环境监测。采用高精度传感器测量风速、风向、雨量、温度、湿度、气压和太阳辐射。</span></p>
       <div class="hero-actions">
         <button type="button" class="btn btn-primary btn-pdf"><span lang="en">Print</span><span lang="zh" hidden>打印</span></button>
-        
+        <div class="docs-dropdown">
+  <button type="button" class="btn btn-primary btn-docs" data-docs-toggle id="hero-docs-btn"><span lang="en">Data Download</span><span lang="zh" hidden>资料下载</span> <span class="doc-count" id="hero-docs-count">(0)</span> &#9660;</button>
+  <div class="docs-dropdown__menu" id="hero-docs-menu" hidden>
+      </div>
+</div>
         <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote><span lang="en">Request Quote</span><span lang="zh" hidden>获取报价</span></button>
       </div>
-      <p class="doc-note"><span lang="en">For technical support or customized OEM versions, email us from <a href="#contact">Contact Information</a>.</span><span lang="zh" hidden>如需技术支持或定制OEM版本，请通过<a href="#contact">联系方式</a>发送邮件。</span></p>
+      <p class="doc-note"><span lang="en">For technical support or customized OEM versions, email us from <a href="#contact">Contact Information</a>.</span><span lang="zh" hidden>如需技术支持或定制OEM版本，请通过<a href="#contact">联系方式</a>发送邮件。</span> for technical documentation</p>
     </div>
     <div class="hero-visual">
       <img src="images/hero_800.png" alt="WE-W200 Professional Weather Station" width="800" height="800" fetchpriority="high" />
@@ -77,19 +81,33 @@
 <section class="wrap" id="gallery">
   <h2 class="section-title" data-i18n="secGallery">Product Gallery</h2>
   <p class="section-sub" data-i18n="subGallery">Detailed views (Scroll thumbnails to browse).</p>
+  <div class="gallery-toolbar">
+    <div class="gallery-cats" id="gallery-cats">
+      <button type="button" class="is-active" data-cat="全部"><span lang="en">All</span><span lang="zh" hidden>全部</span></button>
+<button type="button" data-cat="主图"><span lang="en">Main</span><span lang="zh" hidden>主图</span></button>
+<button type="button" data-cat="细节"><span lang="en">Detail</span><span lang="zh" hidden>细节</span></button>
+<button type="button" data-cat="其他"><span lang="en">Other</span><span lang="zh" hidden>其他</span></button>
+
+    </div>
+    <div class="gallery-actions">
+      <button type="button" class="btn btn-sm" id="gallery-edit-btn"><span lang="en">Edit Gallery</span><span lang="zh" hidden>编辑图库</span></button>
+      <button type="button" class="btn btn-sm btn-primary" id="gallery-save-btn" hidden><span lang="en">Save Changes</span><span lang="zh" hidden>保存修改</span></button>
+    </div>
+  </div>
   <div class="gallery-layout gallery-layout--v2">
     <div class="stage" id="gallery-stage" aria-live="polite"></div>
-    <div class="thumbs" role="tablist" aria-label="Gallery thumbnails">
-      <button type="button" class="is-active" data-full="images/hero_800.png" data-alt="WE-W200 Weather Station overview"><img src="images/hero_800.png" alt="" width="120" height="90" loading="lazy" /></button>
-<button type="button" class="" data-full="images/back.png" data-alt="WE-W200 back panel and connections"><img src="images/back.png" alt="" width="120" height="90" loading="lazy" /></button>
-<button type="button" class="" data-full="images/interface.jpg" data-alt="WE-W200 interface diagram"><img src="images/interface.jpg" alt="" width="120" height="90" loading="lazy" /></button>
-<button type="button" class="" data-full="images/dimensions.png" data-alt="WE-W200 mounting dimensions"><img src="images/dimensions.png" alt="" width="120" height="90" loading="lazy" /></button>
-<button type="button" class="" data-full="images/display.jpg" data-alt="WE-W200 real-time LCD display"><img src="images/display.jpg" alt="" width="120" height="90" loading="lazy" /></button>
-<button type="button" class="" data-full="images/app.png" data-alt="WE-W200 mobile app dashboard"><img src="images/app.png" alt="" width="120" height="90" loading="lazy" /></button>
-<button type="button" class="" data-full="images/package.jpg" data-alt="WE-W200 standard packaging"><img src="images/package.jpg" alt="" width="120" height="90" loading="lazy" /></button>
+    <div class="thumbs" id="gallery-thumbs" role="tablist" aria-label="Gallery thumbnails">
+      <button type="button" class="gthumb is-active" data-full="images/hero_800.png" data-alt="WE-W200 Weather Station overview" data-category="主图"><img src="images/hero_800.png" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Main</span><span lang="zh" hidden>主图</span></span></button>
+<button type="button" class="gthumb" data-full="images/back.png" data-alt="WE-W200 back panel and connections" data-category="主图"><img src="images/back.png" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Main</span><span lang="zh" hidden>主图</span></span></button>
+<button type="button" class="gthumb" data-full="images/interface.jpg" data-alt="WE-W200 interface diagram" data-category="细节"><img src="images/interface.jpg" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Detail</span><span lang="zh" hidden>细节</span></span></button>
+<button type="button" class="gthumb" data-full="images/dimensions.png" data-alt="WE-W200 mounting dimensions" data-category="细节"><img src="images/dimensions.png" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Detail</span><span lang="zh" hidden>细节</span></span></button>
+<button type="button" class="gthumb" data-full="images/display.jpg" data-alt="WE-W200 real-time LCD display" data-category="细节"><img src="images/display.jpg" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Detail</span><span lang="zh" hidden>细节</span></span></button>
+<button type="button" class="gthumb" data-full="images/app.png" data-alt="WE-W200 mobile app dashboard" data-category="其他"><img src="images/app.png" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Other</span><span lang="zh" hidden>其他</span></span></button>
+<button type="button" class="gthumb" data-full="images/package.jpg" data-alt="WE-W200 standard packaging" data-category="其他"><img src="images/package.jpg" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Other</span><span lang="zh" hidden>其他</span></span></button>
 
     </div>
   </div>
+  <input type="file" id="gallery-file-input" accept="image/*" multiple style="display:none" />
 </section>
 
 <section class="wrap" id="specifications">
@@ -212,6 +230,8 @@ window.__PRODUCT_CONFIG__ = {
     sku: "WE-W200"
 };
 </script>
+<script id="gallery-data" type="application/json">[{"src": "images/hero_800.png", "alt": "WE-W200 Weather Station overview", "category": "\u4e3b\u56fe"}, {"src": "images/back.png", "alt": "WE-W200 back panel and connections", "category": "\u4e3b\u56fe"}, {"src": "images/interface.jpg", "alt": "WE-W200 interface diagram", "category": "\u7ec6\u8282"}, {"src": "images/dimensions.png", "alt": "WE-W200 mounting dimensions", "category": "\u7ec6\u8282"}, {"src": "images/display.jpg", "alt": "WE-W200 real-time LCD display", "category": "\u7ec6\u8282"}, {"src": "images/app.png", "alt": "WE-W200 mobile app dashboard", "category": "\u5176\u4ed6"}, {"src": "images/package.jpg", "alt": "WE-W200 standard packaging", "category": "\u5176\u4ed6"}]</script>
+<script id="doc-data" type="application/json">[]</script>
 <script>
 var currentLang = "en";
 function applyLang(lang) {

@@ -13,13 +13,13 @@
   },
   "hero_image": "images/hero_800.png",
   "images": [
-    { "src": "images/hero_800.png", "alt": "WE-W200 Weather Station overview" },
-    { "src": "images/back.png", "alt": "WE-W200 back panel and connections" },
-    { "src": "images/interface.jpg", "alt": "WE-W200 interface diagram" },
-    { "src": "images/dimensions.png", "alt": "WE-W200 mounting dimensions" },
-    { "src": "images/display.jpg", "alt": "WE-W200 real-time LCD display" },
-    { "src": "images/app.png", "alt": "WE-W200 mobile app dashboard" },
-    { "src": "images/package.jpg", "alt": "WE-W200 standard packaging" }
+    { "src": "images/hero_800.png", "alt": "WE-W200 Weather Station overview", "category": "主图" },
+    { "src": "images/back.png", "alt": "WE-W200 back panel and connections", "category": "主图" },
+    { "src": "images/interface.jpg", "alt": "WE-W200 interface diagram", "category": "细节" },
+    { "src": "images/dimensions.png", "alt": "WE-W200 mounting dimensions", "category": "细节" },
+    { "src": "images/display.jpg", "alt": "WE-W200 real-time LCD display", "category": "细节" },
+    { "src": "images/app.png", "alt": "WE-W200 mobile app dashboard", "category": "其他" },
+    { "src": "images/package.jpg", "alt": "WE-W200 standard packaging", "category": "其他" }
   ],
   "highlights": [
     {"title": {"en": "7-in-1 Environmental Sensing", "zh": "七合一环境传感"}, "text": {"en": "Wind speed, wind direction, rainfall, temperature, humidity, barometric pressure, and solar radiation all in a single compact station.", "zh": "风速、风向、雨量、温度、湿度、气压和太阳辐射，全部集成在一台紧凑型气象站中。"}},

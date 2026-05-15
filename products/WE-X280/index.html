@@ -17,7 +17,7 @@
         "sku": "WE-X280",
         "description": "Industrial edge computing gateway with 4G, Ethernet, LoRa, and RS485 connectivity. Supports edge computing, up to 128 connected devices, and 16 expandable I/O modules.",
         "brand": { "@type": "Brand", "name": "WEST" },
-        "image": ["images/WE-X280_front.png", "images/WE-X280_angle.png", "images/WE-X280_scene.png", "images/main-5.png", "images/section.png", "images/DID5O.png", "images/DIDO3.png"],
+        "image": ["images/WE-X280_front.png", "images/WE-X280_angle.png", "images/WE-X280_scene.png", "images/main-5.png", "images/section.png", "images/DID5O.png", "images/DIDO3.png", "images/WE-X280_photo_01.jpg", "images/WE-X280_photo_02.jpg", "images/WE-X280_photo_03.jpg", "images/WE-X280_photo_04.jpg", "images/WE-X280_photo_05.jpg", "images/WE-X280_photo_06.jpg", "images/WE-X280_photo_07.jpg", "images/WE-X280_photo_08.jpg", "images/WE-X280_photo_09.jpg", "images/WE-X280_photo_10.jpg", "images/WE-X280_photo_11.jpg"],
         "manufacturer": {
             "@type": "Organization",
             "name": {"en": "Hainan Shidian Technology Co., Ltd.", "zh": "\u6d77\u5357\u4e16\u7535\u79d1\u6280\u6709\u9650\u516c\u53f8"}
@@ -52,9 +52,11 @@
       <div class="hero-actions">
         <button type="button" class="btn btn-primary btn-pdf"><span lang="en">Print</span><span lang="zh" hidden>打印</span></button>
         <div class="docs-dropdown">
-  <button type="button" class="btn btn-primary btn-docs" data-docs-toggle>PDF (3) &#9660;</button>
-  <div class="docs-dropdown__menu" hidden>
-    <a class="docs-dropdown__item" href="docs/WE-X280_User_Manual_EN.pdf" download="WE-X280_User_Manual_EN.pdf">User Manual (English)</a><a class="docs-dropdown__item" href="docs/WE-X280_User_Manual_CN.pdf" download="WE-X280_User_Manual_CN.pdf">User Manual (Chinese)</a><a class="docs-dropdown__item" href="docs/WE-X280_MQTT_Protocol_EN.pdf" download="WE-X280_MQTT_Protocol_EN.pdf">MQTT Protocol (English)</a>
+  <button type="button" class="btn btn-primary btn-docs" data-docs-toggle id="hero-docs-btn"><span lang="en">Data Download</span><span lang="zh" hidden>资料下载</span> <span class="doc-count" id="hero-docs-count">(3)</span> &#9660;</button>
+  <div class="docs-dropdown__menu" id="hero-docs-menu" hidden>
+    <a class="docs-dropdown__item" href="docs/WE-X280_User_Manual_EN.pdf" download="WE-X280_User_Manual_EN.pdf">User Manual (English)</a>
+<a class="docs-dropdown__item" href="docs/WE-X280_User_Manual_CN.pdf" download="WE-X280_User_Manual_CN.pdf">User Manual (Chinese)</a>
+<a class="docs-dropdown__item" href="docs/WE-X280_MQTT_Protocol_EN.pdf" download="WE-X280_MQTT_Protocol_EN.pdf">MQTT Protocol (English)</a>
   </div>
 </div>
         <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote><span lang="en">Request Quote</span><span lang="zh" hidden>获取报价</span></button>
@@ -82,19 +84,44 @@
 <section class="wrap" id="gallery">
   <h2 class="section-title" data-i18n="secGallery">Product Gallery</h2>
   <p class="section-sub" data-i18n="subGallery">Detailed views (Scroll thumbnails to browse).</p>
+  <div class="gallery-toolbar">
+    <div class="gallery-cats" id="gallery-cats">
+      <button type="button" class="is-active" data-cat="全部"><span lang="en">All</span><span lang="zh" hidden>全部</span></button>
+<button type="button" data-cat="主图"><span lang="en">Main</span><span lang="zh" hidden>主图</span></button>
+<button type="button" data-cat="细节"><span lang="en">Detail</span><span lang="zh" hidden>细节</span></button>
+<button type="button" data-cat="其他"><span lang="en">Other</span><span lang="zh" hidden>其他</span></button>
+
+    </div>
+    <div class="gallery-actions">
+      <button type="button" class="btn btn-sm" id="gallery-edit-btn"><span lang="en">Edit Gallery</span><span lang="zh" hidden>编辑图库</span></button>
+      <button type="button" class="btn btn-sm btn-primary" id="gallery-save-btn" hidden><span lang="en">Save Changes</span><span lang="zh" hidden>保存修改</span></button>
+    </div>
+  </div>
   <div class="gallery-layout gallery-layout--v2">
     <div class="stage" id="gallery-stage" aria-live="polite"></div>
-    <div class="thumbs" role="tablist" aria-label="Gallery thumbnails">
-      <button type="button" class="is-active" data-full="images/WE-X280_front.png" data-alt="WE-X280 edge computing gateway front view"><img src="images/WE-X280_front.png" alt="" width="120" height="90" loading="lazy" /></button>
-<button type="button" class="" data-full="images/WE-X280_angle.png" data-alt="WE-X280 angle view"><img src="images/WE-X280_angle.png" alt="" width="120" height="90" loading="lazy" /></button>
-<button type="button" class="" data-full="images/WE-X280_scene.png" data-alt="WE-X280 transparent scene view"><img src="images/WE-X280_scene.png" alt="" width="120" height="90" loading="lazy" /></button>
-<button type="button" class="" data-full="images/main-5.png" data-alt="WE-X280 interface detail"><img src="images/main-5.png" alt="" width="120" height="90" loading="lazy" /></button>
-<button type="button" class="" data-full="images/section.png" data-alt="WE-X280 dimensional drawing"><img src="images/section.png" alt="" width="120" height="90" loading="lazy" /></button>
-<button type="button" class="" data-full="images/DID5O.png" data-alt="WE-X280 DI/DO interface diagram"><img src="images/DID5O.png" alt="" width="120" height="90" loading="lazy" /></button>
-<button type="button" class="" data-full="images/DIDO3.png" data-alt="WE-X280 DI/DO connection diagram"><img src="images/DIDO3.png" alt="" width="120" height="90" loading="lazy" /></button>
+    <div class="thumbs" id="gallery-thumbs" role="tablist" aria-label="Gallery thumbnails">
+      <button type="button" class="gthumb is-active" data-full="images/WE-X280_front.png" data-alt="WE-X280 edge computing gateway front view" data-category="主图"><img src="images/WE-X280_front.png" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Main</span><span lang="zh" hidden>主图</span></span></button>
+<button type="button" class="gthumb" data-full="images/WE-X280_angle.png" data-alt="WE-X280 angle view" data-category="主图"><img src="images/WE-X280_angle.png" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Main</span><span lang="zh" hidden>主图</span></span></button>
+<button type="button" class="gthumb" data-full="images/WE-X280_scene.png" data-alt="WE-X280 transparent scene view" data-category="其他"><img src="images/WE-X280_scene.png" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Other</span><span lang="zh" hidden>其他</span></span></button>
+<button type="button" class="gthumb" data-full="images/main-5.png" data-alt="WE-X280 interface detail" data-category="细节"><img src="images/main-5.png" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Detail</span><span lang="zh" hidden>细节</span></span></button>
+<button type="button" class="gthumb" data-full="images/section.png" data-alt="WE-X280 dimensional drawing" data-category="细节"><img src="images/section.png" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Detail</span><span lang="zh" hidden>细节</span></span></button>
+<button type="button" class="gthumb" data-full="images/DID5O.png" data-alt="WE-X280 DI/DO interface diagram" data-category="细节"><img src="images/DID5O.png" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Detail</span><span lang="zh" hidden>细节</span></span></button>
+<button type="button" class="gthumb" data-full="images/DIDO3.png" data-alt="WE-X280 DI/DO connection diagram" data-category="细节"><img src="images/DIDO3.png" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Detail</span><span lang="zh" hidden>细节</span></span></button>
+<button type="button" class="gthumb" data-full="images/WE-X280_photo_01.jpg" data-alt="WE-X280 product photo 01" data-category="其他"><img src="images/WE-X280_photo_01.jpg" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Other</span><span lang="zh" hidden>其他</span></span></button>
+<button type="button" class="gthumb" data-full="images/WE-X280_photo_02.jpg" data-alt="WE-X280 product photo 02" data-category="其他"><img src="images/WE-X280_photo_02.jpg" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Other</span><span lang="zh" hidden>其他</span></span></button>
+<button type="button" class="gthumb" data-full="images/WE-X280_photo_03.jpg" data-alt="WE-X280 product photo 03" data-category="其他"><img src="images/WE-X280_photo_03.jpg" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Other</span><span lang="zh" hidden>其他</span></span></button>
+<button type="button" class="gthumb" data-full="images/WE-X280_photo_04.jpg" data-alt="WE-X280 product photo 04" data-category="其他"><img src="images/WE-X280_photo_04.jpg" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Other</span><span lang="zh" hidden>其他</span></span></button>
+<button type="button" class="gthumb" data-full="images/WE-X280_photo_05.jpg" data-alt="WE-X280 product photo 05" data-category="其他"><img src="images/WE-X280_photo_05.jpg" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Other</span><span lang="zh" hidden>其他</span></span></button>
+<button type="button" class="gthumb" data-full="images/WE-X280_photo_06.jpg" data-alt="WE-X280 product photo 06" data-category="其他"><img src="images/WE-X280_photo_06.jpg" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Other</span><span lang="zh" hidden>其他</span></span></button>
+<button type="button" class="gthumb" data-full="images/WE-X280_photo_07.jpg" data-alt="WE-X280 product photo 07" data-category="其他"><img src="images/WE-X280_photo_07.jpg" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Other</span><span lang="zh" hidden>其他</span></span></button>
+<button type="button" class="gthumb" data-full="images/WE-X280_photo_08.jpg" data-alt="WE-X280 product photo 08" data-category="其他"><img src="images/WE-X280_photo_08.jpg" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Other</span><span lang="zh" hidden>其他</span></span></button>
+<button type="button" class="gthumb" data-full="images/WE-X280_photo_09.jpg" data-alt="WE-X280 product photo 09" data-category="其他"><img src="images/WE-X280_photo_09.jpg" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Other</span><span lang="zh" hidden>其他</span></span></button>
+<button type="button" class="gthumb" data-full="images/WE-X280_photo_10.jpg" data-alt="WE-X280 product photo 10" data-category="其他"><img src="images/WE-X280_photo_10.jpg" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Other</span><span lang="zh" hidden>其他</span></span></button>
+<button type="button" class="gthumb" data-full="images/WE-X280_photo_11.jpg" data-alt="WE-X280 product photo 11" data-category="其他"><img src="images/WE-X280_photo_11.jpg" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Other</span><span lang="zh" hidden>其他</span></span></button>
 
     </div>
   </div>
+  <input type="file" id="gallery-file-input" accept="image/*" multiple style="display:none" />
 </section>
 
 <section class="wrap" id="specifications">
@@ -160,12 +187,56 @@
 <section class="wrap" id="downloads">
   <h2 class="section-title"><span lang="en">Downloads</span><span lang="zh" hidden>资料下载</span></h2>
   <p class="section-sub"><span lang="en">Access technical documentation for the product.</span><span lang="zh" hidden>获取产品的技术文档。</span></p>
-  <div class="hero-actions" style="flex-direction:column;align-items:flex-start">
-    <div style="display:flex;flex-wrap:wrap;gap:0.5rem"><a class="btn btn-secondary dl-link" href="docs/WE-X280_User_Manual_EN.pdf" download="WE-X280_User_Manual_EN.pdf">User Manual (English)</a>
-<a class="btn btn-secondary dl-link" href="docs/WE-X280_User_Manual_CN.pdf" download="WE-X280_User_Manual_CN.pdf">User Manual (Chinese)</a>
-<a class="btn btn-secondary dl-link" href="docs/WE-X280_MQTT_Protocol_EN.pdf" download="WE-X280_MQTT_Protocol_EN.pdf">MQTT Protocol (English)</a>
-</div>
+  <div class="doc-toolbar">
+    <div class="doc-cats" id="doc-cats">
+      <button type="button" class="is-active" data-cat="全部"><span lang="en">All</span><span lang="zh" hidden>全部</span></button>
+
+      <button type="button" data-cat="用户手册"><span lang="en">User Manual</span><span lang="zh" hidden>用户手册</span></button>
+
+      <button type="button" data-cat="规格书"><span lang="en">Specification</span><span lang="zh" hidden>规格书</span></button>
+
+      <button type="button" data-cat="使用说明"><span lang="en">Instructions</span><span lang="zh" hidden>使用说明</span></button>
+
+      <button type="button" data-cat="支持文档"><span lang="en">Support</span><span lang="zh" hidden>支持文档</span></button>
+
+      <button type="button" data-cat="操作指引"><span lang="en">Guide</span><span lang="zh" hidden>操作指引</span></button>
+
+    </div>
+    <div class="doc-toolbar-actions">
+      <button type="button" class="btn btn-sm" id="doc-edit-btn"><span lang="en">Edit Docs</span><span lang="zh" hidden>编辑文档</span></button>
+      <button type="button" class="btn btn-sm btn-primary" id="doc-save-btn" hidden><span lang="en">Save Changes</span><span lang="zh" hidden>保存修改</span></button>
+    </div>
   </div>
+  <div class="doc-table-wrap">
+    <table class="doc-table" id="doc-table">
+      <tbody class="doc-group" data-category="用户手册">
+  <tr class="doc-group-header"><td colspan="4"><span lang="en">User Manual</span><span lang="zh" hidden>用户手册</span></td></tr>
+  <tr class="doc-row" data-category="用户手册">
+  <td class="doc-num">1</td>
+  <td class="doc-fmt"><span class="doc-badge badge-pdf">PDF</span></td>
+  <td class="doc-name"><a class="dl-link" href="docs/WE-X280_User_Manual_EN.pdf" download="WE-X280_User_Manual_EN.pdf">User Manual (English)</a></td>
+  <td class="doc-action"></td>
+</tr>
+<tr class="doc-row" data-category="用户手册">
+  <td class="doc-num">2</td>
+  <td class="doc-fmt"><span class="doc-badge badge-pdf">PDF</span></td>
+  <td class="doc-name"><a class="dl-link" href="docs/WE-X280_User_Manual_CN.pdf" download="WE-X280_User_Manual_CN.pdf">User Manual (Chinese)</a></td>
+  <td class="doc-action"></td>
+</tr>
+</tbody>
+<tbody class="doc-group" data-category="支持文档">
+  <tr class="doc-group-header"><td colspan="4"><span lang="en">Support</span><span lang="zh" hidden>支持文档</span></td></tr>
+  <tr class="doc-row" data-category="支持文档">
+  <td class="doc-num">1</td>
+  <td class="doc-fmt"><span class="doc-badge badge-pdf">PDF</span></td>
+  <td class="doc-name"><a class="dl-link" href="docs/WE-X280_MQTT_Protocol_EN.pdf" download="WE-X280_MQTT_Protocol_EN.pdf">MQTT Protocol (English)</a></td>
+  <td class="doc-action"></td>
+</tr>
+</tbody>
+
+    </table>
+  </div>
+  <input type="file" id="doc-file-input" accept=".pdf,.png,.jpg,.jpeg,.doc,.docx,.xls,.xlsx,.md" multiple style="display:none" />
 </section>
 <section class="wrap" id="contact">
   <h2 class="section-title"><span lang="en">Contact Information</span><span lang="zh" hidden>联系方式</span></h2>
@@ -234,6 +305,8 @@ window.__PRODUCT_CONFIG__ = {
     sku: "WE-X280"
 };
 </script>
+<script id="gallery-data" type="application/json">[{"src": "images/WE-X280_front.png", "alt": "WE-X280 edge computing gateway front view", "category": "\u4e3b\u56fe"}, {"src": "images/WE-X280_angle.png", "alt": "WE-X280 angle view", "category": "\u4e3b\u56fe"}, {"src": "images/WE-X280_scene.png", "alt": "WE-X280 transparent scene view", "category": "\u5176\u4ed6"}, {"src": "images/main-5.png", "alt": "WE-X280 interface detail", "category": "\u7ec6\u8282"}, {"src": "images/section.png", "alt": "WE-X280 dimensional drawing", "category": "\u7ec6\u8282"}, {"src": "images/DID5O.png", "alt": "WE-X280 DI/DO interface diagram", "category": "\u7ec6\u8282"}, {"src": "images/DIDO3.png", "alt": "WE-X280 DI/DO connection diagram", "category": "\u7ec6\u8282"}, {"src": "images/WE-X280_photo_01.jpg", "alt": "WE-X280 product photo 01", "category": "\u5176\u4ed6"}, {"src": "images/WE-X280_photo_02.jpg", "alt": "WE-X280 product photo 02", "category": "\u5176\u4ed6"}, {"src": "images/WE-X280_photo_03.jpg", "alt": "WE-X280 product photo 03", "category": "\u5176\u4ed6"}, {"src": "images/WE-X280_photo_04.jpg", "alt": "WE-X280 product photo 04", "category": "\u5176\u4ed6"}, {"src": "images/WE-X280_photo_05.jpg", "alt": "WE-X280 product photo 05", "category": "\u5176\u4ed6"}, {"src": "images/WE-X280_photo_06.jpg", "alt": "WE-X280 product photo 06", "category": "\u5176\u4ed6"}, {"src": "images/WE-X280_photo_07.jpg", "alt": "WE-X280 product photo 07", "category": "\u5176\u4ed6"}, {"src": "images/WE-X280_photo_08.jpg", "alt": "WE-X280 product photo 08", "category": "\u5176\u4ed6"}, {"src": "images/WE-X280_photo_09.jpg", "alt": "WE-X280 product photo 09", "category": "\u5176\u4ed6"}, {"src": "images/WE-X280_photo_10.jpg", "alt": "WE-X280 product photo 10", "category": "\u5176\u4ed6"}, {"src": "images/WE-X280_photo_11.jpg", "alt": "WE-X280 product photo 11", "category": "\u5176\u4ed6"}]</script>
+<script id="doc-data" type="application/json">[{"label": "User Manual (English)", "file": "docs/WE-X280_User_Manual_EN.pdf", "category": "\u7528\u6237\u624b\u518c", "format": "PDF"}, {"label": "User Manual (Chinese)", "file": "docs/WE-X280_User_Manual_CN.pdf", "category": "\u7528\u6237\u624b\u518c", "format": "PDF"}, {"label": "MQTT Protocol (English)", "file": "docs/WE-X280_MQTT_Protocol_EN.pdf", "category": "\u652f\u6301\u6587\u6863", "format": "PDF"}]</script>
 <script>
 var currentLang = "en";
 function applyLang(lang) {

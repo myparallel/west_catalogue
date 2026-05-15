@@ -1,31 +1,610 @@
+/* ========================================
+   Gallery Manager
+   ======================================== */
 (function () {
-  var stage = document.getElementById("gallery-stage");
-  var thumbs = document.querySelectorAll(".thumbs button");
-  if (!stage || !thumbs.length) return;
+  var DATA_SCRIPT = document.getElementById("gallery-data");
+  if (!DATA_SCRIPT) return;
 
-  function setActive(btn) {
-    thumbs.forEach(function (b) {
-      b.classList.toggle("is-active", b === btn);
-    });
+  var CONFIG_IMAGES = [];
+  try { CONFIG_IMAGES = JSON.parse(DATA_SCRIPT.textContent); } catch(e) {}
+
+  var STORAGE_KEY = "gallery_WEX280";
+  var stage = document.getElementById("gallery-stage");
+  var thumbsWrap = document.getElementById("gallery-thumbs");
+  var catsWrap = document.getElementById("gallery-cats");
+  var editBtn = document.getElementById("gallery-edit-btn");
+  var saveBtn = document.getElementById("gallery-save-btn");
+  var fileInput = document.getElementById("gallery-file-input");
+
+  if (!stage || !thumbsWrap || !catsWrap) return;
+
+  var currentFilter = "全部";
+  var isEditMode = false;
+  var selectedSrc = null;
+
+  function loadStorage() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch(e) { return {}; }
   }
 
-  thumbs.forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      var src = btn.getAttribute("data-full");
-      if (!src) return;
-      var alt = btn.getAttribute("data-alt") || "";
-      stage.innerHTML =
-        '<img src="' +
-        src +
-        '" alt="' +
-        alt.replace(/"/g, "&quot;") +
-        '" width="960" height="720" loading="lazy" decoding="async" />';
-      setActive(btn);
+  function saveStorage(data) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  function getEditData() {
+    return loadStorage();
+  }
+
+  function setDeleted(src) {
+    var d = getEditData();
+    if (!d.deleted) d.deleted = [];
+    if (d.deleted.indexOf(src) === -1) d.deleted.push(src);
+    saveStorage(d);
+  }
+
+  function unsetDeleted(src) {
+    var d = getEditData();
+    if (!d.deleted) return;
+    d.deleted = d.deleted.filter(function(s) { return s !== src; });
+    saveStorage(d);
+  }
+
+  function isDeleted(src) {
+    var d = getEditData();
+    return d.deleted && d.deleted.indexOf(src) !== -1;
+  }
+
+  function getCategoryOverride(src) {
+    var d = getEditData();
+    return d.categories && d.categories[src] ? d.categories[src] : null;
+  }
+
+  function setCategoryOverride(src, cat) {
+    var d = getEditData();
+    if (!d.categories) d.categories = {};
+    d.categories[src] = cat;
+    saveStorage(d);
+  }
+
+  function getAddedImages() {
+    var d = getEditData();
+    return d.added || [];
+  }
+
+  function addAddedImage(img) {
+    var d = getEditData();
+    if (!d.added) d.added = [];
+    d.added.push(img);
+    saveStorage(d);
+  }
+
+  function removeAddedImage(src) {
+    var d = getEditData();
+    if (!d.added) return;
+    d.added = d.added.filter(function(s) { return s.src !== src; });
+    saveStorage(d);
+  }
+
+  function getAllImages() {
+    var result = [];
+    // config images minus deleted
+    CONFIG_IMAGES.forEach(function(img) {
+      if (!isDeleted(img.src)) {
+        var cat = getCategoryOverride(img.src) || img.category;
+        result.push({ src: img.src, alt: img.alt, category: cat, builtin: true });
+      }
+    });
+    // user added images
+    getAddedImages().forEach(function(img) {
+      result.push({ src: img.src, alt: img.alt || "", category: img.category || "其他", builtin: false });
+    });
+    return result;
+  }
+
+  function render() {
+    var all = getAllImages();
+    var catTabs = catsWrap.querySelectorAll("button");
+    catTabs.forEach(function(b) {
+      b.classList.toggle("is-active", b.getAttribute("data-cat") === currentFilter);
+    });
+    var filtered = all.filter(function(img) {
+      return currentFilter === "全部" || img.category === currentFilter;
+    });
+    // render thumbs
+    var html = "";
+    filtered.forEach(function(img, idx) {
+      var act = selectedSrc === img.src ? ' is-active' : '';
+      html += '<button type="button" class="gthumb' + act + '" data-full="' + img.src.replace(/"/g, "&quot;") + '" data-alt="' + (img.alt||"").replace(/"/g, "&quot;") + '" data-category="' + (img.category||"其他").replace(/"/g, "&quot;") + '" data-builtin="' + img.builtin + '"><img src="' + img.src.replace(/"/g, "&quot;") + '" alt="" width="120" height="90" loading="lazy" />';
+      if (isEditMode) {
+        html += '<button type="button" class="thumb-del" title="Delete">&times;</button>';
+      }
+      html += '<span class="thumb-cat">' + (img.category||"其他") + '</span></button>\n';
+    });
+    if (filtered.length === 0) {
+      html = '<p class="gallery-empty">No images in this category.</p>';
+    }
+    thumbsWrap.innerHTML = html;
+    // bind thumb clicks
+    thumbsWrap.querySelectorAll(".gthumb").forEach(function(btn) {
+      btn.addEventListener("click", function(e) {
+        if (e.target.closest(".thumb-del")) return;
+        selectImage(btn);
+      });
+      var delBtn = btn.querySelector(".thumb-del");
+      if (delBtn) {
+        delBtn.addEventListener("click", function(e) {
+          e.stopPropagation();
+          var src = btn.getAttribute("data-full");
+          var builtin = btn.getAttribute("data-builtin") === "true";
+          if (builtin) {
+            setDeleted(src);
+          } else {
+            removeAddedImage(src);
+          }
+          if (selectedSrc === src) selectedSrc = null;
+          render();
+        });
+      }
+    });
+    // select first visible if none selected
+    if (!selectedSrc || !thumbsWrap.querySelector('.gthumb.is-active')) {
+      var firstThumb = thumbsWrap.querySelector(".gthumb");
+      if (firstThumb && !selectedSrc) {
+        selectImage(firstThumb);
+      } else if (!firstThumb) {
+        stage.innerHTML = '<p style="color:var(--muted);padding:2rem">Select an image</p>';
+      }
+    }
+  }
+
+  function saveCategory(src, newCat, builtin) {
+    if (builtin) {
+      setCategoryOverride(src, newCat);
+    } else {
+      var added = getAddedImages();
+      added = added.map(function(img) {
+        if (img.src === src) img.category = newCat;
+        return img;
+      });
+      var d = getEditData();
+      d.added = added;
+      saveStorage(d);
+    }
+  }
+
+  function selectImage(btn) {
+    if (!btn) return;
+    var src = btn.getAttribute("data-full");
+    var alt = btn.getAttribute("data-alt") || "";
+    var cat = btn.getAttribute("data-category") || "其他";
+    var builtin = btn.getAttribute("data-builtin") === "true";
+    selectedSrc = src;
+    // remove is-active from all
+    thumbsWrap.querySelectorAll(".gthumb").forEach(function(b) {
+      b.classList.toggle("is-active", b === btn);
+    });
+    // render stage
+    var stageHtml = '<img src="' + src.replace(/"/g, "&quot;") + '" alt="' + alt.replace(/"/g, "&quot;") + '" width="960" height="720" loading="lazy" decoding="async" />';
+    if (isEditMode) {
+      stageHtml += '<div class="stage-edit-overlay stage-edit-top-right">' +
+        '<select class="stage-cat-select">' +
+        '<option value="主图"' + (cat==="主图"?" selected":"") + '>主图 / Main</option>' +
+        '<option value="细节"' + (cat==="细节"?" selected":"") + '>细节 / Detail</option>' +
+        '<option value="其他"' + (cat==="其他"?" selected":"") + '>其他 / Other</option>' +
+        '</select></div>' +
+        '<div class="stage-edit-overlay stage-edit-bottom-right">' +
+        '<button type="button" class="stage-del-btn" data-src="' + src.replace(/"/g, "&quot;") + '">删除</button></div>';
+    } else {
+      var catEn = ({'主图':'Main','细节':'Detail','其他':'Other'})[cat] || cat;
+      stageHtml += '<div class="stage-category"><span lang="en">' + catEn + '</span><span lang="zh" hidden>' + cat + '</span></div>';
+    }
+    stage.innerHTML = stageHtml;
+    if (isEditMode) {
+      var sel = stage.querySelector(".stage-cat-select");
+      if (sel) {
+        sel.addEventListener("change", function() {
+          var newCat = sel.value;
+          saveCategory(src, newCat, builtin);
+          selectedSrc = null;
+          render();
+        });
+      }
+      var delBtn = stage.querySelector(".stage-del-btn");
+      if (delBtn) {
+        delBtn.addEventListener("click", function() {
+          if (builtin) {
+            setDeleted(src);
+          } else {
+            removeAddedImage(src);
+          }
+          selectedSrc = null;
+          render();
+        });
+      }
+    }
+  }
+
+  // Category tabs
+  catsWrap.querySelectorAll("button").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      currentFilter = btn.getAttribute("data-cat");
+      selectedSrc = null;
+      render();
     });
   });
 
-  var first = document.querySelector(".thumbs button.is-active") || thumbs[0];
-  if (first) first.click();
+  // Edit / Save toggle
+  if (editBtn) {
+    editBtn.addEventListener("click", function() {
+      isEditMode = !isEditMode;
+      editBtn.hidden = isEditMode;
+      if (saveBtn) saveBtn.hidden = !isEditMode;
+      render();
+    });
+  }
+  if (saveBtn) {
+    saveBtn.addEventListener("click", function() {
+      isEditMode = false;
+      editBtn.hidden = false;
+      saveBtn.hidden = true;
+      render();
+    });
+  }
+
+  // Add image via file input
+  if (fileInput) {
+    fileInput.addEventListener("change", function() {
+      var files = fileInput.files;
+      for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var reader = new FileReader();
+        reader.onload = (function(f) {
+          return function(e) {
+            var dataUrl = e.target.result;
+            var cat = "其他";
+            addAddedImage({
+              src: dataUrl,
+              alt: f.name,
+              category: cat
+            });
+            render();
+          };
+        })(file);
+        reader.readAsDataURL(file);
+      }
+      fileInput.value = "";
+    });
+  }
+
+  // Add image button (injected into toolbar via JS)
+  var addBtn = document.createElement("button");
+  addBtn.type = "button";
+  addBtn.className = "btn btn-sm";
+  addBtn.id = "gallery-add-btn";
+  addBtn.hidden = true;
+  addBtn.innerHTML = '<span lang="en">+ Add Image</span><span lang="zh" hidden>+ 添加图片</span>';
+  var actions = document.querySelector(".gallery-actions");
+  if (actions) {
+    actions.insertBefore(addBtn, saveBtn);
+  }
+  // apply current language to add button
+  if (typeof currentLang !== "undefined") {
+    addBtn.querySelectorAll("[lang]").forEach(function(el) {
+      el.hidden = el.getAttribute("lang") !== currentLang;
+    });
+  }
+  addBtn.addEventListener("click", function() {
+    fileInput.click();
+  });
+
+  // Override edit/save to show/hide add button
+  if (editBtn) {
+    editBtn.addEventListener("click", function() {
+      addBtn.hidden = false;
+    });
+  }
+  if (saveBtn) {
+    saveBtn.addEventListener("click", function() {
+      addBtn.hidden = true;
+    });
+  }
+
+  // Initial render
+  render();
+
+  // Apply lang toggle support for dynamically created elements
+  document.addEventListener("langchange", function() {
+    // handled by global i18n
+  });
+})();
+
+/* ========================================
+   Document Manager
+   ======================================== */
+(function () {
+  var DOC_SCRIPT = document.getElementById("doc-data");
+  if (!DOC_SCRIPT) return;
+
+  var CONFIG_DOCS = [];
+  try { CONFIG_DOCS = JSON.parse(DOC_SCRIPT.textContent); } catch(e) {}
+
+  var STORAGE_KEY = "docs_WEX280";
+  var table = document.getElementById("doc-table");
+  var catsWrap = document.getElementById("doc-cats");
+  var editBtn = document.getElementById("doc-edit-btn");
+  var saveBtn = document.getElementById("doc-save-btn");
+  var fileInput = document.getElementById("doc-file-input");
+
+  if (!table || !catsWrap) return;
+
+  var currentFilter = "全部";
+  var isEditMode = false;
+
+  function loadStorage() {
+    try { var raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : {}; } catch(e) { return {}; }
+  }
+  function saveStorage(d) { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
+
+  function setDeleted(file) {
+    var d = loadStorage();
+    if (!d.deleted) d.deleted = [];
+    if (d.deleted.indexOf(file) === -1) d.deleted.push(file);
+    saveStorage(d);
+  }
+  function isDeleted(file) {
+    var d = loadStorage();
+    return d.deleted && d.deleted.indexOf(file) !== -1;
+  }
+  function getCatOverride(file) {
+    var d = loadStorage();
+    return d.categories && d.categories[file] ? d.categories[file] : null;
+  }
+  function setCatOverride(file, cat) {
+    var d = loadStorage();
+    if (!d.categories) d.categories = {};
+    d.categories[file] = cat;
+    saveStorage(d);
+  }
+  function getAdded() {
+    var d = loadStorage();
+    return d.added || [];
+  }
+  function addDoc(doc) {
+    var d = loadStorage();
+    if (!d.added) d.added = [];
+    d.added.push(doc);
+    saveStorage(d);
+  }
+  function removeAdded(file) {
+    var d = loadStorage();
+    if (!d.added) return;
+    d.added = d.added.filter(function(x) { return x.file !== file; });
+    saveStorage(d);
+  }
+
+  function getAllDocs() {
+    var result = [];
+    CONFIG_DOCS.forEach(function(doc) {
+      if (!isDeleted(doc.file)) {
+        var cat = getCatOverride(doc.file) || doc.category;
+        result.push({ label: doc.label, file: doc.file, category: cat, format: doc.format, builtin: true });
+      }
+    });
+    getAdded().forEach(function(doc) {
+      result.push({ label: doc.label, file: doc.file, category: doc.category || "支持文档", format: doc.format || "PDF", builtin: false });
+    });
+    return result;
+  }
+
+  function fmtBadge(fmt) {
+    return '<span class="doc-badge badge-' + fmt.toLowerCase() + '">' + fmt + '</span>';
+  }
+
+  function updateHeroSection() {
+    var all = getAllDocs();
+    // update count
+    var countEl = document.getElementById("hero-docs-count");
+    if (countEl) countEl.textContent = "(" + all.length + ")";
+    // update dropdown menu items
+    var menu = document.getElementById("hero-docs-menu");
+    if (menu) {
+      var itemsHtml = "";
+      all.forEach(function(doc) {
+        var fn = (doc.file.split("/").pop() || doc.file).replace(/"/g,"&quot;");
+        itemsHtml += '<a class="docs-dropdown__item" href="' + doc.file.replace(/"/g,"&quot;") + '" download="' + fn + '">' + doc.label.replace(/"/g,"&quot;") + '</a>\n';
+      });
+      menu.innerHTML = itemsHtml;
+    }
+  }
+
+  function triggerDownload(file, filename) {
+    var a = document.createElement("a");
+    a.href = file;
+    a.download = filename || "download";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  function render() {
+    var all = getAllDocs();
+    updateHeroSection();
+    // update cat tabs
+    catsWrap.querySelectorAll("button").forEach(function(b) {
+      b.classList.toggle("is-active", b.getAttribute("data-cat") === currentFilter);
+    });
+    var filtered = all.filter(function(doc) {
+      return currentFilter === "全部" || doc.category === currentFilter;
+    });
+    // group by category
+    var groups = {};
+    var catOrder = ["用户手册","规格书","使用说明","支持文档","操作指引"];
+    filtered.forEach(function(doc) {
+      var c = doc.category || "支持文档";
+      if (!groups[c]) groups[c] = [];
+      groups[c].push(doc);
+    });
+    var html = "";
+    catOrder.forEach(function(cat) {
+      var docs = groups[cat];
+      if (!docs) return;
+      var rows = "";
+      docs.forEach(function(doc, i) {
+        var fn = (doc.file.split("/").pop() || doc.file).replace(/"/g,"&quot;");
+        rows += '<tr class="doc-row" data-category="' + cat.replace(/"/g,"&quot;") + '" data-file="' + doc.file.replace(/"/g,"&quot;") + '" data-builtin="' + doc.builtin + '">';
+        rows += '<td class="doc-num">' + (i+1) + '</td>';
+        rows += '<td class="doc-fmt">' + fmtBadge(doc.format) + '</td>';
+        rows += '<td class="doc-name"><a class="dl-link" href="' + doc.file.replace(/"/g,"&quot;") + '" download="' + fn + '">' + doc.label.replace(/"/g,"&quot;") + '</a></td>';
+        rows += '<td class="doc-action">';
+        if (isEditMode) {
+          rows += '<select class="doc-cat-select">' +
+            '<option value="用户手册"' + (cat==="用户手册"?" selected":"") + '>用户手册 / User Manual</option>' +
+            '<option value="规格书"' + (cat==="规格书"?" selected":"") + '>规格书 / Specification</option>' +
+            '<option value="使用说明"' + (cat==="使用说明"?" selected":"") + '>使用说明 / Instructions</option>' +
+            '<option value="支持文档"' + (cat==="支持文档"?" selected":"") + '>支持文档 / Support</option>' +
+            '<option value="操作指引"' + (cat==="操作指引"?" selected":"") + '>操作指引 / Guide</option>' +
+            '</select>';
+          rows += '<button type="button" class="doc-del-btn" title="Delete">&times;</button>';
+        } else {
+          rows += '<button type="button" class="doc-dl-btn" data-file="' + doc.file.replace(/"/g,"&quot;") + '" data-fn="' + fn + '"><span lang="en">Download</span><span lang="zh" hidden>下载</span></button>';
+        }
+        rows += '</td></tr>\n';
+      });
+      html += '<tbody class="doc-group" data-category="' + cat.replace(/"/g,"&quot;") + '">' +
+        '<tr class="doc-group-header"><td colspan="4">' + cat + '</td></tr>' +
+        rows + '</tbody>\n';
+    });
+    table.innerHTML = html;
+
+    // bind events
+    table.querySelectorAll(".doc-row").forEach(function(row) {
+      var dlBtn = row.querySelector(".doc-dl-btn");
+      if (dlBtn) {
+        dlBtn.addEventListener("click", function() {
+          var file = dlBtn.getAttribute("data-file");
+          var fn = dlBtn.getAttribute("data-fn");
+          triggerDownload(file, fn);
+        });
+      }
+      if (isEditMode) {
+        var sel = row.querySelector(".doc-cat-select");
+        if (sel) {
+          sel.addEventListener("change", function() {
+            var newCat = sel.value;
+            var file = row.getAttribute("data-file");
+            var builtin = row.getAttribute("data-builtin") === "true";
+            if (builtin) {
+              setCatOverride(file, newCat);
+            } else {
+              var added = getAdded();
+              added = added.map(function(d) {
+                if (d.file === file) d.category = newCat;
+                return d;
+              });
+              var store = loadStorage();
+              store.added = added;
+              saveStorage(store);
+            }
+            render();
+          });
+        }
+        var delBtn = row.querySelector(".doc-del-btn");
+        if (delBtn) {
+          delBtn.addEventListener("click", function() {
+            var file = row.getAttribute("data-file");
+            var builtin = row.getAttribute("data-builtin") === "true";
+            if (builtin) {
+              setDeleted(file);
+            } else {
+              removeAdded(file);
+            }
+            render();
+          });
+        }
+      }
+    });
+  }
+
+  // Category filter tabs
+  catsWrap.querySelectorAll("button").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      currentFilter = btn.getAttribute("data-cat");
+      render();
+    });
+  });
+
+  // Edit / Save toggle
+  if (editBtn) {
+    editBtn.addEventListener("click", function() {
+      isEditMode = !isEditMode;
+      editBtn.hidden = isEditMode;
+      if (saveBtn) saveBtn.hidden = !isEditMode;
+      render();
+    });
+  }
+  if (saveBtn) {
+    saveBtn.addEventListener("click", function() {
+      isEditMode = false;
+      editBtn.hidden = false;
+      saveBtn.hidden = true;
+      render();
+    });
+  }
+
+  // Add document via file input
+  if (fileInput) {
+    fileInput.addEventListener("change", function() {
+      var files = fileInput.files;
+      for (var i = 0; i < files.length; i++) {
+        (function(file) {
+          var label = file.name;
+          var ext = label.split(".").pop().toLowerCase();
+          var fmtMap = {"pdf":"PDF","png":"图片","jpg":"图片","jpeg":"图片","gif":"图片","webp":"图片","doc":"WORD","docx":"WORD","xls":"EXCEL","xlsx":"EXCEL","md":"MARKDOWN","markdown":"MARKDOWN"};
+          var fmt = fmtMap[ext] || ext.toUpperCase();
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            addDoc({
+              label: label,
+              file: e.target.result,
+              category: "支持文档",
+              format: fmt
+            });
+            render();
+          };
+          reader.readAsDataURL(file);
+        })(files[i]);
+      }
+      fileInput.value = "";
+    });
+  }
+
+  // Add doc button
+  var addBtn = document.createElement("button");
+  addBtn.type = "button";
+  addBtn.className = "btn btn-sm";
+  addBtn.id = "doc-add-btn";
+  addBtn.hidden = true;
+  addBtn.innerHTML = '<span lang="en">+ Add Document</span><span lang="zh" hidden>+ 添加文档</span>';
+  var actions = document.querySelector(".doc-toolbar-actions");
+  if (actions) {
+    actions.insertBefore(addBtn, saveBtn);
+  }
+  if (typeof currentLang !== "undefined") {
+    addBtn.querySelectorAll("[lang]").forEach(function(el) {
+      el.hidden = el.getAttribute("lang") !== currentLang;
+    });
+  }
+  addBtn.addEventListener("click", function() { fileInput.click(); });
+  if (editBtn) {
+    editBtn.addEventListener("click", function() { addBtn.hidden = false; });
+  }
+  if (saveBtn) {
+    saveBtn.addEventListener("click", function() { addBtn.hidden = true; });
+  }
+
+  render();
 })();
 
 (function () {

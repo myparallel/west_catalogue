@@ -89,24 +89,42 @@ def build_nav(cfg):
     )
 
 
+DOC_CATEGORIES = ["全部", "用户手册", "规格书", "使用说明", "支持文档", "操作指引"]
+DOC_FORMATS = {"pdf":"PDF","png":"图片","jpg":"图片","jpeg":"图片","gif":"图片","webp":"图片","doc":"WORD","docx":"WORD","xls":"EXCEL","xlsx":"EXCEL","md":"MARKDOWN","markdown":"MARKDOWN"}
+
+# Bilingual category mappings: {zh: en}
+BILINGUAL_CATS = {
+    "全部": "All", "主图": "Main", "细节": "Detail", "其他": "Other",
+    "用户手册": "User Manual", "规格书": "Specification",
+    "使用说明": "Instructions", "支持文档": "Support", "操作指引": "Guide"
+}
+
+def biling_btn(text, active=False, extra_attrs=""):
+    """Generate a bilingual button with lang spans."""
+    en = BILINGUAL_CATS.get(text, text)
+    active_cls = ' class="is-active"' if active else ''
+    return f'<button type="button"{active_cls} data-cat="{esc(text)}"{extra_attrs}><span lang="en">{esc(en)}</span><span lang="zh" hidden>{esc(text)}</span></button>\n'
+
+def doc_format(filepath):
+    ext = os.path.splitext(filepath)[1].lstrip(".").lower()
+    return DOC_FORMATS.get(ext, ext.upper())
+
 def build_docs_dropdown(cfg):
     documents = cfg.get("documents", [])
     manual_pdf = cfg.get("manual_pdf", "")
-    count = len(documents)
     if manual_pdf:
-        count += 1
-    if count == 0:
-        return "", ""
+        has_manual = any(d.get("file","") == manual_pdf for d in documents)
+        if not has_manual:
+            documents = [{"label": "User Manual (PDF)", "file": manual_pdf, "category": "用户手册"}] + documents
+    count = len(documents)
     items = "".join(
-        f'<a class="docs-dropdown__item" href="{esc(d["file"])}" download="{esc(os.path.basename(d["file"]))}">{esc(d["label"])}</a>'
+        f'<a class="docs-dropdown__item" href="{esc(d["file"])}" download="{esc(os.path.basename(d["file"]))}">{esc(d["label"])}</a>\n'
         for d in documents
     )
-    btn_label = f"PDF ({count})"
     html = f"""<div class="docs-dropdown">
-  <button type="button" class="btn btn-primary btn-docs" data-docs-toggle>{btn_label} &#9660;</button>
-  <div class="docs-dropdown__menu" hidden>
-    {items}
-  </div>
+  <button type="button" class="btn btn-primary btn-docs" data-docs-toggle id="hero-docs-btn"><span lang="en">Data Download</span><span lang="zh" hidden>资料下载</span> <span class="doc-count" id="hero-docs-count">({count})</span> &#9660;</button>
+  <div class="docs-dropdown__menu" id="hero-docs-menu" hidden>
+    {items}  </div>
 </div>"""
     return html, " for technical documentation"
 
@@ -160,24 +178,51 @@ def build_gallery(cfg):
     images = cfg.get("images", [])
     if not images:
         return ""
+    gallery_cats = ["全部", "主图", "细节", "其他"]
+    tabs = ""
+    for i, cat in enumerate(gallery_cats):
+        tabs += biling_btn(cat, active=(i==0))
     thumbs = ""
     first_active = True
     for img in images:
         src = esc(img.get("src", ""))
         alt = esc(img.get("alt", ""))
-        active_class = ' is-active' if first_active else ''
+        cat = esc(img.get("category", "其他"))
+        cls = "gthumb" + (" is-active" if first_active else "")
         first_active = False
-        thumbs += f"""<button type="button" class="{active_class.strip()}" data-full="{src}" data-alt="{alt}"><img src="{src}" alt="" width="120" height="90" loading="lazy" /></button>\n"""
+        cat_en = BILINGUAL_CATS.get(cat, cat)
+        thumbs += f"""<button type="button" class="{cls}" data-full="{src}" data-alt="{alt}" data-category="{cat}"><img src="{src}" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">{esc(cat_en)}</span><span lang="zh" hidden>{esc(cat)}</span></span></button>\n"""
     return f"""<section class="wrap" id="gallery">
   <h2 class="section-title" data-i18n="secGallery">Product Gallery</h2>
   <p class="section-sub" data-i18n="subGallery">Detailed views (Scroll thumbnails to browse).</p>
+  <div class="gallery-toolbar">
+    <div class="gallery-cats" id="gallery-cats">
+      {tabs}
+    </div>
+    <div class="gallery-actions">
+      <button type="button" class="btn btn-sm" id="gallery-edit-btn"><span lang="en">Edit Gallery</span><span lang="zh" hidden>编辑图库</span></button>
+      <button type="button" class="btn btn-sm btn-primary" id="gallery-save-btn" hidden><span lang="en">Save Changes</span><span lang="zh" hidden>保存修改</span></button>
+    </div>
+  </div>
   <div class="gallery-layout gallery-layout--v2">
     <div class="stage" id="gallery-stage" aria-live="polite"></div>
-    <div class="thumbs" role="tablist" aria-label="Gallery thumbnails">
+    <div class="thumbs" id="gallery-thumbs" role="tablist" aria-label="Gallery thumbnails">
       {thumbs}
     </div>
   </div>
+  <input type="file" id="gallery-file-input" accept="image/*" multiple style="display:none" />
 </section>"""
+
+def gallery_script(cfg):
+    images = cfg.get("images", [])
+    data = []
+    for img in images:
+        data.append({
+            "src": img.get("src", ""),
+            "alt": img.get("alt", ""),
+            "category": img.get("category", "其他")
+        })
+    return f"""<script id="gallery-data" type="application/json">{json.dumps(data)}</script>"""
 
 
 def build_video(cfg):
@@ -260,26 +305,81 @@ def build_package(cfg):
 
 
 def build_downloads(cfg):
-    manual_pdf = cfg.get("manual_pdf", "")
     documents = cfg.get("documents", [])
-    if not manual_pdf and not documents:
-        return ""
-    items = ""
-    all_docs = []
+    # also handle legacy manual_pdf
+    manual_pdf = cfg.get("manual_pdf", "")
     if manual_pdf:
-        all_docs.append(("User Manual (PDF)", manual_pdf))
-    for doc in documents:
-        all_docs.append((doc["label"], doc["file"]))
-    for label, path in all_docs:
-        fn = os.path.basename(path)
-        items += f"""<a class="btn btn-secondary dl-link" href="{esc(path)}" download="{esc(fn)}">{esc(label)}</a>\n"""
+        has_manual = any(d.get("file","") == manual_pdf for d in documents)
+        if not has_manual:
+            documents = [{"label": "User Manual (PDF)", "file": manual_pdf, "category": "用户手册"}] + documents
+    if not documents:
+        return ""
+    doc_cats = DOC_CATEGORIES[1:]  # exclude "全部"
+    for d in documents:
+        if "category" not in d:
+            d["category"] = "支持文档"
+    cat_html = ""
+    for cat in doc_cats:
+        cat_docs = [d for d in documents if d.get("category") == cat]
+        if not cat_docs:
+            continue
+        rows = ""
+        for i, d in enumerate(cat_docs, 1):
+            fmt = doc_format(d["file"])
+            fn = os.path.basename(d["file"])
+            rows += f"""<tr class="doc-row" data-category="{esc(cat)}">
+  <td class="doc-num">{i}</td>
+  <td class="doc-fmt"><span class="doc-badge badge-{fmt.lower()}">{fmt}</span></td>
+  <td class="doc-name"><a class="dl-link" href="{esc(d["file"])}" download="{esc(fn)}">{esc(d["label"])}</a></td>
+  <td class="doc-action"></td>
+</tr>\n"""
+        cat_en = BILINGUAL_CATS.get(cat, cat)
+        cat_html += f"""<tbody class="doc-group" data-category="{esc(cat)}">
+  <tr class="doc-group-header"><td colspan="4"><span lang="en">{esc(cat_en)}</span><span lang="zh" hidden>{esc(cat)}</span></td></tr>
+  {rows}</tbody>\n"""
     return f"""<section class="wrap" id="downloads">
   <h2 class="section-title"><span lang="en">Downloads</span><span lang="zh" hidden>资料下载</span></h2>
   <p class="section-sub"><span lang="en">Access technical documentation for the product.</span><span lang="zh" hidden>获取产品的技术文档。</span></p>
-  <div class="hero-actions" style="flex-direction:column;align-items:flex-start">
-    <div style="display:flex;flex-wrap:wrap;gap:0.5rem">{items}</div>
+  <div class="doc-toolbar">
+    <div class="doc-cats" id="doc-cats">
+      {biling_btn("全部", active=True)}
+      {biling_btn("用户手册")}
+      {biling_btn("规格书")}
+      {biling_btn("使用说明")}
+      {biling_btn("支持文档")}
+      {biling_btn("操作指引")}
+    </div>
+    <div class="doc-toolbar-actions">
+      <button type="button" class="btn btn-sm" id="doc-edit-btn"><span lang="en">Edit Docs</span><span lang="zh" hidden>编辑文档</span></button>
+      <button type="button" class="btn btn-sm btn-primary" id="doc-save-btn" hidden><span lang="en">Save Changes</span><span lang="zh" hidden>保存修改</span></button>
+    </div>
   </div>
+  <div class="doc-table-wrap">
+    <table class="doc-table" id="doc-table">
+      {cat_html}
+    </table>
+  </div>
+  <input type="file" id="doc-file-input" accept=".pdf,.png,.jpg,.jpeg,.doc,.docx,.xls,.xlsx,.md" multiple style="display:none" />
 </section>"""
+
+def build_doc_script(cfg):
+    documents = cfg.get("documents", [])
+    manual_pdf = cfg.get("manual_pdf", "")
+    if manual_pdf:
+        has_manual = any(d.get("file","") == manual_pdf for d in documents)
+        if not has_manual:
+            documents = [{"label": "User Manual (PDF)", "file": manual_pdf, "category": "用户手册"}] + documents
+    data = []
+    for d in documents:
+        fmt = doc_format(d["file"])
+        cat = d.get("category") or "支持文档"
+        data.append({
+            "label": d["label"],
+            "file": d["file"],
+            "category": cat,
+            "format": fmt
+        })
+    return f"""<script id="doc-data" type="application/json">{json.dumps(data)}</script>"""
 
 
 def build_contact(cfg):
@@ -380,11 +480,13 @@ window.__PRODUCT_CONFIG__ = {{
     hero = build_hero(cfg)
     highlights = build_highlights(cfg)
     gallery = build_gallery(cfg)
+    gallery_data_script = gallery_script(cfg)
     video = build_video(cfg)
     specs = build_specifications(cfg)
     apps = build_applications(cfg)
     pkg = build_package(cfg)
     downloads = build_downloads(cfg)
+    doc_data_script = build_doc_script(cfg)
     contact = build_contact(cfg)
     footer = build_footer(cfg)
     quote_modal = build_quote_modal(cfg)
@@ -500,6 +602,8 @@ document.addEventListener("DOMContentLoaded", function() {
 {quote_modal}
 
 {inline_config}
+{gallery_data_script}
+{doc_data_script}
 {i18n_script}
 {pdf_script}
 <script src="{js_path}" defer></script>

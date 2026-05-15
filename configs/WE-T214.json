@@ -13,13 +13,13 @@
   },
   "hero_image": "images/hero_800.png",
   "images": [
-    { "src": "images/hero_800.png", "alt": "WE-T214 full set with sensor probe" },
-    { "src": "images/back.png", "alt": "WE-T214 host back view and antenna" },
-    { "src": "images/interface.jpg", "alt": "WE-T214 interface and connector labels" },
-    { "src": "images/dimensions.png", "alt": "WE-T214 host dimensions" },
-    { "src": "images/display.jpg", "alt": "WE-T214 LCD screen with real-time readings" },
-    { "src": "images/app.png", "alt": "Soil Parameter Tester mobile app interface" },
-    { "src": "images/package.jpg", "alt": "WE-T214 standard packaging and accessories" }
+    { "src": "images/hero_800.png", "alt": "WE-T214 full set with sensor probe", "category": "主图" },
+    { "src": "images/back.png", "alt": "WE-T214 host back view and antenna", "category": "主图" },
+    { "src": "images/interface.jpg", "alt": "WE-T214 interface and connector labels", "category": "细节" },
+    { "src": "images/dimensions.png", "alt": "WE-T214 host dimensions", "category": "细节" },
+    { "src": "images/display.jpg", "alt": "WE-T214 LCD screen with real-time readings", "category": "细节" },
+    { "src": "images/app.png", "alt": "Soil Parameter Tester mobile app interface", "category": "其他" },
+    { "src": "images/package.jpg", "alt": "WE-T214 standard packaging and accessories", "category": "其他" }
   ],
   "highlights": [
     {"title": {"en": "3-in-1 Precise Sensing", "zh": "三合一精准传感"}, "text": {"en": "Monitors Soil Temperature, Volumetric Moisture Content, and Electrical Conductivity (EC) simultaneously with a high-accuracy triple-probe sensor.", "zh": "通过高精度三合一探针，同时监测土壤温度、体积含水率和电导率（EC）。"}},

@@ -13,13 +13,24 @@
   },
   "hero_image": "images/WE-X280_front.png",
   "images": [
-    {"src": "images/WE-X280_front.png", "alt": "WE-X280 edge computing gateway front view"},
-    {"src": "images/WE-X280_angle.png", "alt": "WE-X280 angle view"},
-    {"src": "images/WE-X280_scene.png", "alt": "WE-X280 transparent scene view"},
-    {"src": "images/main-5.png", "alt": "WE-X280 interface detail"},
-    {"src": "images/section.png", "alt": "WE-X280 dimensional drawing"},
-    {"src": "images/DID5O.png", "alt": "WE-X280 DI/DO interface diagram"},
-    {"src": "images/DIDO3.png", "alt": "WE-X280 DI/DO connection diagram"}
+    {"src": "images/WE-X280_front.png", "alt": "WE-X280 edge computing gateway front view", "category": "主图"},
+    {"src": "images/WE-X280_angle.png", "alt": "WE-X280 angle view", "category": "主图"},
+    {"src": "images/WE-X280_scene.png", "alt": "WE-X280 transparent scene view", "category": "其他"},
+    {"src": "images/main-5.png", "alt": "WE-X280 interface detail", "category": "细节"},
+    {"src": "images/section.png", "alt": "WE-X280 dimensional drawing", "category": "细节"},
+    {"src": "images/DID5O.png", "alt": "WE-X280 DI/DO interface diagram", "category": "细节"},
+    {"src": "images/DIDO3.png", "alt": "WE-X280 DI/DO connection diagram", "category": "细节"},
+    {"src": "images/WE-X280_photo_01.jpg", "alt": "WE-X280 product photo 01", "category": "其他"},
+    {"src": "images/WE-X280_photo_02.jpg", "alt": "WE-X280 product photo 02", "category": "其他"},
+    {"src": "images/WE-X280_photo_03.jpg", "alt": "WE-X280 product photo 03", "category": "其他"},
+    {"src": "images/WE-X280_photo_04.jpg", "alt": "WE-X280 product photo 04", "category": "其他"},
+    {"src": "images/WE-X280_photo_05.jpg", "alt": "WE-X280 product photo 05", "category": "其他"},
+    {"src": "images/WE-X280_photo_06.jpg", "alt": "WE-X280 product photo 06", "category": "其他"},
+    {"src": "images/WE-X280_photo_07.jpg", "alt": "WE-X280 product photo 07", "category": "其他"},
+    {"src": "images/WE-X280_photo_08.jpg", "alt": "WE-X280 product photo 08", "category": "其他"},
+    {"src": "images/WE-X280_photo_09.jpg", "alt": "WE-X280 product photo 09", "category": "其他"},
+    {"src": "images/WE-X280_photo_10.jpg", "alt": "WE-X280 product photo 10", "category": "其他"},
+    {"src": "images/WE-X280_photo_11.jpg", "alt": "WE-X280 product photo 11", "category": "其他"}
   ],
   "highlights": [
     {"title": {"en": "Multi-Network Convergence", "zh": "多网融合"}, "text": {"en": "Supports 4G full Netcom, Ethernet, LoRa (410\u2013490MHz), and RS485 wired networks simultaneously for flexible device connectivity.", "zh": "同时支持4G全网通、以太网、LoRa（410\u2013490MHz）和RS485有线网络，实现灵活的设备连接。"}},
@@ -69,9 +80,9 @@
     {"item": {"en": "User manual & certificate of conformity", "zh": "用户手册及合格证"}, "qty": 1}
   ],
   "documents": [
-    {"label": "User Manual (English)", "file": "docs/WE-X280_User_Manual_EN.pdf"},
-    {"label": "User Manual (Chinese)", "file": "docs/WE-X280_User_Manual_CN.pdf"},
-    {"label": "MQTT Protocol (English)", "file": "docs/WE-X280_MQTT_Protocol_EN.pdf"}
+    {"label": "User Manual (English)", "file": "docs/WE-X280_User_Manual_EN.pdf", "category": "用户手册"},
+    {"label": "User Manual (Chinese)", "file": "docs/WE-X280_User_Manual_CN.pdf", "category": "用户手册"},
+    {"label": "MQTT Protocol (English)", "file": "docs/WE-X280_MQTT_Protocol_EN.pdf", "category": "支持文档"}
   ],
   "contact": {
     "address": "Room 1502, 15th Floor, Building 20, No. 487 Tianlin Road<br />Shanghai, 200233, China",

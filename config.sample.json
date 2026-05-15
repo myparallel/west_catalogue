@@ -13,13 +13,13 @@
   },
   "hero_image": "Asset/hero_800.png",
   "images": [
-    { "src": "Asset/hero_800.png", "alt": "WE-T214 full set with sensor probe" },
-    { "src": "Asset/back.png", "alt": "WE-T214 host back view and antenna" },
-    { "src": "Asset/interface.jpg", "alt": "WE-T214 interface and connector labels" },
-    { "src": "Asset/dimensions.png", "alt": "WE-T214 host dimensions" },
-    { "src": "Asset/display.jpg", "alt": "WE-T214 LCD screen with real-time readings" },
-    { "src": "Asset/app.png", "alt": "Soil Parameter Tester mobile app interface" },
-    { "src": "Asset/package.jpg", "alt": "WE-T214 standard packaging and accessories" }
+    { "src": "Asset/hero_800.png", "alt": "WE-T214 full set with sensor probe", "category": "主图" },
+    { "src": "Asset/back.png", "alt": "WE-T214 host back view and antenna", "category": "主图" },
+    { "src": "Asset/interface.jpg", "alt": "WE-T214 interface and connector labels", "category": "细节" },
+    { "src": "Asset/dimensions.png", "alt": "WE-T214 host dimensions", "category": "细节" },
+    { "src": "Asset/display.jpg", "alt": "WE-T214 LCD screen with real-time readings", "category": "细节" },
+    { "src": "Asset/app.png", "alt": "WE-T214 mobile app interface", "category": "其他" },
+    { "src": "Asset/package.jpg", "alt": "WE-T214 standard packaging and accessories", "category": "其他" }
   ],
   "highlights": [
     { "title": "3-in-1 Precise Sensing", "text": "Monitors Soil Temperature, Volumetric Moisture Content, and Electrical Conductivity (EC) simultaneously with a high-accuracy triple-probe sensor." },
@@ -58,7 +58,9 @@
     { "item": "4G / LoRa Antenna", "qty": 1 },
     { "item": "Printed User Manual & Certificate", "qty": 1 }
   ],
-  "manual_pdf": "WE-T214-manual.pdf",
+  "documents": [
+    {"label": "User Manual (PDF)", "file": "WE-T214-manual.pdf", "category": "用户手册"}
+  ],
   "contact": {
     "address": "Room 1502, 15th Floor, Building 20, No. 487 Tianlin Road<br />Shanghai, 200233, China",
     "phone": "+86-021-33675566",

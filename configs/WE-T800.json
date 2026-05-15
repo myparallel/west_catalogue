@@ -13,11 +13,11 @@
   },
   "hero_image": "images/T800-1.png",
   "images": [
-    { "src": "images/T800-1.png", "alt": "WE-T800 field monitor front view" },
-    { "src": "images/T800-2.png", "alt": "WE-T800 monitor view 2" },
-    { "src": "images/T800-3.png", "alt": "WE-T800 monitor view 3" },
-    { "src": "images/T800-4.png", "alt": "WE-T800 monitor view 4" },
-    { "src": "images/T800-5.png", "alt": "WE-T800 monitor view 5" }
+    { "src": "images/T800-1.png", "alt": "WE-T800 field monitor front view", "category": "主图" },
+    { "src": "images/T800-2.png", "alt": "WE-T800 monitor view 2", "category": "主图" },
+    { "src": "images/T800-3.png", "alt": "WE-T800 monitor view 3", "category": "细节" },
+    { "src": "images/T800-4.png", "alt": "WE-T800 monitor view 4", "category": "细节" },
+    { "src": "images/T800-5.png", "alt": "WE-T800 monitor view 5", "category": "细节" }
   ],
   "highlights": [
     {"title": {"en": "4G & Cloud-ready", "zh": "4G与云就绪"}, "text": {"en": "LTE FDD/TDD bands supported; MQTT, HTTP, and WEST cloud protocols; 3-year cellular data plan option.", "zh": "支持LTE FDD/TDD频段；MQTT、HTTP和WEST云协议；可选3年蜂窝数据套餐。"}},

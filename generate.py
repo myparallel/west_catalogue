@@ -70,14 +70,19 @@ def build_nav(cfg):
 
 def build_docs_dropdown(cfg):
     documents = cfg.get("documents", [])
-    if not documents:
+    manual_pdf = cfg.get("manual_pdf", "")
+    count = len(documents)
+    if manual_pdf:
+        count += 1
+    if count == 0:
         return "", ""
     items = "".join(
         f'<a class="docs-dropdown__item" href="{esc(d["file"])}" download="{esc(os.path.basename(d["file"]))}">{esc(d["label"])}</a>'
         for d in documents
     )
+    btn_label = f"PDF ({count})"
     html = f"""<div class="docs-dropdown">
-  <button type="button" class="btn btn-primary btn-docs" data-docs-toggle>Documents &#9660;</button>
+  <button type="button" class="btn btn-primary btn-docs" data-docs-toggle>{btn_label} &#9660;</button>
   <div class="docs-dropdown__menu" hidden>
     {items}
   </div>
@@ -102,7 +107,7 @@ def build_hero(cfg):
       <h1>{esc(p.get("name",""))}</h1>
       <p class="lead">{esc(p.get("lead",""))}</p>
       <div class="hero-actions">
-        <button type="button" class="btn btn-primary btn-pdf" data-sku="{esc(p.get("sku",""))}">Download as PDF</button>
+        <button type="button" class="btn btn-primary btn-pdf" data-sku="{esc(p.get("sku",""))}">打印</button>
         {docs_dropdown}
         {manual_btn}
         <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote>Request Quote</button>
@@ -395,7 +400,8 @@ window.__PRODUCT_CONFIG__ = {{
             if (menu) {
                 var isOpen = !menu.hasAttribute("hidden");
                 menu.hidden = isOpen;
-                btn.innerHTML = isOpen ? "Documents &#9660;" : "Documents &#9650;";
+                var base = btn.innerHTML.replace(/[▼▲].*/, "").trim();
+                btn.innerHTML = isOpen ? base + " &#9650;" : base + " &#9660;";
             }
         });
     });
@@ -403,7 +409,7 @@ window.__PRODUCT_CONFIG__ = {{
         document.querySelectorAll(".docs-dropdown__menu:not([hidden])").forEach(function(m) {
             m.hidden = true;
             var btn = m.parentElement.querySelector("[data-docs-toggle]");
-            if (btn) btn.innerHTML = "Documents &#9660;";
+            if (btn) btn.innerHTML = btn.innerHTML.replace(/[▲▼].*/, "").trim() + " &#9660;";
         });
     });
 })();

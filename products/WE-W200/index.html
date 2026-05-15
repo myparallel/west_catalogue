@@ -47,7 +47,7 @@
       <h1>WE-W200 Professional Weather Station</h1>
       <p class="lead">A professional-grade weather station for precision agriculture, meteorology, and environmental monitoring. Measures wind speed, wind direction, rainfall, temperature, humidity, barometric pressure, and solar radiation with high-accuracy sensors.</p>
       <div class="hero-actions">
-        <button type="button" class="btn btn-primary btn-pdf" data-sku="WE-W200">Download as PDF</button>
+        <button type="button" class="btn btn-primary btn-pdf" data-sku="WE-W200">打印</button>
         
         
         <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote>Request Quote</button>
@@ -235,7 +235,8 @@ window.__PRODUCT_CONFIG__ = {
             if (menu) {
                 var isOpen = !menu.hasAttribute("hidden");
                 menu.hidden = isOpen;
-                btn.innerHTML = isOpen ? "Documents &#9660;" : "Documents &#9650;";
+                var base = btn.innerHTML.replace(/[▼▲].*/, "").trim();
+                btn.innerHTML = isOpen ? base + " &#9650;" : base + " &#9660;";
             }
         });
     });
@@ -243,7 +244,7 @@ window.__PRODUCT_CONFIG__ = {
         document.querySelectorAll(".docs-dropdown__menu:not([hidden])").forEach(function(m) {
             m.hidden = true;
             var btn = m.parentElement.querySelector("[data-docs-toggle]");
-            if (btn) btn.innerHTML = "Documents &#9660;";
+            if (btn) btn.innerHTML = btn.innerHTML.replace(/[▲▼].*/, "").trim() + " &#9660;";
         });
     });
 })();

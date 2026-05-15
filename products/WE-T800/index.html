@@ -47,12 +47,17 @@
       <h1>WE-T800 Multi-Function Field Monitor</h1>
       <p class="lead">A sealed IP68 field unit for distributed monitoring: 4G backhaul, RS485 Modbus-RTU, two 4–20 mA analog channels, two digital inputs, and flexible power from internal Li-ion packs or 9–30 V DC. Built for water utilities, environmental sites, and industrial IoT where reliability matters.</p>
       <div class="hero-actions">
-        <button type="button" class="btn btn-primary btn-pdf" data-sku="WE-T800">Download as PDF</button>
-        
+        <button type="button" class="btn btn-primary btn-pdf" data-sku="WE-T800">打印</button>
+        <div class="docs-dropdown">
+  <button type="button" class="btn btn-primary btn-docs" data-docs-toggle>PDF (1) &#9660;</button>
+  <div class="docs-dropdown__menu" hidden>
+    
+  </div>
+</div>
         <a class="btn btn-primary dl-link" href="WE-T800-datasheet.pdf" download="WE-T800-datasheet.pdf">Download Manual (PDF)</a>
         <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote>Request Quote</button>
       </div>
-      <p class="doc-note">English PDF manual. For technical support or customized OEM versions, email us from <a href="#contact">Contact Information</a>.</p>
+      <p class="doc-note">English PDF manual. For technical support or customized OEM versions, email us from <a href="#contact">Contact Information</a>. for technical documentation</p>
     </div>
     <div class="hero-visual">
       <img src="images/T800-1.png" alt="WE-T800 Multi-Function Field Monitor" width="800" height="800" fetchpriority="high" />
@@ -239,7 +244,8 @@ window.__PRODUCT_CONFIG__ = {
             if (menu) {
                 var isOpen = !menu.hasAttribute("hidden");
                 menu.hidden = isOpen;
-                btn.innerHTML = isOpen ? "Documents &#9660;" : "Documents &#9650;";
+                var base = btn.innerHTML.replace(/[▼▲].*/, "").trim();
+                btn.innerHTML = isOpen ? base + " &#9650;" : base + " &#9660;";
             }
         });
     });
@@ -247,7 +253,7 @@ window.__PRODUCT_CONFIG__ = {
         document.querySelectorAll(".docs-dropdown__menu:not([hidden])").forEach(function(m) {
             m.hidden = true;
             var btn = m.parentElement.querySelector("[data-docs-toggle]");
-            if (btn) btn.innerHTML = "Documents &#9660;";
+            if (btn) btn.innerHTML = btn.innerHTML.replace(/[▲▼].*/, "").trim() + " &#9660;";
         });
     });
 })();

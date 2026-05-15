@@ -47,9 +47,9 @@
       <h1>WE-X280 Industrial Edge Computing Gateway</h1>
       <p class="lead">A powerful industrial edge computing gateway supporting LoRa wireless and RS485 wired convergence networks. Connects up to 128 wired/wireless devices, features 4G full Netcom and Ethernet dual-channel communication, edge computing engine, and seamless integration with the WEST-AIOT cloud platform.</p>
       <div class="hero-actions">
-        <button type="button" class="btn btn-primary btn-pdf" data-sku="WE-X280">Download as PDF</button>
+        <button type="button" class="btn btn-primary btn-pdf" data-sku="WE-X280">打印</button>
         <div class="docs-dropdown">
-  <button type="button" class="btn btn-primary btn-docs" data-docs-toggle>Documents &#9660;</button>
+  <button type="button" class="btn btn-primary btn-docs" data-docs-toggle>PDF (3) &#9660;</button>
   <div class="docs-dropdown__menu" hidden>
     <a class="docs-dropdown__item" href="docs/WE-X280_User_Manual_EN.pdf" download="WE-X280_User_Manual_EN.pdf">User Manual (English)</a><a class="docs-dropdown__item" href="docs/WE-X280_User_Manual_CN.pdf" download="WE-X280_User_Manual_CN.pdf">User Manual (Chinese)</a><a class="docs-dropdown__item" href="docs/WE-X280_MQTT_Protocol_EN.pdf" download="WE-X280_MQTT_Protocol_EN.pdf">MQTT Protocol (English)</a>
   </div>
@@ -257,7 +257,8 @@ window.__PRODUCT_CONFIG__ = {
             if (menu) {
                 var isOpen = !menu.hasAttribute("hidden");
                 menu.hidden = isOpen;
-                btn.innerHTML = isOpen ? "Documents &#9660;" : "Documents &#9650;";
+                var base = btn.innerHTML.replace(/[▼▲].*/, "").trim();
+                btn.innerHTML = isOpen ? base + " &#9650;" : base + " &#9660;";
             }
         });
     });
@@ -265,7 +266,7 @@ window.__PRODUCT_CONFIG__ = {
         document.querySelectorAll(".docs-dropdown__menu:not([hidden])").forEach(function(m) {
             m.hidden = true;
             var btn = m.parentElement.querySelector("[data-docs-toggle]");
-            if (btn) btn.innerHTML = "Documents &#9660;";
+            if (btn) btn.innerHTML = btn.innerHTML.replace(/[▲▼].*/, "").trim() + " &#9660;";
         });
     });
 })();

@@ -47,12 +47,17 @@
       <h1>WE-T214 3-in-1 Soil Sensor Transmitter</h1>
       <p class="lead">A rugged, field-ready transmitter for precision agriculture. Simultaneously monitors soil temperature, volumetric moisture content, and electrical conductivity (EC). Supports dual 4G and LoRa connectivity for reliable data backhaul in remote areas.</p>
       <div class="hero-actions">
-        <button type="button" class="btn btn-primary btn-pdf" data-sku="WE-T214">Download as PDF</button>
-        
+        <button type="button" class="btn btn-primary btn-pdf" data-sku="WE-T214">打印</button>
+        <div class="docs-dropdown">
+  <button type="button" class="btn btn-primary btn-docs" data-docs-toggle>PDF (1) &#9660;</button>
+  <div class="docs-dropdown__menu" hidden>
+    
+  </div>
+</div>
         <a class="btn btn-primary dl-link" href="WE-T214-manual.pdf" download="WE-T214-manual.pdf">Download Manual (PDF)</a>
         <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote>Request Quote</button>
       </div>
-      <p class="doc-note">English PDF manual. For technical support or customized OEM versions, email us from <a href="#contact">Contact Information</a>.</p>
+      <p class="doc-note">English PDF manual. For technical support or customized OEM versions, email us from <a href="#contact">Contact Information</a>. for technical documentation</p>
     </div>
     <div class="hero-visual">
       <img src="images/hero_800.png" alt="WE-T214 3-in-1 Soil Sensor Transmitter" width="800" height="800" fetchpriority="high" />
@@ -249,7 +254,8 @@ window.__PRODUCT_CONFIG__ = {
             if (menu) {
                 var isOpen = !menu.hasAttribute("hidden");
                 menu.hidden = isOpen;
-                btn.innerHTML = isOpen ? "Documents &#9660;" : "Documents &#9650;";
+                var base = btn.innerHTML.replace(/[▼▲].*/, "").trim();
+                btn.innerHTML = isOpen ? base + " &#9650;" : base + " &#9660;";
             }
         });
     });
@@ -257,7 +263,7 @@ window.__PRODUCT_CONFIG__ = {
         document.querySelectorAll(".docs-dropdown__menu:not([hidden])").forEach(function(m) {
             m.hidden = true;
             var btn = m.parentElement.querySelector("[data-docs-toggle]");
-            if (btn) btn.innerHTML = "Documents &#9660;";
+            if (btn) btn.innerHTML = btn.innerHTML.replace(/[▲▼].*/, "").trim() + " &#9660;";
         });
     });
 })();

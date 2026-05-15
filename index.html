@@ -78,28 +78,28 @@ var products = [
     page: 1,
     name: "3-in-1 Soil Sensor Transmitter",
     desc: "Temperature, Moisture &amp; EC monitoring with dual 4G/LoRa connectivity.",
-    manual: "WE-T214-manual.pdf"
+    docs: 1
   },
   {
     sku: "WE-W200",
     page: 2,
     name: "Professional Weather Station",
     desc: "7-in-1 environmental monitoring with solar power.",
-    manual: ""
+    docs: 0
   },
   {
     sku: "WE-T800",
     page: 3,
     name: "Multi-Function Field Monitor",
     desc: "4G RTU with RS485, analog &amp; digital I/O, IP68.",
-    manual: "WE-T800-datasheet.pdf"
+    docs: 1
   },
   {
     sku: "WE-X280",
     page: 4,
     name: "Industrial Edge Computing Gateway",
     desc: "4G/LoRa/RS485 edge gateway, 128 devices, 16 I/O.",
-    manual: ""
+    docs: 3
   }
 ];
 
@@ -113,8 +113,8 @@ header.innerHTML =
   '<div class="catalog-index__cell catalog-index__cell--page">Page</div>' +
   '<div class="catalog-index__cell catalog-index__cell--sku">Model</div>' +
   '<div class="catalog-index__cell catalog-index__cell--name">Product Name</div>' +
-  '<div class="catalog-index__cell catalog-index__cell--actions">Catalogue PDF</div>' +
-  '<div class="catalog-index__cell catalog-index__cell--actions">Manual PDF</div>';
+  '<div class="catalog-index__cell catalog-index__cell--actions">目录打印</div>' +
+  '<div class="catalog-index__cell catalog-index__cell--actions">文档下载</div>';
 list.appendChild(header);
 
 products.forEach(function(p) {
@@ -123,16 +123,16 @@ products.forEach(function(p) {
 
   var detailUrl = "products/" + p.sku + "/";
   var pdfUrl = detailUrl + "?dl=1";
-  var manualBtn = p.manual
-    ? '<a class="catalog-index__dl" href="' + detailUrl + p.manual + '" download="' + p.manual + '" title="Download manual PDF">PDF</a>'
+  var docsBtn = p.docs > 0
+    ? '<a class="catalog-index__dl" href="' + detailUrl + '#downloads" title="Download documents">PDF (' + p.docs + ')</a>'
     : '<span class="catalog-index__dl catalog-index__dl--na">—</span>';
 
   row.innerHTML =
     '<div class="catalog-index__cell catalog-index__cell--page">' + p.page + '</div>' +
     '<div class="catalog-index__cell catalog-index__cell--sku"><a href="' + detailUrl + '">' + p.sku + '</a></div>' +
     '<div class="catalog-index__cell catalog-index__cell--name"><a href="' + detailUrl + '">' + p.name + '</a></div>' +
-    '<div class="catalog-index__cell catalog-index__cell--actions"><a class="catalog-index__dl" href="' + pdfUrl + '" target="_blank" title="Download catalogue PDF">PDF</a></div>' +
-    '<div class="catalog-index__cell catalog-index__cell--actions">' + manualBtn + '</div>';
+    '<div class="catalog-index__cell catalog-index__cell--actions"><a class="catalog-index__dl" href="' + pdfUrl + '" target="_blank" title="Print this product page">打印</a></div>' +
+    '<div class="catalog-index__cell catalog-index__cell--actions">' + docsBtn + '</div>';
 
   list.appendChild(row);
 });

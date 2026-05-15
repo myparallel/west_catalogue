@@ -95,6 +95,42 @@ code {
   color: var(--blue);
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: auto;
+}
+
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.lang-toggle:hover {
+  background: var(--blue-soft);
+  border-color: var(--blue);
+  color: var(--blue-hover);
+}
+
+@media (max-width: 850px) {
+  .header-right {
+    order: 1;
+  }
+}
+
 .menu-toggle {
   display: none;
   background: none;
@@ -1372,6 +1408,10 @@ body.modal-open {
   }
 
   /* Hamburger to X animation */
+  .site-header .inner {
+    flex-wrap: nowrap;
+  }
+
   .site-header.nav-open .menu-toggle span:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
   }

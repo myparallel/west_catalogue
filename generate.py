@@ -51,21 +51,21 @@ def build_json_ld(cfg):
 def build_nav(cfg):
     has_video = bool(cfg.get("video", {}).get("available", False))
     links = [
-        ("../../index.html", "Catalog"),
-        ("#overview", "Overview"),
-        ("#highlights", "Highlights"),
-        ("#gallery", "Gallery"),
+        ("../../index.html", "Catalog", "navCatalog"),
+        ("#overview", "Overview", "navOverview"),
+        ("#highlights", "Highlights", "navHighlights"),
+        ("#gallery", "Gallery", "navGallery"),
     ]
     if has_video:
-        links.append(("#video", "Video"))
+        links.append(("#video", "Video", "navVideo"))
     links += [
-        ("#specifications", "Specifications"),
-        ("#applications", "Applications"),
-        ("#package", "Package"),
-        ("#downloads", "Downloads"),
-        ("#contact", "Contact"),
+        ("#specifications", "Specifications", "navSpecs"),
+        ("#applications", "Applications", "navApps"),
+        ("#package", "Package", "navPackage"),
+        ("#downloads", "Downloads", "navDownloads"),
+        ("#contact", "Contact", "navContact"),
     ]
-    return "".join(f'<a href="{href}">{label}</a>' for href, label in links)
+    return "".join(f'<a href="{href}" data-i18n="{key}">{label}</a>' for href, label, key in links)
 
 
 def build_docs_dropdown(cfg):
@@ -107,7 +107,7 @@ def build_hero(cfg):
       <h1>{esc(p.get("name",""))}</h1>
       <p class="lead">{esc(p.get("lead",""))}</p>
       <div class="hero-actions">
-        <button type="button" class="btn btn-primary btn-pdf" data-sku="{esc(p.get("sku",""))}">打印</button>
+        <button type="button" class="btn btn-primary btn-pdf" data-i18n="btnPrint" data-sku="{esc(p.get("sku",""))}">Print</button>
         {docs_dropdown}
         {manual_btn}
         <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote>Request Quote</button>
@@ -375,6 +375,41 @@ window.__PRODUCT_CONFIG__ = {{
     js_path = "../../assets/js/main.js"
     logo_href = "../../index.html"
 
+    i18n_script = """<script>
+var i18n = {
+  zh: {
+    navCatalog:     "产品目录",
+    navOverview:    "产品概览",
+    navHighlights:  "产品亮点",
+    navGallery:     "产品图库",
+    navSpecs:       "技术参数",
+    navApps:        "应用场景",
+    navPackage:     "包装清单",
+    navDownloads:   "资料下载",
+    navContact:     "联系我们",
+    btnPrint:       "打印",
+    sectionTitleDownloads: "资料下载",
+    sectionTitleSpecs: "技术参数",
+    sectionTitleApps: "应用场景"
+  }
+};
+var currentLang = "en";
+function applyLang(lang) {
+  currentLang = lang;
+  var dict = i18n[lang] || {};
+  document.querySelectorAll("[data-i18n]").forEach(function(el) {
+    var key = el.getAttribute("data-i18n");
+    if (dict[key] !== undefined) el.textContent = dict[key];
+  });
+  var tb = document.getElementById("lang-toggle");
+  if (tb) tb.textContent = lang === "en" ? "中 / EN" : "EN / 中";
+}
+document.addEventListener("DOMContentLoaded", function() {
+  var tb = document.getElementById("lang-toggle");
+  if (tb) tb.addEventListener("click", function() { applyLang(currentLang === "en" ? "zh" : "en"); });
+});
+</script>"""
+
     pdf_script = """<script>
 (function() {
     var btns = document.querySelectorAll(".btn-pdf");
@@ -435,9 +470,12 @@ window.__PRODUCT_CONFIG__ = {{
 <header class="site-header">
   <div class="wrap inner">
     <a class="logo" href="{logo_href}"><span>{esc(p.get("sku",""))}</span></a>
-    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="header-right">
+      <button type="button" class="lang-toggle" id="lang-toggle" title="Switch language">中 / EN</button>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
     <nav class="nav" id="main-nav" aria-label="Primary">
       {nav}
     </nav>
@@ -460,6 +498,7 @@ window.__PRODUCT_CONFIG__ = {{
 {quote_modal}
 
 {inline_config}
+{i18n_script}
 {pdf_script}
 <script src="{js_path}" defer></script>
 </body>

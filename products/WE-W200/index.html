@@ -30,11 +30,14 @@
 <header class="site-header">
   <div class="wrap inner">
     <a class="logo" href="../../index.html"><span>WE-W200</span></a>
-    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="header-right">
+      <button type="button" class="lang-toggle" id="lang-toggle" title="Switch language">中 / EN</button>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
     <nav class="nav" id="main-nav" aria-label="Primary">
-      <a href="../../index.html">Catalog</a><a href="#overview">Overview</a><a href="#highlights">Highlights</a><a href="#gallery">Gallery</a><a href="#specifications">Specifications</a><a href="#applications">Applications</a><a href="#package">Package</a><a href="#downloads">Downloads</a><a href="#contact">Contact</a>
+      <a href="../../index.html" data-i18n="navCatalog">Catalog</a><a href="#overview" data-i18n="navOverview">Overview</a><a href="#highlights" data-i18n="navHighlights">Highlights</a><a href="#gallery" data-i18n="navGallery">Gallery</a><a href="#specifications" data-i18n="navSpecs">Specifications</a><a href="#applications" data-i18n="navApps">Applications</a><a href="#package" data-i18n="navPackage">Package</a><a href="#downloads" data-i18n="navDownloads">Downloads</a><a href="#contact" data-i18n="navContact">Contact</a>
     </nav>
   </div>
 </header>
@@ -47,7 +50,7 @@
       <h1>WE-W200 Professional Weather Station</h1>
       <p class="lead">A professional-grade weather station for precision agriculture, meteorology, and environmental monitoring. Measures wind speed, wind direction, rainfall, temperature, humidity, barometric pressure, and solar radiation with high-accuracy sensors.</p>
       <div class="hero-actions">
-        <button type="button" class="btn btn-primary btn-pdf" data-sku="WE-W200">打印</button>
+        <button type="button" class="btn btn-primary btn-pdf" data-i18n="btnPrint" data-sku="WE-W200">Print</button>
         
         
         <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote>Request Quote</button>
@@ -209,6 +212,40 @@ window.__PRODUCT_CONFIG__ = {
     name: "WE-W200 Professional Weather Station",
     sku: "WE-W200"
 };
+</script>
+<script>
+var i18n = {
+  zh: {
+    navCatalog:     "产品目录",
+    navOverview:    "产品概览",
+    navHighlights:  "产品亮点",
+    navGallery:     "产品图库",
+    navSpecs:       "技术参数",
+    navApps:        "应用场景",
+    navPackage:     "包装清单",
+    navDownloads:   "资料下载",
+    navContact:     "联系我们",
+    btnPrint:       "打印",
+    sectionTitleDownloads: "资料下载",
+    sectionTitleSpecs: "技术参数",
+    sectionTitleApps: "应用场景"
+  }
+};
+var currentLang = "en";
+function applyLang(lang) {
+  currentLang = lang;
+  var dict = i18n[lang] || {};
+  document.querySelectorAll("[data-i18n]").forEach(function(el) {
+    var key = el.getAttribute("data-i18n");
+    if (dict[key] !== undefined) el.textContent = dict[key];
+  });
+  var tb = document.getElementById("lang-toggle");
+  if (tb) tb.textContent = lang === "en" ? "中 / EN" : "EN / 中";
+}
+document.addEventListener("DOMContentLoaded", function() {
+  var tb = document.getElementById("lang-toggle");
+  if (tb) tb.addEventListener("click", function() { applyLang(currentLang === "en" ? "zh" : "en"); });
+});
 </script>
 <script>
 (function() {

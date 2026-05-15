@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>WEST Product Catalogue</title>
+<title data-i18n="title">WEST Product Catalogue</title>
 <meta name="description" content="WEST IoT sensor product catalogue — professional agricultural and environmental monitoring solutions." />
 <link rel="stylesheet" href="assets/css/main.css" />
 </head>
@@ -12,14 +12,17 @@
 
 <header class="site-header">
   <div class="wrap inner">
-    <a class="logo" href="#">WEST <span>Catalogue</span></a>
-    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <a class="logo" href="#">WEST <span data-i18n="logo">Catalogue</span></a>
+    <div class="header-right">
+      <button type="button" class="lang-toggle" id="lang-toggle" title="Switch language">中 / EN</button>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
     <nav class="nav" id="main-nav" aria-label="Primary">
-      <a href="#products">Products</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="#products" data-i18n="navProducts">Products</a>
+      <a href="#about" data-i18n="navAbout">About</a>
+      <a href="#contact" data-i18n="navContact">Contact</a>
     </nav>
   </div>
 </header>
@@ -27,39 +30,39 @@
 <main id="main">
   <section class="catalog-hero">
     <div class="wrap" style="text-align:center">
-      <h1 class="catalog-hero__title">WEST <span>Product Catalogue</span></h1>
-      <p class="catalog-hero__lead">Professional IoT sensing solutions for precision agriculture, environmental monitoring, and smart farming.</p>
+      <h1 class="catalog-hero__title">WEST <span data-i18n="heroTitle">Product Catalogue</span></h1>
+      <p class="catalog-hero__lead" data-i18n="heroLead">Professional IoT sensing solutions for precision agriculture, environmental monitoring, and smart farming.</p>
       <p class="catalog-hero__count" id="product-count"></p>
     </div>
   </section>
 
   <section class="wrap" id="products">
     <div class="catalog-toolbar">
-      <h2 class="section-title" style="margin:0">Product Index</h2>
+      <h2 class="section-title" style="margin:0" data-i18n="sectionProducts">Product Index</h2>
       <div class="catalog-toolbar__actions">
-        <button type="button" class="btn btn-secondary" id="download-all-pdf">Download All as PDF</button>
+        <button type="button" class="btn btn-secondary" id="download-all-pdf" data-i18n="downloadAll">Download All as PDF</button>
       </div>
     </div>
-    <p class="section-sub">Click a product name or model to view details. Download catalogue PDF or product manual.</p>
+    <p class="section-sub" data-i18n="sectionSub">Click a product to view details, or download catalogue PDF.</p>
     <div class="catalog-index" id="product-list"></div>
   </section>
 
   <section class="wrap" id="about">
-    <h2 class="section-title">About WEST</h2>
-    <p class="section-sub">Hainan World Electronic Science And Technology Co., Ltd.</p>
+    <h2 class="section-title" data-i18n="aboutTitle">About WEST</h2>
+    <p class="section-sub" data-i18n="aboutSub">Hainan World Electronic Science And Technology Co., Ltd.</p>
     <div class="card" style="max-width:700px">
-      <p>We specialize in the development and manufacturing of IoT sensing solutions for agriculture and environmental monitoring. Our product line includes soil sensors, weather stations, and environmental monitoring systems with 4G/LoRa connectivity.</p>
+      <p data-i18n="aboutText">We specialize in the development and manufacturing of IoT sensing solutions for agriculture and environmental monitoring. Our product line includes soil sensors, weather stations, and environmental monitoring systems with 4G/LoRa connectivity.</p>
     </div>
   </section>
 
   <section class="wrap" id="contact">
-    <h2 class="section-title">Contact Information</h2>
-    <p class="section-sub">For quotations, lead times, and technical support.</p>
+    <h2 class="section-title" data-i18n="contactTitle">Contact Information</h2>
+    <p class="section-sub" data-i18n="contactSub">For quotations, lead times, and technical support.</p>
     <address class="contact-info">
       Room 1502, 15th Floor, Building 20, No. 487 Tianlin Road<br />Shanghai, 200233, China<br />
       <a href="tel:+86-021-33675566">+86-021-33675566</a><br />
       <a href="mailto:ftd_sales@west-hn.com">ftd_sales@west-hn.com</a><br />
-      Monday to Friday, 9:00 - 18:00
+      <span data-i18n="contactHours">Monday to Friday, 9:00 - 18:00</span>
     </address>
   </section>
 </main>
@@ -67,77 +70,108 @@
 <footer class="site-footer">
   <div class="wrap footer-meta">
     <span>Hainan World Electronic Science And Technology Co., Ltd.</span>
-    <span>Product Catalogue &middot; Page 1 (Index)</span>
+    <span data-i18n="footerPage">Product Catalogue &middot; Page 1 (Index)</span>
   </div>
 </footer>
 
 <script>
-var products = [
-  {
-    sku: "WE-T214",
-    page: 1,
-    name: "3-in-1 Soil Sensor Transmitter",
-    desc: "Temperature, Moisture &amp; EC monitoring with dual 4G/LoRa connectivity.",
-    docs: 1
-  },
-  {
-    sku: "WE-W200",
-    page: 2,
-    name: "Professional Weather Station",
-    desc: "7-in-1 environmental monitoring with solar power.",
-    docs: 0
-  },
-  {
-    sku: "WE-T800",
-    page: 3,
-    name: "Multi-Function Field Monitor",
-    desc: "4G RTU with RS485, analog &amp; digital I/O, IP68.",
-    docs: 1
-  },
-  {
-    sku: "WE-X280",
-    page: 4,
-    name: "Industrial Edge Computing Gateway",
-    desc: "4G/LoRa/RS485 edge gateway, 128 devices, 16 I/O.",
-    docs: 3
+// --- i18n translations ---
+var i18n = {
+  zh: {
+    title:          "WEST 产品目录",
+    logo:           "产品目录",
+    navProducts:    "产品目录",
+    navAbout:       "关于我们",
+    navContact:     "联系我们",
+    heroTitle:      "产品目录",
+    heroLead:       "专业的物联网传感解决方案，适用于精准农业、环境监测和智慧农业。",
+    sectionProducts:"产品索引",
+    sectionSub:     "点击产品名称查看详情，或下载目录PDF。",
+    downloadAll:    "下载全部PDF",
+    aboutTitle:     "关于 WEST",
+    aboutSub:       "海南世电科技有限公司",
+    aboutText:      "我们专注于为农业和环境监测开发制造物联网传感解决方案。产品线包括土壤传感器、气象站和环境监测系统，支持4G/LoRa连接。",
+    contactTitle:   "联系方式",
+    contactSub:     "获取报价、交期和技术支持。",
+    contactHours:   "周一至周五，9:00 - 18:00",
+    footerPage:     "产品目录 · 第1页（索引）",
+    colPage:        "页码",
+    colModel:       "型号",
+    colName:        "产品名称",
+    colPrint:       "打印目录封面",
+    colDocs:        "文档下载"
   }
-];
+};
 
-var list = document.getElementById("product-list");
-document.getElementById("product-count").textContent = products.length + " product" + (products.length > 1 ? "s" : "");
+var currentLang = "en";
 
-// Header row
-var header = document.createElement("div");
-header.className = "catalog-index__row catalog-index__header";
-header.innerHTML =
-  '<div class="catalog-index__cell catalog-index__cell--page">Page</div>' +
-  '<div class="catalog-index__cell catalog-index__cell--sku">Model</div>' +
-  '<div class="catalog-index__cell catalog-index__cell--name">Product Name</div>' +
-  '<div class="catalog-index__cell catalog-index__cell--actions">目录打印</div>' +
-  '<div class="catalog-index__cell catalog-index__cell--actions">文档下载</div>';
-list.appendChild(header);
+function applyLang(lang) {
+  currentLang = lang;
+  var dict = i18n[lang] || {};
+  document.querySelectorAll("[data-i18n]").forEach(function(el) {
+    var key = el.getAttribute("data-i18n");
+    if (dict[key] !== undefined) {
+      el.textContent = dict[key];
+    }
+  });
+  // Rebuild table with new lang
+  buildTable();
+  // Update toggle button
+  document.getElementById("lang-toggle").textContent = lang === "en" ? "中 / EN" : "EN / 中";
+}
 
-products.forEach(function(p) {
-  var row = document.createElement("div");
-  row.className = "catalog-index__row";
-
-  var detailUrl = "products/" + p.sku + "/";
-  var pdfUrl = detailUrl + "?dl=1";
-  var docsBtn = p.docs > 0
-    ? '<a class="catalog-index__dl" href="' + detailUrl + '#downloads" title="Download documents">PDF (' + p.docs + ')</a>'
-    : '<span class="catalog-index__dl catalog-index__dl--na">—</span>';
-
-  row.innerHTML =
-    '<div class="catalog-index__cell catalog-index__cell--page">' + p.page + '</div>' +
-    '<div class="catalog-index__cell catalog-index__cell--sku"><a href="' + detailUrl + '">' + p.sku + '</a></div>' +
-    '<div class="catalog-index__cell catalog-index__cell--name"><a href="' + detailUrl + '">' + p.name + '</a></div>' +
-    '<div class="catalog-index__cell catalog-index__cell--actions"><a class="catalog-index__dl" href="' + pdfUrl + '" target="_blank" title="Print this product page">打印</a></div>' +
-    '<div class="catalog-index__cell catalog-index__cell--actions">' + docsBtn + '</div>';
-
-  list.appendChild(row);
+document.getElementById("lang-toggle").addEventListener("click", function() {
+  applyLang(currentLang === "en" ? "zh" : "en");
 });
 
-// Download all as PDF
+// --- Product data ---
+var products = [
+  { sku: "WE-T214", page: 1, name: "3-in-1 Soil Sensor Transmitter", desc: "Temperature, Moisture &amp; EC monitoring with dual 4G/LoRa connectivity.", docs: 1 },
+  { sku: "WE-W200", page: 2, name: "Professional Weather Station", desc: "7-in-1 environmental monitoring with solar power.", docs: 0 },
+  { sku: "WE-T800", page: 3, name: "Multi-Function Field Monitor", desc: "4G RTU with RS485, analog &amp; digital I/O, IP68.", docs: 1 },
+  { sku: "WE-X280", page: 4, name: "Industrial Edge Computing Gateway", desc: "4G/LoRa/RS485 edge gateway, 128 devices, 16 I/O.", docs: 3 }
+];
+
+function buildTable() {
+  var list = document.getElementById("product-list");
+  list.innerHTML = "";
+  document.getElementById("product-count").textContent = products.length + " product" + (products.length > 1 ? "s" : "");
+
+  var dict = i18n[currentLang] || {};
+
+  // Header
+  var header = document.createElement("div");
+  header.className = "catalog-index__row catalog-index__header";
+  header.innerHTML =
+    '<div class="catalog-index__cell catalog-index__cell--page">' + (dict.colPage || "Page") + '</div>' +
+    '<div class="catalog-index__cell catalog-index__cell--sku">' + (dict.colModel || "Model") + '</div>' +
+    '<div class="catalog-index__cell catalog-index__cell--name">' + (dict.colName || "Product Name") + '</div>' +
+    '<div class="catalog-index__cell catalog-index__cell--actions">' + (dict.colPrint || "Print") + '</div>' +
+    '<div class="catalog-index__cell catalog-index__cell--actions">' + (dict.colDocs || "Docs") + '</div>';
+  list.appendChild(header);
+
+  products.forEach(function(p) {
+    var row = document.createElement("div");
+    row.className = "catalog-index__row";
+    var detailUrl = "products/" + p.sku + "/";
+    var pdfUrl = detailUrl + "?dl=1";
+    var docsBtn = p.docs > 0
+      ? '<a class="catalog-index__dl" href="' + detailUrl + '#downloads">PDF (' + p.docs + ')</a>'
+      : '<span class="catalog-index__dl catalog-index__dl--na">—</span>';
+
+    row.innerHTML =
+      '<div class="catalog-index__cell catalog-index__cell--page">' + p.page + '</div>' +
+      '<div class="catalog-index__cell catalog-index__cell--sku"><a href="' + detailUrl + '">' + p.sku + '</a></div>' +
+      '<div class="catalog-index__cell catalog-index__cell--name"><a href="' + detailUrl + '">' + p.name + '</a></div>' +
+      '<div class="catalog-index__cell catalog-index__cell--actions"><a class="catalog-index__dl" href="' + pdfUrl + '" target="_blank">打印目录封面</a></div>' +
+      '<div class="catalog-index__cell catalog-index__cell--actions">' + docsBtn + '</div>';
+
+    list.appendChild(row);
+  });
+}
+
+buildTable();
+
 document.getElementById("download-all-pdf").addEventListener("click", function() {
   products.forEach(function(p) {
     window.open("products/" + p.sku + "/?dl=1", "_blank");

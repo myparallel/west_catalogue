@@ -346,13 +346,13 @@ window.__PRODUCT_CONFIG__ = {{
     var filename = sku + "-catalogue.pdf";
 
     function generatePDF() {{
+        console.log("PDF generation started");
         var opt = {{
-            margin:       [0.35, 0.3, 0.35, 0.3],
+            margin:       0.4,
             filename:     filename,
             image:        {{ type: 'jpeg', quality: 0.95 }},
-            html2canvas:  {{ scale: 2, windowWidth: 794, letterRendering: true, useCORS: true, logging: false, onclone: function(d) {{ d.body.classList.add("pdf-mode"); }} }},
-            jsPDF:        {{ unit: 'in', format: 'a4', orientation: 'portrait' }},
-            pagebreak:    {{ mode: ['avoid-all', 'css', 'legacy'] }}
+            html2canvas:  {{ scale: 2, useCORS: true, logging: true, allowTaint: false }},
+            jsPDF:        {{ unit: 'in', format: 'a4', orientation: 'portrait' }}
         }};
         var el = document.getElementById("main");
         html2pdf().set(opt).from(el).save();

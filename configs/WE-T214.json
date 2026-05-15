@@ -6,7 +6,7 @@
     "brand": "WEST",
     "manufacturer": "Hainan World Electronic Science And Technology Co., Ltd.",
     "description": "Industrial soil transmitter for Temperature, Moisture, and EC monitoring with dual 4G and LoRa connectivity, IP67 enclosure, and GNSS positioning.",
-    "lead": "A rugged, field-ready transmitter for precision agriculture. Simultaneously monitors soil temperature, volumetric moisture content, and electrical conductivity (EC). Supports dual 4G and LoRaWAN connectivity for reliable data backhaul in remote areas.",
+    "lead": "A rugged, field-ready transmitter for precision agriculture. Simultaneously monitors soil temperature, volumetric moisture content, and electrical conductivity (EC). Supports dual 4G and LoRa connectivity for reliable data backhaul in remote areas.",
     "page_number": 1,
     "og_title": "WE-T214 3-in-1 Soil Sensor Transmitter",
     "og_description": "Integrated soil monitor for Temp, Moisture, and EC with dual 4G/LoRa connectivity."
@@ -23,7 +23,7 @@
   ],
   "highlights": [
     { "title": "3-in-1 Precise Sensing", "text": "Monitors Soil Temperature, Volumetric Moisture Content, and Electrical Conductivity (EC) simultaneously with a high-accuracy triple-probe sensor." },
-    { "title": "Dual 4G & LoRaWAN", "text": "Flexible connectivity with 4G LTE (MQTT/HTTP) and LoRaWAN (up to 5km range), ensuring data reporting even in extremely remote locations." },
+    { "title": "Dual 4G & LoRa", "text": "Flexible connectivity with 4G LTE (MQTT/HTTP) and LoRa (up to 5km range), ensuring data reporting even in extremely remote locations." },
     { "title": "GNSS Positioning", "text": "Built-in GPS/GLONASS/BDS support for automated asset tracking and mapping of soil data across large plantations." },
     { "title": "Ultra-long Endurance", "text": "Powered by a 19,000mAh high-capacity lithium battery or optional 40W solar panel for years of maintenance-free operation." },
     { "title": "Rugged & Reliable", "text": "IP67-rated host and IP68-rated probe enclosure. Engineered for harsh agricultural environments from -40\u00b0C to +85\u00b0C." },
@@ -50,7 +50,7 @@
   ],
   "applications": [
     { "title": "Smart Agriculture", "text": "Automated soil monitoring for greenhouse farming, orchards, and open fields to optimize irrigation cycles and fertilizer application based on real-time EC and moisture data." },
-    { "title": "Environmental Science", "text": "Long-term research on soil salinity and moisture dynamics in ecological conservation areas, leveraging LoRaWAN for data transmission across remote terrain." }
+    { "title": "Environmental Science", "text": "Long-term research on soil salinity and moisture dynamics in ecological conservation areas, leveraging LoRa for data transmission across remote terrain." }
   ],
   "package_items": [
     { "item": "3-in-1 Soil Sensor Transmitter (WE-T214 Host)", "qty": 1 },

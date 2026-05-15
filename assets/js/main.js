@@ -103,14 +103,21 @@
     return result;
   }
 
-  function updateSectionVis() {
-    var sec = document.getElementById("gallery");
-    if (sec) sec.hidden = (getAllImages().length === 0);
-  }
-
   function render() {
     var all = getAllImages();
-    updateSectionVis();
+    // toggle empty / content
+    var emptyEl = document.getElementById("gallery-empty");
+    var contentEl = document.getElementById("gallery-content");
+    var toolbarEl = document.getElementById("gallery-toolbar");
+    if (all.length === 0) {
+      if (emptyEl) emptyEl.hidden = false;
+      if (contentEl) contentEl.hidden = true;
+      if (toolbarEl) toolbarEl.hidden = true;
+    } else {
+      if (emptyEl) emptyEl.hidden = true;
+      if (contentEl) contentEl.hidden = false;
+      if (toolbarEl) toolbarEl.hidden = false;
+    }
     var catTabs = catsWrap.querySelectorAll("button");
     catTabs.forEach(function(b) {
       b.classList.toggle("is-active", b.getAttribute("data-cat") === currentFilter);
@@ -317,6 +324,12 @@
     });
   }
 
+  // Wire empty-state upload button
+  var emptyBtn = document.getElementById("gallery-empty-btn");
+  if (emptyBtn) {
+    emptyBtn.addEventListener("click", function() { fileInput.click(); });
+  }
+
   // Initial render
   render();
 
@@ -434,15 +447,22 @@
     document.body.removeChild(a);
   }
 
-  function updateDocSectionVis() {
-    var sec = document.getElementById("downloads");
-    if (sec) sec.hidden = (getAllDocs().length === 0);
-  }
-
   function render() {
     var all = getAllDocs();
     updateHeroSection();
-    updateDocSectionVis();
+    // toggle empty / content
+    var emptyEl = document.getElementById("doc-empty");
+    var contentEl = document.getElementById("doc-content");
+    var toolbarEl = document.getElementById("doc-toolbar");
+    if (all.length === 0) {
+      if (emptyEl) emptyEl.hidden = false;
+      if (contentEl) contentEl.hidden = true;
+      if (toolbarEl) toolbarEl.hidden = true;
+    } else {
+      if (emptyEl) emptyEl.hidden = true;
+      if (contentEl) contentEl.hidden = false;
+      if (toolbarEl) toolbarEl.hidden = false;
+    }
     // update cat tabs
     catsWrap.querySelectorAll("button").forEach(function(b) {
       b.classList.toggle("is-active", b.getAttribute("data-cat") === currentFilter);
@@ -616,6 +636,12 @@
     saveBtn.addEventListener("click", function() { addBtn.hidden = true; });
   }
 
+  // Wire empty-state upload button
+  var emptyBtn = document.getElementById("doc-empty-btn");
+  if (emptyBtn) {
+    emptyBtn.addEventListener("click", function() { fileInput.click(); });
+  }
+
   render();
 })();
 
@@ -710,14 +736,21 @@
     if (placeholder) placeholder.hidden = true;
   }
 
-  function updateVideoSectionVis() {
-    var sec = document.getElementById("video");
-    if (sec) sec.hidden = (getAllVideos().length === 0);
-  }
-
   function render() {
     var all = getAllVideos();
-    updateVideoSectionVis();
+    // toggle empty / content
+    var emptyEl = document.getElementById("video-empty");
+    var contentEl = document.getElementById("video-content");
+    var toolbarEl = document.getElementById("video-toolbar");
+    if (all.length === 0) {
+      if (emptyEl) emptyEl.hidden = false;
+      if (contentEl) contentEl.hidden = true;
+      if (toolbarEl) toolbarEl.hidden = true;
+    } else {
+      if (emptyEl) emptyEl.hidden = true;
+      if (contentEl) contentEl.hidden = false;
+      if (toolbarEl) toolbarEl.hidden = false;
+    }
     // update cat tabs
     if (catsWrap) {
       catsWrap.querySelectorAll("button").forEach(function(b) {
@@ -898,6 +931,12 @@
   }
   if (saveBtn) {
     saveBtn.addEventListener("click", function() { addBtn.hidden = true; });
+  }
+
+  // Wire empty-state upload button
+  var emptyBtn = document.getElementById("video-empty-btn");
+  if (emptyBtn) {
+    emptyBtn.addEventListener("click", function() { fileInput.click(); });
   }
 
   render();

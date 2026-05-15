@@ -79,9 +79,9 @@
   </div>
 </section>
 <section class="wrap" id="gallery">
-  <h2 class="section-title" data-i18n="secGallery">Product Gallery</h2>
-  <p class="section-sub" data-i18n="subGallery">Detailed views (Scroll thumbnails to browse).</p>
-  <div class="gallery-toolbar">
+  <h2 class="section-title"><span lang="en">Product Gallery</span><span lang="zh" hidden>产品图库</span></h2>
+  <p class="section-sub"><span lang="en">Detailed views of the product.</span><span lang="zh" hidden>产品详细视图。</span></p>
+  <div class="gallery-toolbar" id="gallery-toolbar">
     <div class="gallery-cats" id="gallery-cats">
       <button type="button" class="is-active" data-cat="全部"><span lang="en">All</span><span lang="zh" hidden>全部</span></button>
 <button type="button" data-cat="主图"><span lang="en">Main</span><span lang="zh" hidden>主图</span></button>
@@ -94,7 +94,10 @@
       <button type="button" class="btn btn-sm btn-primary" id="gallery-save-btn" hidden><span lang="en">Save Changes</span><span lang="zh" hidden>保存修改</span></button>
     </div>
   </div>
-  <div class="gallery-layout gallery-layout--v2">
+  <div class="gallery-empty" id="gallery-empty" hidden>
+    <button type="button" class="btn btn-primary" id="gallery-empty-btn"><span lang="en">+ Upload Images</span><span lang="zh" hidden>+ 上传图片</span></button>
+  </div>
+  <div class="gallery-layout gallery-layout--v2" id="gallery-content">
     <div class="stage" id="gallery-stage" aria-live="polite"></div>
     <div class="thumbs" id="gallery-thumbs" role="tablist" aria-label="Gallery thumbnails">
       <button type="button" class="gthumb is-active" data-full="images/hero_800.png" data-alt="WE-W200 Weather Station overview" data-category="主图"><img src="images/hero_800.png" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Main</span><span lang="zh" hidden>主图</span></span></button>
@@ -109,7 +112,40 @@
   </div>
   <input type="file" id="gallery-file-input" accept="image/*" multiple style="display:none" />
 </section>
+<section class="wrap" id="video">
+  <h2 class="section-title"><span lang="en">Videos</span><span lang="zh" hidden>产品视频</span></h2>
+  <p class="section-sub"><span lang="en">Product videos and demonstrations.</span><span lang="zh" hidden>产品视频与演示。</span></p>
+  <div class="video-toolbar" id="video-toolbar" hidden>
+    <div class="video-cats" id="video-cats">
+      <button type="button" class="is-active" data-cat="全部"><span lang="en">All</span><span lang="zh" hidden>全部</span></button>
+<button type="button" data-cat="产品概览"><span lang="en">Overview</span><span lang="zh" hidden>产品概览</span></button>
+<button type="button" data-cat="使用说明"><span lang="en">Instructions</span><span lang="zh" hidden>使用说明</span></button>
+<button type="button" data-cat="安装指引"><span lang="en">Installation</span><span lang="zh" hidden>安装指引</span></button>
+<button type="button" data-cat="操作演示"><span lang="en">Demo</span><span lang="zh" hidden>操作演示</span></button>
+<button type="button" data-cat="其他"><span lang="en">Other</span><span lang="zh" hidden>其他</span></button>
 
+    </div>
+    <div class="video-actions">
+      <button type="button" class="btn btn-sm" id="video-edit-btn"><span lang="en">Edit Videos</span><span lang="zh" hidden>编辑视频</span></button>
+      <button type="button" class="btn btn-sm btn-primary" id="video-save-btn" hidden><span lang="en">Save Changes</span><span lang="zh" hidden>保存修改</span></button>
+    </div>
+  </div>
+  <div class="video-empty" id="video-empty">
+    <button type="button" class="btn btn-primary" id="video-empty-btn"><span lang="en">+ Upload Videos</span><span lang="zh" hidden>+ 上传视频</span></button>
+  </div>
+  <div class="video-area" id="video-content" hidden>
+    <div class="video-player-wrap">
+      <video class="video-player" id="video-player" controls preload="metadata">
+        <source src="" type="video/mp4" />
+      </video>
+      <p class="video-placeholder" id="video-placeholder"><span lang="en">Select a video to play</span><span lang="zh" hidden>选择一个视频播放</span></p>
+    </div>
+    <div class="video-list" id="video-list">
+      
+    </div>
+  </div>
+  <input type="file" id="video-file-input" accept="video/mp4,video/webm,video/ogg" multiple style="display:none" />
+</section>
 <section class="wrap" id="specifications">
   <h2 class="section-title"><span lang="en">Specifications</span><span lang="zh" hidden>技术参数</span></h2>
   <p class="section-sub"><span lang="en">Technical parameters based on the product manual.</span><span lang="zh" hidden>基于产品手册的技术参数。</span></p>
@@ -162,7 +198,39 @@
     </table>
   </div>
 </section>
+<section class="wrap" id="downloads">
+  <h2 class="section-title"><span lang="en">Downloads</span><span lang="zh" hidden>资料下载</span></h2>
+  <p class="section-sub"><span lang="en">Access technical documentation for the product.</span><span lang="zh" hidden>获取产品的技术文档。</span></p>
+  <div class="doc-toolbar" id="doc-toolbar" hidden>
+    <div class="doc-cats" id="doc-cats">
+      <button type="button" class="is-active" data-cat="全部"><span lang="en">All</span><span lang="zh" hidden>全部</span></button>
 
+      <button type="button" data-cat="用户手册"><span lang="en">User Manual</span><span lang="zh" hidden>用户手册</span></button>
+
+      <button type="button" data-cat="规格书"><span lang="en">Specification</span><span lang="zh" hidden>规格书</span></button>
+
+      <button type="button" data-cat="使用说明"><span lang="en">Instructions</span><span lang="zh" hidden>使用说明</span></button>
+
+      <button type="button" data-cat="支持文档"><span lang="en">Support</span><span lang="zh" hidden>支持文档</span></button>
+
+      <button type="button" data-cat="操作指引"><span lang="en">Guide</span><span lang="zh" hidden>操作指引</span></button>
+
+    </div>
+    <div class="doc-toolbar-actions">
+      <button type="button" class="btn btn-sm" id="doc-edit-btn"><span lang="en">Edit Docs</span><span lang="zh" hidden>编辑文档</span></button>
+      <button type="button" class="btn btn-sm btn-primary" id="doc-save-btn" hidden><span lang="en">Save Changes</span><span lang="zh" hidden>保存修改</span></button>
+    </div>
+  </div>
+  <div class="doc-empty" id="doc-empty">
+    <button type="button" class="btn btn-primary" id="doc-empty-btn"><span lang="en">+ Upload Documents</span><span lang="zh" hidden>+ 上传文档</span></button>
+  </div>
+  <div class="doc-table-wrap" id="doc-content" hidden>
+    <table class="doc-table" id="doc-table">
+      
+    </table>
+  </div>
+  <input type="file" id="doc-file-input" accept=".pdf,.png,.jpg,.jpeg,.doc,.docx,.xls,.xlsx,.md" multiple style="display:none" />
+</section>
 <section class="wrap" id="contact">
   <h2 class="section-title"><span lang="en">Contact Information</span><span lang="zh" hidden>联系方式</span></h2>
   <p class="section-sub"><span lang="en">For quotations, lead times, and technical support.</span><span lang="zh" hidden>获取报价、交期和技术支持。</span></p>

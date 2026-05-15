@@ -80,9 +80,9 @@
   </div>
 </section>
 <section class="wrap" id="gallery">
-  <h2 class="section-title" data-i18n="secGallery">Product Gallery</h2>
-  <p class="section-sub" data-i18n="subGallery">Detailed views (Scroll thumbnails to browse).</p>
-  <div class="gallery-toolbar">
+  <h2 class="section-title"><span lang="en">Product Gallery</span><span lang="zh" hidden>产品图库</span></h2>
+  <p class="section-sub"><span lang="en">Detailed views of the product.</span><span lang="zh" hidden>产品详细视图。</span></p>
+  <div class="gallery-toolbar" id="gallery-toolbar">
     <div class="gallery-cats" id="gallery-cats">
       <button type="button" class="is-active" data-cat="全部"><span lang="en">All</span><span lang="zh" hidden>全部</span></button>
 <button type="button" data-cat="主图"><span lang="en">Main</span><span lang="zh" hidden>主图</span></button>
@@ -95,7 +95,10 @@
       <button type="button" class="btn btn-sm btn-primary" id="gallery-save-btn" hidden><span lang="en">Save Changes</span><span lang="zh" hidden>保存修改</span></button>
     </div>
   </div>
-  <div class="gallery-layout gallery-layout--v2">
+  <div class="gallery-empty" id="gallery-empty" hidden>
+    <button type="button" class="btn btn-primary" id="gallery-empty-btn"><span lang="en">+ Upload Images</span><span lang="zh" hidden>+ 上传图片</span></button>
+  </div>
+  <div class="gallery-layout gallery-layout--v2" id="gallery-content">
     <div class="stage" id="gallery-stage" aria-live="polite"></div>
     <div class="thumbs" id="gallery-thumbs" role="tablist" aria-label="Gallery thumbnails">
       <button type="button" class="gthumb is-active" data-full="images/hero_800.png" data-alt="WE-T214 full set with sensor probe" data-category="主图"><img src="images/hero_800.png" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">Main</span><span lang="zh" hidden>主图</span></span></button>
@@ -113,7 +116,7 @@
 <section class="wrap" id="video">
   <h2 class="section-title"><span lang="en">Videos</span><span lang="zh" hidden>产品视频</span></h2>
   <p class="section-sub"><span lang="en">Product videos and demonstrations.</span><span lang="zh" hidden>产品视频与演示。</span></p>
-  <div class="video-toolbar">
+  <div class="video-toolbar" id="video-toolbar">
     <div class="video-cats" id="video-cats">
       <button type="button" class="is-active" data-cat="全部"><span lang="en">All</span><span lang="zh" hidden>全部</span></button>
 <button type="button" data-cat="产品概览"><span lang="en">Overview</span><span lang="zh" hidden>产品概览</span></button>
@@ -128,7 +131,10 @@
       <button type="button" class="btn btn-sm btn-primary" id="video-save-btn" hidden><span lang="en">Save Changes</span><span lang="zh" hidden>保存修改</span></button>
     </div>
   </div>
-  <div class="video-area">
+  <div class="video-empty" id="video-empty" hidden>
+    <button type="button" class="btn btn-primary" id="video-empty-btn"><span lang="en">+ Upload Videos</span><span lang="zh" hidden>+ 上传视频</span></button>
+  </div>
+  <div class="video-area" id="video-content">
     <div class="video-player-wrap">
       <video class="video-player" id="video-player" controls preload="metadata">
         <source src="" type="video/mp4" />
@@ -201,7 +207,7 @@
 <section class="wrap" id="downloads">
   <h2 class="section-title"><span lang="en">Downloads</span><span lang="zh" hidden>资料下载</span></h2>
   <p class="section-sub"><span lang="en">Access technical documentation for the product.</span><span lang="zh" hidden>获取产品的技术文档。</span></p>
-  <div class="doc-toolbar">
+  <div class="doc-toolbar" id="doc-toolbar">
     <div class="doc-cats" id="doc-cats">
       <button type="button" class="is-active" data-cat="全部"><span lang="en">All</span><span lang="zh" hidden>全部</span></button>
 
@@ -221,7 +227,10 @@
       <button type="button" class="btn btn-sm btn-primary" id="doc-save-btn" hidden><span lang="en">Save Changes</span><span lang="zh" hidden>保存修改</span></button>
     </div>
   </div>
-  <div class="doc-table-wrap">
+  <div class="doc-empty" id="doc-empty" hidden>
+    <button type="button" class="btn btn-primary" id="doc-empty-btn"><span lang="en">+ Upload Documents</span><span lang="zh" hidden>+ 上传文档</span></button>
+  </div>
+  <div class="doc-table-wrap" id="doc-content">
     <table class="doc-table" id="doc-table">
       <tbody class="doc-group" data-category="用户手册">
   <tr class="doc-group-header"><td colspan="4"><span lang="en">User Manual</span><span lang="zh" hidden>用户手册</span></td></tr>

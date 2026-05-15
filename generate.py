@@ -177,26 +177,26 @@ def build_highlights(cfg):
 
 def build_gallery(cfg):
     images = cfg.get("images", [])
-    if not images:
-        return ""
+    has_content = bool(images)
     gallery_cats = ["全部", "主图", "细节", "其他"]
     tabs = ""
     for i, cat in enumerate(gallery_cats):
         tabs += biling_btn(cat, active=(i==0))
     thumbs = ""
-    first_active = True
-    for img in images:
-        src = esc(img.get("src", ""))
-        alt = esc(img.get("alt", ""))
-        cat = esc(img.get("category", "其他"))
-        cls = "gthumb" + (" is-active" if first_active else "")
-        first_active = False
-        cat_en = BILINGUAL_CATS.get(cat, cat)
-        thumbs += f"""<button type="button" class="{cls}" data-full="{src}" data-alt="{alt}" data-category="{cat}"><img src="{src}" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">{esc(cat_en)}</span><span lang="zh" hidden>{esc(cat)}</span></span></button>\n"""
+    if has_content:
+        first_active = True
+        for img in images:
+            src = esc(img.get("src", ""))
+            alt = esc(img.get("alt", ""))
+            cat = esc(img.get("category", "其他"))
+            cls = "gthumb" + (" is-active" if first_active else "")
+            first_active = False
+            cat_en = BILINGUAL_CATS.get(cat, cat)
+            thumbs += f"""<button type="button" class="{cls}" data-full="{src}" data-alt="{alt}" data-category="{cat}"><img src="{src}" alt="" width="120" height="90" loading="lazy" /><span class="thumb-cat"><span lang="en">{esc(cat_en)}</span><span lang="zh" hidden>{esc(cat)}</span></span></button>\n"""
     return f"""<section class="wrap" id="gallery">
-  <h2 class="section-title" data-i18n="secGallery">Product Gallery</h2>
-  <p class="section-sub" data-i18n="subGallery">Detailed views (Scroll thumbnails to browse).</p>
-  <div class="gallery-toolbar">
+  <h2 class="section-title"><span lang="en">Product Gallery</span><span lang="zh" hidden>产品图库</span></h2>
+  <p class="section-sub"><span lang="en">Detailed views of the product.</span><span lang="zh" hidden>产品详细视图。</span></p>
+  <div class="gallery-toolbar" id="gallery-toolbar"{' hidden' if not has_content else ''}>
     <div class="gallery-cats" id="gallery-cats">
       {tabs}
     </div>
@@ -205,7 +205,10 @@ def build_gallery(cfg):
       <button type="button" class="btn btn-sm btn-primary" id="gallery-save-btn" hidden><span lang="en">Save Changes</span><span lang="zh" hidden>保存修改</span></button>
     </div>
   </div>
-  <div class="gallery-layout gallery-layout--v2">
+  <div class="gallery-empty" id="gallery-empty"{' hidden' if has_content else ''}>
+    <button type="button" class="btn btn-primary" id="gallery-empty-btn"><span lang="en">+ Upload Images</span><span lang="zh" hidden>+ 上传图片</span></button>
+  </div>
+  <div class="gallery-layout gallery-layout--v2" id="gallery-content"{' hidden' if not has_content else ''}>
     <div class="stage" id="gallery-stage" aria-live="polite"></div>
     <div class="thumbs" id="gallery-thumbs" role="tablist" aria-label="Gallery thumbnails">
       {thumbs}
@@ -228,20 +231,17 @@ def gallery_script(cfg):
 
 def build_videos(cfg):
     videos = cfg.get("videos", [])
-    # convert legacy single video config
     old_video = cfg.get("video", {})
     if old_video.get("available") and not videos:
         videos = [{"label": "Product Video", "file": old_video["src"], "poster": old_video.get("poster",""), "category": "产品概览"}]
-    if not videos:
-        return ""
-    vids = videos
-    for v in vids:
+    has_content = bool(videos)
+    for v in videos:
         if "category" not in v:
             v["category"] = "产品概览"
     vid_cats = VIDEO_CATEGORIES[1:]
     cat_html = ""
     for cat in vid_cats:
-        cat_vids = [v for v in vids if v.get("category") == cat]
+        cat_vids = [v for v in videos if v.get("category") == cat]
         if not cat_vids:
             continue
         items = ""
@@ -263,7 +263,7 @@ def build_videos(cfg):
     return f"""<section class="wrap" id="video">
   <h2 class="section-title"><span lang="en">Videos</span><span lang="zh" hidden>产品视频</span></h2>
   <p class="section-sub"><span lang="en">Product videos and demonstrations.</span><span lang="zh" hidden>产品视频与演示。</span></p>
-  <div class="video-toolbar">
+  <div class="video-toolbar" id="video-toolbar"{' hidden' if not has_content else ''}>
     <div class="video-cats" id="video-cats">
       {tabs}
     </div>
@@ -272,7 +272,10 @@ def build_videos(cfg):
       <button type="button" class="btn btn-sm btn-primary" id="video-save-btn" hidden><span lang="en">Save Changes</span><span lang="zh" hidden>保存修改</span></button>
     </div>
   </div>
-  <div class="video-area">
+  <div class="video-empty" id="video-empty"{' hidden' if has_content else ''}>
+    <button type="button" class="btn btn-primary" id="video-empty-btn"><span lang="en">+ Upload Videos</span><span lang="zh" hidden>+ 上传视频</span></button>
+  </div>
+  <div class="video-area" id="video-content"{' hidden' if not has_content else ''}>
     <div class="video-player-wrap">
       <video class="video-player" id="video-player" controls preload="metadata">
         <source src="" type="video/mp4" />
@@ -365,15 +368,13 @@ def build_package(cfg):
 
 def build_downloads(cfg):
     documents = cfg.get("documents", [])
-    # also handle legacy manual_pdf
     manual_pdf = cfg.get("manual_pdf", "")
     if manual_pdf:
         has_manual = any(d.get("file","") == manual_pdf for d in documents)
         if not has_manual:
             documents = [{"label": "User Manual (PDF)", "file": manual_pdf, "category": "用户手册"}] + documents
-    if not documents:
-        return ""
-    doc_cats = DOC_CATEGORIES[1:]  # exclude "全部"
+    has_content = bool(documents)
+    doc_cats = DOC_CATEGORIES[1:]
     for d in documents:
         if "category" not in d:
             d["category"] = "支持文档"
@@ -396,10 +397,13 @@ def build_downloads(cfg):
         cat_html += f"""<tbody class="doc-group" data-category="{esc(cat)}">
   <tr class="doc-group-header"><td colspan="4"><span lang="en">{esc(cat_en)}</span><span lang="zh" hidden>{esc(cat)}</span></td></tr>
   {rows}</tbody>\n"""
+    docs_toolbar_hidden = ' hidden' if not has_content else ''
+    docs_empty_hidden = '' if not has_content else ' hidden'
+    docs_content_hidden = ' hidden' if not has_content else ''
     return f"""<section class="wrap" id="downloads">
   <h2 class="section-title"><span lang="en">Downloads</span><span lang="zh" hidden>资料下载</span></h2>
   <p class="section-sub"><span lang="en">Access technical documentation for the product.</span><span lang="zh" hidden>获取产品的技术文档。</span></p>
-  <div class="doc-toolbar">
+  <div class="doc-toolbar" id="doc-toolbar"{docs_toolbar_hidden}>
     <div class="doc-cats" id="doc-cats">
       {biling_btn("全部", active=True)}
       {biling_btn("用户手册")}
@@ -413,7 +417,10 @@ def build_downloads(cfg):
       <button type="button" class="btn btn-sm btn-primary" id="doc-save-btn" hidden><span lang="en">Save Changes</span><span lang="zh" hidden>保存修改</span></button>
     </div>
   </div>
-  <div class="doc-table-wrap">
+  <div class="doc-empty" id="doc-empty"{docs_empty_hidden}>
+    <button type="button" class="btn btn-primary" id="doc-empty-btn"><span lang="en">+ Upload Documents</span><span lang="zh" hidden>+ 上传文档</span></button>
+  </div>
+  <div class="doc-table-wrap" id="doc-content"{docs_content_hidden}>
     <table class="doc-table" id="doc-table">
       {cat_html}
     </table>

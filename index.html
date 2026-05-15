@@ -125,7 +125,7 @@ function buildTable() {
 
     row.innerHTML =
       '<div class="catalog-index__cell catalog-index__cell--page">' + p.page + '</div>' +
-      '<div class="catalog-index__cell catalog-index__cell--sku"><a href="' + detailUrl + '">' + p.sku + '</a></div>' +
+      '<div class="catalog-index__cell catalog-index__cell--sku"><a href="' + detailUrl + '">' + p.sku + '</a><div class="prod-name-mobile"><a href="' + detailUrl + '">' + p.name + '</a></div></div>' +
       '<div class="catalog-index__cell catalog-index__cell--name"><a href="' + detailUrl + '">' + p.name + '</a></div>' +
       '<div class="catalog-index__cell catalog-index__cell--actions"><a class="catalog-index__dl" href="' + pdfUrl + '" target="_blank">PRINT</a></div>' +
       '<div class="catalog-index__cell catalog-index__cell--actions">' + docsBtn + '</div>';

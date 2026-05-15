@@ -771,6 +771,10 @@ body.modal-open {
   font-weight: 400;
 }
 
+.prod-name-mobile {
+  display: none;
+}
+
 @media (max-width: 700px) {
   .catalog-index__row {
     grid-template-columns: 36px 1fr 60px 60px;
@@ -779,10 +783,10 @@ body.modal-open {
     display: none;
   }
   .catalog-index__header .catalog-index__cell--name {
-    display: block;
+    display: none;
   }
   .catalog-index__cell {
-    padding: 0.5rem 0.35rem;
+    padding: 0.4rem 0.3rem;
     font-size: 0.82rem;
   }
   .catalog-index__cell--page {
@@ -790,10 +794,22 @@ body.modal-open {
   }
   .catalog-index__cell--sku {
     font-size: 0.78rem;
+    line-height: 1.3;
+  }
+  .prod-name-mobile {
+    display: block;
+    font-size: 0.68rem;
+    color: var(--muted);
+    margin-top: 0.1rem;
+    word-break: break-word;
+  }
+  .prod-name-mobile a {
+    color: var(--muted);
+    font-weight: 400;
   }
   .catalog-index__dl {
-    font-size: 0.65rem;
-    padding: 0.2rem 0.35rem;
+    font-size: 0.6rem;
+    padding: 0.2rem 0.25rem;
   }
 }
 
@@ -1349,6 +1365,48 @@ body.modal-open {
 @media (max-width: 520px) {
   .quote-form__row--half {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Quote modal mobile */
+@media (max-width: 480px) {
+  .quote-modal {
+    padding: 0.5rem;
+  }
+  .quote-modal__dialog {
+    padding: 1rem 0.75rem;
+    width: 100%;
+    border-radius: 10px;
+  }
+  .quote-modal__title {
+    font-size: 1.05rem;
+    margin-right: 1.5rem;
+  }
+  .quote-modal__lead {
+    font-size: 0.82rem;
+    margin-bottom: 0.75rem;
+  }
+  .quote-form__row {
+    margin-bottom: 0.65rem;
+  }
+  .quote-form__row label {
+    font-size: 0.8rem;
+  }
+  .quote-form__row input,
+  .quote-form__row textarea {
+    padding: 0.45rem 0.5rem;
+    font-size: 0.88rem;
+  }
+  .quote-form__row--half {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+  .quote-form__actions {
+    flex-direction: column;
+  }
+  .quote-form__actions .btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 

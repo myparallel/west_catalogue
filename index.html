@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WES Product Catalogue</title>
+<meta name="description" content="WES IoT sensor product catalogue - Professional agricultural and environmental monitoring solutions." />
+<link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap inner">
+    <a class="logo" href="#">WES <span>Catalogue</span></a>
+    <nav class="nav" id="main-nav" aria-label="Primary">
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero wrap" id="overview">
+    <div class="hero-grid" style="grid-template-columns:1fr">
+      <div style="text-align:center">
+        <h1>WES Product Catalogue</h1>
+        <p class="lead" style="margin-inline:auto">Professional IoT sensing solutions for precision agriculture, environmental monitoring, and smart farming.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="products">
+    <h2 class="section-title">Products</h2>
+    <p class="section-sub">Browse our complete range of IoT sensor products.</p>
+    <div class="highlights" id="product-list">
+      <!-- Products are listed here -->
+    </div>
+  </section>
+
+  <section class="wrap" id="about">
+    <h2 class="section-title">About WES</h2>
+    <p class="section-sub">Hainan World Electronic Science And Technology Co., Ltd.</p>
+    <div class="card" style="max-width:700px">
+      <p>We specialize in the development and manufacturing of IoT sensing solutions for agriculture and environmental monitoring. Our product line includes soil sensors, weather stations, and environmental monitoring systems with 4G/LoRa connectivity.</p>
+    </div>
+  </section>
+
+  <section class="wrap" id="contact">
+    <h2 class="section-title">Contact Information</h2>
+    <p class="section-sub">For quotations, lead times, and technical support.</p>
+    <address class="contact-info">
+      Room 1502, 15th Floor, Building 20, No. 487 Tianlin Road<br />Shanghai, 200233, China<br />
+      <a href="tel:+86-021-33675566">+86-021-33675566</a><br />
+      <a href="mailto:ftd_sales@west-hn.com">ftd_sales@west-hn.com</a><br />
+      Monday to Friday, 9:00 - 18:00
+    </address>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-meta">
+    <span>Hainan World Electronic Science And Technology Co., Ltd.</span>
+    <span>Product Catalogue</span>
+  </div>
+</footer>
+
+<script>
+// Auto-discover products by fetching product list
+var products = [
+  { sku: "WE-T214", name: "3-in-1 Soil Sensor Transmitter", desc: "Temperature, Moisture & EC monitoring with dual 4G/LoRa", img: "products/WE-T214/images/hero_800.png" },
+  { sku: "WE-W200", name: "Professional Weather Station", desc: "7-in-1 environmental monitoring with solar power", img: "products/WE-W200/images/hero_800.png" }
+];
+
+var list = document.getElementById("product-list");
+products.forEach(function(p) {
+  var card = document.createElement("div");
+  card.className = "card";
+  card.style.cursor = "pointer";
+  card.onclick = function() { window.location = "products/" + p.sku + "/"; };
+  card.innerHTML = '<div style="display:flex;gap:1rem;align-items:center">' +
+    '<img src="' + p.img + '" alt="" style="width:80px;height:80px;object-fit:contain;border-radius:8px;border:1px solid var(--border);flex-shrink:0" />' +
+    '<div><h3 style="margin:0 0 0.25rem">' + p.sku + ' - ' + p.name + '</h3>' +
+    '<p style="margin:0;color:var(--muted)">' + p.desc + '</p></div></div>';
+  list.appendChild(card);
+});
+</script>
+</body>
+</html>

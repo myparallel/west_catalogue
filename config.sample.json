@@ -1,0 +1,68 @@
+{
+  "_note": "Copy this file and fill in your product details.",
+  "product": {
+    "sku": "WE-T214",
+    "name": "WE-T214 3-in-1 Soil Sensor Transmitter",
+    "short_name": "T214",
+    "brand": "WES",
+    "manufacturer": "Hainan World Electronic Science And Technology Co., Ltd.",
+    "description": "Industrial soil transmitter for Temperature, Moisture, and EC monitoring with dual 4G and LoRa connectivity, IP67 enclosure, and GNSS positioning.",
+    "lead": "A rugged, field-ready transmitter for precision agriculture. Simultaneously monitors soil temperature, volumetric moisture content, and electrical conductivity (EC). Supports dual 4G and LoRaWAN connectivity for reliable data backhaul in remote areas.",
+    "og_title": "WE-T214 3-in-1 Soil Sensor Transmitter",
+    "og_description": "Integrated soil monitor for Temp, Moisture, and EC with dual 4G/LoRa connectivity."
+  },
+  "hero_image": "Asset/hero_800.png",
+  "images": [
+    { "src": "Asset/hero_800.png", "alt": "WE-T214 full set with sensor probe" },
+    { "src": "Asset/back.png", "alt": "WE-T214 host back view and antenna" },
+    { "src": "Asset/interface.jpg", "alt": "WE-T214 interface and connector labels" },
+    { "src": "Asset/dimensions.png", "alt": "WE-T214 host dimensions" },
+    { "src": "Asset/display.jpg", "alt": "WE-T214 LCD screen with real-time readings" },
+    { "src": "Asset/app.png", "alt": "Soil Parameter Tester mobile app interface" },
+    { "src": "Asset/package.jpg", "alt": "WE-T214 standard packaging and accessories" }
+  ],
+  "highlights": [
+    { "title": "3-in-1 Precise Sensing", "text": "Monitors Soil Temperature, Volumetric Moisture Content, and Electrical Conductivity (EC) simultaneously with a high-accuracy triple-probe sensor." },
+    { "title": "Dual 4G & LoRaWAN", "text": "Flexible connectivity with 4G LTE (MQTT/HTTP) and LoRaWAN (up to 5km range), ensuring data reporting even in extremely remote locations." },
+    { "title": "GNSS Positioning", "text": "Built-in GPS/GLONASS/BDS support for automated asset tracking and mapping of soil data across large plantations." },
+    { "title": "Ultra-long Endurance", "text": "Powered by a 19,000mAh high-capacity lithium battery or optional 40W solar panel for years of maintenance-free operation." },
+    { "title": "Rugged & Reliable", "text": "IP67-rated host and IP68-rated probe enclosure. Engineered for harsh agricultural environments from -40\u00b0C to +85\u00b0C." },
+    { "title": "Real-time LCD Display", "text": "On-site data viewing via a high-contrast display. View temperature, humidity, and EC levels directly without a mobile device." }
+  ],
+  "video": {
+    "available": true,
+    "poster": "Asset/hero_800.png",
+    "src": "Asset/product-video.mp4"
+  },
+  "specifications": [
+    { "label": "Measured Variables", "value": "Soil Temperature, Soil Moisture, Soil Conductivity (EC)" },
+    { "label": "Temperature Range", "value": "-40\u00b0C to +85\u00b0C (Accuracy: \u00b10.5\u00b0C from 0-40\u00b0C)" },
+    { "label": "Moisture Range", "value": "0 to 100% Volumetric Water Content (Accuracy: \u00b13%)" },
+    { "label": "Conductivity (EC)", "value": "0 to 20 mS/cm (Accuracy: \u00b13% FS)" },
+    { "label": "LoRa Connectivity", "value": "410.125~490.125MHz; 22dBm Tx power; -147dBm sensitivity; 5km LOS range" },
+    { "label": "4G Connectivity", "value": "LTE FDD B1/3/5/7/20/28; Supports MQTT, HTTP, and WES cloud protocols" },
+    { "label": "Positioning (GNSS)", "value": "GPS / GLONASS / BDS / Galileo / QZSS" },
+    { "label": "Power Options", "value": "9-30V DC (Typ 24V), 19,000mAh Internal Li-battery, or 40W Solar Panel" },
+    { "label": "Sampling / Reporting", "value": "Configurable from 1 minute to 18 hours" },
+    { "label": "Enclosure Rating", "value": "Transmitter Host: IP67; Sensor Probe: IP68" },
+    { "label": "Dimensions", "value": "121 x 78 x 51.4 mm (Main unit excluding antenna and cable)" },
+    { "label": "Weight", "value": "190g (Main unit)" }
+  ],
+  "applications": [
+    { "title": "Smart Agriculture", "text": "Automated soil monitoring for greenhouse farming, orchards, and open fields to optimize irrigation cycles and fertilizer application based on real-time EC and moisture data." },
+    { "title": "Environmental Science", "text": "Long-term research on soil salinity and moisture dynamics in ecological conservation areas, leveraging LoRaWAN for data transmission across remote terrain." }
+  ],
+  "package_items": [
+    { "item": "3-in-1 Soil Sensor Transmitter (WE-T214 Host)", "qty": 1 },
+    { "item": "Soil Temperature/Moisture/EC Probe", "qty": 1 },
+    { "item": "4G / LoRa Antenna", "qty": 1 },
+    { "item": "Printed User Manual & Certificate", "qty": 1 }
+  ],
+  "manual_pdf": "WE-T214-manual.pdf",
+  "contact": {
+    "address": "Room 1502, 15th Floor, Building 20, No. 487 Tianlin Road<br />Shanghai, 200233, China",
+    "phone": "+86-021-33675566",
+    "email": "ftd_sales@west-hn.com",
+    "hours": "Monday to Friday, 9:00 - 18:00"
+  }
+}

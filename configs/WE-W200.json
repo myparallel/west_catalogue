@@ -1,0 +1,69 @@
+{
+  "product": {
+    "sku": "WE-W200",
+    "name": "WE-W200 Professional Weather Station",
+    "short_name": "W200",
+    "brand": "WES",
+    "manufacturer": "Hainan World Electronic Science And Technology Co., Ltd.",
+    "description": "All-in-one weather monitoring station with wind speed, direction, rainfall, and solar radiation sensors. Supports 4G and LoRa data transmission with IP67 housing.",
+    "lead": "A professional-grade weather station for precision agriculture, meteorology, and environmental monitoring. Measures wind speed, wind direction, rainfall, temperature, humidity, barometric pressure, and solar radiation with high-accuracy sensors.",
+    "og_title": "WE-W200 Professional Weather Station",
+    "og_description": "All-in-one weather station with 7 environmental sensors and dual 4G/LoRa connectivity."
+  },
+  "hero_image": "images/hero_800.png",
+  "images": [
+    { "src": "images/hero_800.png", "alt": "WE-W200 Weather Station overview" },
+    { "src": "images/back.png", "alt": "WE-W200 back panel and connections" },
+    { "src": "images/interface.jpg", "alt": "WE-W200 interface diagram" },
+    { "src": "images/dimensions.png", "alt": "WE-W200 mounting dimensions" },
+    { "src": "images/display.jpg", "alt": "WE-W200 real-time LCD display" },
+    { "src": "images/app.png", "alt": "WE-W200 mobile app dashboard" },
+    { "src": "images/package.jpg", "alt": "WE-W200 standard packaging" }
+  ],
+  "highlights": [
+    { "title": "7-in-1 Environmental Sensing", "text": "Wind speed, wind direction, rainfall, temperature, humidity, barometric pressure, and solar radiation all in a single compact station." },
+    { "title": "Dual 4G & LoRaWAN", "text": "Connect via 4G LTE (MQTT/HTTP) or LoRaWAN up to 5km range. Choose your preferred backhaul for any deployment location." },
+    { "title": "Solar Powered", "text": "Built-in 20W solar panel with 12,000mAh backup battery for true off-grid operation, 365 days a year." },
+    { "title": "Industrial Durability", "text": "IP67-rated enclosure with UV-resistant coating. Operates reliably from -40\u00b0C to +85\u00b0C in extreme environments." },
+    { "title": "GNSS Positioning", "text": "Integrated GPS/GLONASS/BDS for automatic geo-tagging of weather data across distributed sensor networks." },
+    { "title": "Cloud Platform", "text": "WES Cloud dashboard with real-time charts, alerts via email/SMS, and API access for third-party integration." }
+  ],
+  "video": {
+    "available": false,
+    "poster": "",
+    "src": ""
+  },
+  "specifications": [
+    { "label": "Wind Speed Range", "value": "0 to 60 m/s (Accuracy: ±0.3 m/s)" },
+    { "label": "Wind Direction", "value": "0 to 360\u00b0 (Accuracy: ±3\u00b0)" },
+    { "label": "Rainfall", "value": "0 to 200 mm/h (Resolution: 0.2 mm)" },
+    { "label": "Temperature Range", "value": "-40\u00b0C to +85\u00b0C (Accuracy: ±0.3\u00b0C)" },
+    { "label": "Humidity Range", "value": "0 to 100% RH (Accuracy: ±2%)" },
+    { "label": "Barometric Pressure", "value": "300 to 1100 hPa (Accuracy: ±0.5 hPa)" },
+    { "label": "Solar Radiation", "value": "0 to 2000 W/m\u00b2 (Accuracy: ±5%)" },
+    { "label": "Connectivity", "value": "4G LTE (B1/3/5/7/20/28) + LoRaWAN 410~490MHz" },
+    { "label": "Sampling Interval", "value": "Configurable: 1 min to 24 hours" },
+    { "label": "Enclosure Rating", "value": "IP67 (Sensor head: IP68)" },
+    { "label": "Power Supply", "value": "20W Solar Panel + 12,000mAh Li-ion battery" },
+    { "label": "Dimensions", "value": "320 x 180 x 145 mm (assembled)" }
+  ],
+  "applications": [
+    { "title": "Precision Agriculture", "text": "Real-time microclimate monitoring for crop management. Optimize irrigation scheduling based on evapotranspiration data and wind conditions." },
+    { "title": "Meteorological Networks", "text": "Deploy dense networks of weather stations for hyper-local forecasting. LoRaWAN backhaul enables wide-area coverage with low power consumption." }
+  ],
+  "package_items": [
+    { "item": "WE-W200 Weather Station (main unit)", "qty": 1 },
+    { "item": "Wind Speed & Direction Sensor", "qty": 1 },
+    { "item": "Rain Gauge (tipping bucket)", "qty": 1 },
+    { "item": "Solar Radiation Shield", "qty": 1 },
+    { "item": "Mounting Bracket Kit", "qty": 1 },
+    { "item": "User Manual & Certificate", "qty": 1 }
+  ],
+  "manual_pdf": "",
+  "contact": {
+    "address": "Room 1502, 15th Floor, Building 20, No. 487 Tianlin Road<br />Shanghai, 200233, China",
+    "phone": "+86-021-33675566",
+    "email": "ftd_sales@west-hn.com",
+    "hours": "Monday to Friday, 9:00 - 18:00"
+  }
+}

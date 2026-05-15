@@ -387,7 +387,7 @@ window.__PRODUCT_CONFIG__ = {{
 
 <header class="site-header">
   <div class="wrap inner">
-    <a class="logo" href="{logo_href}">{esc(p.get("sku",""))}-<span>{esc(p.get("short_name", ""))}</span></a>
+    <a class="logo" href="{logo_href}"><span>{esc(p.get("sku",""))}</span></a>
     <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>

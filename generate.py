@@ -110,7 +110,7 @@ def build_hero(cfg):
         <button type="button" class="btn btn-primary btn-pdf" data-i18n="btnPrint" data-sku="{esc(p.get("sku",""))}">Print</button>
         {docs_dropdown}
         {manual_btn}
-        <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote>Request Quote</button>
+        <button type="button" class="btn btn-secondary" id="quote-open-btn" data-i18n="btnQuote" data-open-quote>Request Quote</button>
       </div>
       <p class="doc-note">{doc_note}{docs_suffix}</p>
     </div>
@@ -130,8 +130,8 @@ def build_highlights(cfg):
         for item in items
     )
     return f"""<section class="wrap" id="highlights">
-  <h2 class="section-title">Key Highlights</h2>
-  <p class="section-sub">Precision monitoring meets rugged industrial design.</p>
+  <h2 class="section-title" data-i18n="secHighlights">Key Highlights</h2>
+  <p class="section-sub" data-i18n="subHighlights">Precision monitoring meets rugged industrial design.</p>
   <div class="highlights">
     {cards}
   </div>
@@ -151,8 +151,8 @@ def build_gallery(cfg):
         first_active = False
         thumbs += f"""<button type="button" class="{active_class.strip()}" data-full="{src}" data-alt="{alt}"><img src="{src}" alt="" width="120" height="90" loading="lazy" /></button>\n"""
     return f"""<section class="wrap" id="gallery">
-  <h2 class="section-title">Product Gallery</h2>
-  <p class="section-sub">Detailed views (Scroll thumbnails to browse).</p>
+  <h2 class="section-title" data-i18n="secGallery">Product Gallery</h2>
+  <p class="section-sub" data-i18n="subGallery">Detailed views (Scroll thumbnails to browse).</p>
   <div class="gallery-layout gallery-layout--v2">
     <div class="stage" id="gallery-stage" aria-live="polite"></div>
     <div class="thumbs" role="tablist" aria-label="Gallery thumbnails">
@@ -169,7 +169,7 @@ def build_video(cfg):
     poster = esc(video.get("poster", ""))
     src = esc(video.get("src", ""))
     return f"""<section class="wrap" id="video">
-  <h2 class="section-title">Product Video</h2>
+  <h2 class="section-title" data-i18n="secVideo">Product Video</h2>
   <p class="section-sub">Quick look at the {esc(cfg["product"].get("name",""))} in action.</p>
   <div class="video-container">
     <video controls preload="metadata" poster="{poster}">
@@ -189,8 +189,8 @@ def build_specifications(cfg):
         for s in specs
     )
     return f"""<section class="wrap" id="specifications">
-  <h2 class="section-title">Specifications</h2>
-  <p class="section-sub">Technical parameters based on the product manual.</p>
+  <h2 class="section-title" data-i18n="secSpecs">Specifications</h2>
+  <p class="section-sub" data-i18n="subSpecs">Technical parameters based on the product manual.</p>
   <div class="spec-table-wrap">
     <table class="spec">
       <tbody>
@@ -210,8 +210,8 @@ def build_applications(cfg):
         for a in apps
     )
     return f"""<section class="wrap" id="applications">
-  <h2 class="section-title">Typical Applications</h2>
-  <p class="section-sub">Optimized for diverse agricultural and environmental monitoring needs.</p>
+  <h2 class="section-title" data-i18n="secApps">Typical Applications</h2>
+  <p class="section-sub" data-i18n="subApps">Optimized for diverse agricultural and environmental monitoring needs.</p>
   <div class="two-col">
     {cards}
   </div>
@@ -226,8 +226,8 @@ def build_package(cfg):
     for i, item in enumerate(items, 1):
         rows += f"<tr><td>{i}</td><td>{esc(item['item'])}</td><td>{esc(str(item['qty']))}</td></tr>\n"
     return f"""<section class="wrap" id="package">
-  <h2 class="section-title">Standard Package</h2>
-  <p class="section-sub">Standard configuration for the {esc(cfg["product"].get("sku",""))}.</p>
+  <h2 class="section-title" data-i18n="secPackage">Standard Package</h2>
+  <p class="section-sub" data-i18n="subPackage">Standard configuration for the product.</p>
   <div class="spec-table-wrap">
     <table class="spec">
       <thead>
@@ -257,8 +257,8 @@ def build_downloads(cfg):
         fn = os.path.basename(path)
         items += f"""<a class="btn btn-secondary dl-link" href="{esc(path)}" download="{esc(fn)}">{esc(label)}</a>\n"""
     return f"""<section class="wrap" id="downloads">
-  <h2 class="section-title">Downloads</h2>
-  <p class="section-sub">Access technical documentation for {prod_name}.</p>
+  <h2 class="section-title" data-i18n="secDownloads">Downloads</h2>
+  <p class="section-sub" data-i18n="subDownloads">Access technical documentation for the product.</p>
   <div class="hero-actions" style="flex-direction:column;align-items:flex-start">
     <div style="display:flex;flex-wrap:wrap;gap:0.5rem">{items}</div>
   </div>
@@ -268,8 +268,8 @@ def build_downloads(cfg):
 def build_contact(cfg):
     c = cfg.get("contact", {})
     return f"""<section class="wrap" id="contact">
-  <h2 class="section-title">Contact Information</h2>
-  <p class="section-sub">For quotations, lead times, and technical support.</p>
+  <h2 class="section-title" data-i18n="secContact">Contact Information</h2>
+  <p class="section-sub" data-i18n="subContact">For quotations, lead times, and technical support.</p>
   <address class="contact-info">
     {c.get("address","")}<br />
     <a href="tel:{esc(c.get("phone",""))}">{esc(c.get("phone",""))}</a><br />
@@ -387,10 +387,24 @@ var i18n = {
     navPackage:     "包装清单",
     navDownloads:   "资料下载",
     navContact:     "联系我们",
+    navVideo:       "产品视频",
     btnPrint:       "打印",
-    sectionTitleDownloads: "资料下载",
-    sectionTitleSpecs: "技术参数",
-    sectionTitleApps: "应用场景"
+    btnQuote:       "获取报价",
+    secHighlights:  "产品亮点",
+    subHighlights:  "精准监测与工业级设计相结合。",
+    secGallery:     "产品图库",
+    subGallery:     "详细视图（滚动缩略图浏览）。",
+    secVideo:       "产品视频",
+    secSpecs:       "技术参数",
+    subSpecs:       "基于产品手册的技术参数。",
+    secApps:        "典型应用场景",
+    subApps:        "适用于多种农业和环境监测需求。",
+    secPackage:     "标准包装",
+    subPackage:     "产品的标准配置。",
+    secDownloads:   "资料下载",
+    subDownloads:   "获取产品的技术文档。",
+    secContact:     "联系方式",
+    subContact:     "获取报价、交期和技术支持。"
   }
 };
 var currentLang = "en";

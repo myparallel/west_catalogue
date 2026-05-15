@@ -40,7 +40,7 @@
     <div class="catalog-toolbar">
       <h2 class="section-title" style="margin:0" data-i18n="sectionProducts">Product Index</h2>
       <div class="catalog-toolbar__actions">
-        <button type="button" class="btn btn-secondary" id="download-all-pdf" data-i18n="downloadAll">Download All as PDF</button>
+        <button type="button" class="btn btn-secondary" id="print-catalogue" data-i18n="printCatalogue">Print Catalogue Cover</button>
       </div>
     </div>
     <p class="section-sub" data-i18n="sectionSub">Click a product to view details, or download catalogue PDF.</p>
@@ -87,7 +87,7 @@ var i18n = {
     heroLead:       "专业的物联网传感解决方案，适用于精准农业、环境监测和智慧农业。",
     sectionProducts:"产品索引",
     sectionSub:     "点击产品名称查看详情，或下载目录PDF。",
-    downloadAll:    "下载全部PDF",
+    printCatalogue:"打印目录封面",
     aboutTitle:     "关于 WEST",
     aboutSub:       "海南世电科技有限公司",
     aboutText:      "我们专注于为农业和环境监测开发制造物联网传感解决方案。产品线包括土壤传感器、气象站和环境监测系统，支持4G/LoRa连接。",
@@ -98,7 +98,7 @@ var i18n = {
     colPage:        "页码",
     colModel:       "型号",
     colName:        "产品名称",
-    colPrint:       "打印目录封面",
+    colPrint:       "PDF",
     colDocs:        "文档下载"
   }
 };
@@ -146,7 +146,7 @@ function buildTable() {
     '<div class="catalog-index__cell catalog-index__cell--page">' + (dict.colPage || "Page") + '</div>' +
     '<div class="catalog-index__cell catalog-index__cell--sku">' + (dict.colModel || "Model") + '</div>' +
     '<div class="catalog-index__cell catalog-index__cell--name">' + (dict.colName || "Product Name") + '</div>' +
-    '<div class="catalog-index__cell catalog-index__cell--actions">' + (dict.colPrint || "Print") + '</div>' +
+    '<div class="catalog-index__cell catalog-index__cell--actions">' + (dict.colPrint || "PDF") + '</div>' +
     '<div class="catalog-index__cell catalog-index__cell--actions">' + (dict.colDocs || "Docs") + '</div>';
   list.appendChild(header);
 
@@ -163,7 +163,7 @@ function buildTable() {
       '<div class="catalog-index__cell catalog-index__cell--page">' + p.page + '</div>' +
       '<div class="catalog-index__cell catalog-index__cell--sku"><a href="' + detailUrl + '">' + p.sku + '</a></div>' +
       '<div class="catalog-index__cell catalog-index__cell--name"><a href="' + detailUrl + '">' + p.name + '</a></div>' +
-      '<div class="catalog-index__cell catalog-index__cell--actions"><a class="catalog-index__dl" href="' + pdfUrl + '" target="_blank">打印目录封面</a></div>' +
+      '<div class="catalog-index__cell catalog-index__cell--actions"><a class="catalog-index__dl" href="' + pdfUrl + '" target="_blank">PRINT</a></div>' +
       '<div class="catalog-index__cell catalog-index__cell--actions">' + docsBtn + '</div>';
 
     list.appendChild(row);
@@ -172,10 +172,8 @@ function buildTable() {
 
 buildTable();
 
-document.getElementById("download-all-pdf").addEventListener("click", function() {
-  products.forEach(function(p) {
-    window.open("products/" + p.sku + "/?dl=1", "_blank");
-  });
+document.getElementById("print-catalogue").addEventListener("click", function() {
+  window.print();
 });
 </script>
 </body>

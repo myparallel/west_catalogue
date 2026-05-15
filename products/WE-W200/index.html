@@ -53,7 +53,7 @@
         <button type="button" class="btn btn-primary btn-pdf" data-i18n="btnPrint" data-sku="WE-W200">Print</button>
         
         
-        <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote>Request Quote</button>
+        <button type="button" class="btn btn-secondary" id="quote-open-btn" data-i18n="btnQuote" data-open-quote>Request Quote</button>
       </div>
       <p class="doc-note">For technical support or customized OEM versions, email us from <a href="#contact">Contact Information</a>.</p>
     </div>
@@ -63,8 +63,8 @@
   </div>
 </section>
 <section class="wrap" id="highlights">
-  <h2 class="section-title">Key Highlights</h2>
-  <p class="section-sub">Precision monitoring meets rugged industrial design.</p>
+  <h2 class="section-title" data-i18n="secHighlights">Key Highlights</h2>
+  <p class="section-sub" data-i18n="subHighlights">Precision monitoring meets rugged industrial design.</p>
   <div class="highlights">
     <div class="card"><h3>7-in-1 Environmental Sensing</h3><p>Wind speed, wind direction, rainfall, temperature, humidity, barometric pressure, and solar radiation all in a single compact station.</p></div>
 <div class="card"><h3>Dual 4G &amp; LoRa</h3><p>Connect via 4G LTE (MQTT/HTTP) or LoRa up to 5km range. Choose your preferred backhaul for any deployment location.</p></div>
@@ -76,8 +76,8 @@
   </div>
 </section>
 <section class="wrap" id="gallery">
-  <h2 class="section-title">Product Gallery</h2>
-  <p class="section-sub">Detailed views (Scroll thumbnails to browse).</p>
+  <h2 class="section-title" data-i18n="secGallery">Product Gallery</h2>
+  <p class="section-sub" data-i18n="subGallery">Detailed views (Scroll thumbnails to browse).</p>
   <div class="gallery-layout gallery-layout--v2">
     <div class="stage" id="gallery-stage" aria-live="polite"></div>
     <div class="thumbs" role="tablist" aria-label="Gallery thumbnails">
@@ -94,8 +94,8 @@
 </section>
 
 <section class="wrap" id="specifications">
-  <h2 class="section-title">Specifications</h2>
-  <p class="section-sub">Technical parameters based on the product manual.</p>
+  <h2 class="section-title" data-i18n="secSpecs">Specifications</h2>
+  <p class="section-sub" data-i18n="subSpecs">Technical parameters based on the product manual.</p>
   <div class="spec-table-wrap">
     <table class="spec">
       <tbody>
@@ -117,8 +117,8 @@
   </div>
 </section>
 <section class="wrap" id="applications">
-  <h2 class="section-title">Typical Applications</h2>
-  <p class="section-sub">Optimized for diverse agricultural and environmental monitoring needs.</p>
+  <h2 class="section-title" data-i18n="secApps">Typical Applications</h2>
+  <p class="section-sub" data-i18n="subApps">Optimized for diverse agricultural and environmental monitoring needs.</p>
   <div class="two-col">
     <div class="card"><h3>Precision Agriculture</h3><p>Real-time microclimate monitoring for crop management. Optimize irrigation scheduling based on evapotranspiration data and wind conditions.</p></div>
 <div class="card"><h3>Meteorological Networks</h3><p>Deploy dense networks of weather stations for hyper-local forecasting. LoRa backhaul enables wide-area coverage with low power consumption.</p></div>
@@ -126,8 +126,8 @@
   </div>
 </section>
 <section class="wrap" id="package">
-  <h2 class="section-title">Standard Package</h2>
-  <p class="section-sub">Standard configuration for the WE-W200.</p>
+  <h2 class="section-title" data-i18n="secPackage">Standard Package</h2>
+  <p class="section-sub" data-i18n="subPackage">Standard configuration for the product.</p>
   <div class="spec-table-wrap">
     <table class="spec">
       <thead>
@@ -147,8 +147,8 @@
 </section>
 
 <section class="wrap" id="contact">
-  <h2 class="section-title">Contact Information</h2>
-  <p class="section-sub">For quotations, lead times, and technical support.</p>
+  <h2 class="section-title" data-i18n="secContact">Contact Information</h2>
+  <p class="section-sub" data-i18n="subContact">For quotations, lead times, and technical support.</p>
   <address class="contact-info">
     Room 1502, 15th Floor, Building 20, No. 487 Tianlin Road<br />Shanghai, 200233, China<br />
     <a href="tel:+86-021-33675566">+86-021-33675566</a><br />
@@ -225,10 +225,24 @@ var i18n = {
     navPackage:     "包装清单",
     navDownloads:   "资料下载",
     navContact:     "联系我们",
+    navVideo:       "产品视频",
     btnPrint:       "打印",
-    sectionTitleDownloads: "资料下载",
-    sectionTitleSpecs: "技术参数",
-    sectionTitleApps: "应用场景"
+    btnQuote:       "获取报价",
+    secHighlights:  "产品亮点",
+    subHighlights:  "精准监测与工业级设计相结合。",
+    secGallery:     "产品图库",
+    subGallery:     "详细视图（滚动缩略图浏览）。",
+    secVideo:       "产品视频",
+    secSpecs:       "技术参数",
+    subSpecs:       "基于产品手册的技术参数。",
+    secApps:        "典型应用场景",
+    subApps:        "适用于多种农业和环境监测需求。",
+    secPackage:     "标准包装",
+    subPackage:     "产品的标准配置。",
+    secDownloads:   "资料下载",
+    subDownloads:   "获取产品的技术文档。",
+    secContact:     "联系方式",
+    subContact:     "获取报价、交期和技术支持。"
   }
 };
 var currentLang = "en";

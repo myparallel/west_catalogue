@@ -1,0 +1,67 @@
+{
+  "product": {
+    "sku": "WE-T800",
+    "name": "WE-T800 Multi-Function Field Monitor",
+    "short_name": "T800",
+    "brand": "WEST",
+    "manufacturer": "Hainan Shidian Technology Co., Ltd.",
+    "description": "Industrial field monitor with 4G connectivity, RS485 Modbus-RTU, two analog inputs (4\u201320 mA), two digital inputs, IP68 enclosure, and MQTT/HTTP/WEST cloud protocols.",
+    "lead": "A sealed IP68 field unit for distributed monitoring: 4G backhaul, RS485 Modbus-RTU, two 4\u201320 mA analog channels, two digital inputs, and flexible power from internal Li-ion packs or 9\u201330 V DC. Built for water utilities, environmental sites, and industrial IoT where reliability matters.",
+    "og_title": "WE-T800 Multi-Function Field Monitor",
+    "og_description": "IP68 4G field device: RS485, AI, DI, cloud protocols with MQTT/HTTP.",
+    "page_number": 3
+  },
+  "hero_image": "images/T800-1.png",
+  "images": [
+    { "src": "images/T800-1.png", "alt": "WE-T800 field monitor front view" },
+    { "src": "images/T800-2.png", "alt": "WE-T800 monitor view 2" },
+    { "src": "images/T800-3.png", "alt": "WE-T800 monitor view 3" },
+    { "src": "images/T800-4.png", "alt": "WE-T800 monitor view 4" },
+    { "src": "images/T800-5.png", "alt": "WE-T800 monitor view 5" }
+  ],
+  "highlights": [
+    { "title": "4G & Cloud-ready", "text": "LTE FDD/TDD bands supported; MQTT, HTTP, and WEST cloud protocols; 3-year cellular data plan option (100 MB/month)." },
+    { "title": "Field I/O", "text": "1\u00d7 RS485 (4800\u2013115200 bps, Modbus-RTU), 2\u00d7 AI (4\u201320 mA), 2\u00d7 DI (switch or pulse counting), 2\u00d7 configurable DC outputs (3.6 / 5 / 12 V)." },
+    { "title": "Rugged & Readable", "text": "IP68 enclosure; 60\u00d732 mm LCD with LED indicators and keypad for local readings and alarms." },
+    { "title": "Dual Power", "text": "Internal Li-ion options (114000 or 228000 mAh) with automatic handover to 9\u201330 V DC external supply." },
+    { "title": "Mobile Supervision", "text": "Bluetooth for local configuration; companion app for remote visibility." },
+    { "title": "Configurable Timing", "text": "Sampling and upload periods configurable from 10 s to 18 h to match battery life and network duty cycle." }
+  ],
+  "video": {
+    "available": false,
+    "poster": "",
+    "src": ""
+  },
+  "specifications": [
+    { "label": "Model", "value": "WE-T800 multi-function monitor / RTU-style field unit" },
+    { "label": "Connectivity", "value": "4G LTE; SMA female antenna; MQTT, HTTP, WEST cloud" },
+    { "label": "LTE Bands", "value": "LTE FDD B1/3/5/8; LTE TDD B34/38/39/40/41" },
+    { "label": "RS485", "value": "1 port, 4800\u2013115200 bps, Modbus-RTU" },
+    { "label": "Analog Inputs", "value": "2\u00d7 AI, 4\u201320 mA" },
+    { "label": "Digital Inputs", "value": "2\u00d7 DI \u2014 dry contact / pulse counting" },
+    { "label": "Sensor Excitation", "value": "2\u00d7 DC output ports, 3.6 V / 5 V / 12 V selectable" },
+    { "label": "Sampling / Upload", "value": "Configurable 10 s \u2013 18 h" },
+    { "label": "Power \u2014 Battery", "value": "Internal Li-ion: 114000 mAh or 228000 mAh" },
+    { "label": "Power \u2014 External", "value": "9\u201330 V DC (typical 24 V), auto-changeover with battery" },
+    { "label": "Operating Temp", "value": "\u221220\u00b0C to +70\u00b0C" },
+    { "label": "Enclosure", "value": "Fully sealed, IP68; ABS/PC housing" },
+    { "label": "Local UI", "value": "60\u00d732 mm LCD, status LEDs, keypad, Bluetooth for provisioning" }
+  ],
+  "applications": [
+    { "title": "Water & Environmental Networks", "text": "Smart water and pipeline monitoring: consolidate analog, digital, and serial field devices into a single 4G-capable uplink." },
+    { "title": "Energy & Industrial IoT", "text": "Remote supervision for pumps, treatment skids, and distributed assets where Modbus-RTU sensors must be bridged to cloud SCADA or MQTT/HTTP endpoints." }
+  ],
+  "package_items": [
+    { "item": "Multi-function monitor (WE-T800)", "qty": 1 },
+    { "item": "Printed user manual", "qty": 1 },
+    { "item": "Cellular antenna", "qty": 1 },
+    { "item": "Certificate of conformity", "qty": 1 }
+  ],
+  "manual_pdf": "WE-T800-datasheet.pdf",
+  "contact": {
+    "address": "Room 1502, 15th Floor, Building 20, No. 487 Tianlin Road<br />Shanghai, 200233, China",
+    "phone": "+86-021-33675566",
+    "email": "ftd_sales@west-hn.com",
+    "hours": "Monday to Friday, 9:00 - 18:00"
+  }
+}

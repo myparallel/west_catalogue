@@ -1,0 +1,82 @@
+{
+  "product": {
+    "sku": "WE-X280",
+    "name": "WE-X280 Industrial Edge Computing Gateway",
+    "short_name": "X280",
+    "brand": "WEST",
+    "manufacturer": "Hainan Shidian Technology Co., Ltd.",
+    "description": "Industrial edge computing gateway with 4G, Ethernet, LoRa, and RS485 connectivity. Supports edge computing, up to 128 connected devices, and 16 expandable I/O modules.",
+    "lead": "A powerful industrial edge computing gateway supporting LoRa wireless and RS485 wired convergence networks. Connects up to 128 wired/wireless devices, features 4G full Netcom and Ethernet dual-channel communication, edge computing engine, and seamless integration with the WEST-AIOT cloud platform.",
+    "og_title": "WE-X280 Industrial Edge Computing Gateway",
+    "og_description": "Edge computing gateway with 4G/LoRa/RS485, supporting up to 128 devices and 16 I/O modules.",
+    "page_number": 4
+  },
+  "hero_image": "images/WE-X280_透明场景图.png",
+  "images": [
+    { "src": "images/WE-X280_透明场景图.png", "alt": "WE-X280 edge computing gateway overview" },
+    { "src": "images/WE-T280_高清图-1.png", "alt": "WE-X280 front view" },
+    { "src": "images/WE-T280_高清图-2.png", "alt": "WE-X280 angle view" },
+    { "src": "images/main-5.png", "alt": "WE-X280 interface detail" },
+    { "src": "images/section.png", "alt": "WE-X280 dimensional drawing" },
+    { "src": "images/DID5O.png", "alt": "WE-X280 DI/DO interface diagram" },
+    { "src": "images/DIDO3.png", "alt": "WE-X280 DI/DO connection diagram" }
+  ],
+  "highlights": [
+    { "title": "Multi-Network Convergence", "text": "Supports 4G full Netcom, Ethernet, LoRa (410\u2013490MHz), and RS485 wired networks simultaneously for flexible device connectivity." },
+    { "title": "Edge Computing Engine", "text": "Built-in edge computing capabilities for high-precision digital conversion, exception cleaning, protocol unification, and business logic calculation at the edge." },
+    { "title": "Massive Device Access", "text": "One gateway connects up to 128 wired/wireless sensing devices, with expandable support for up to 16 I/O node modules." },
+    { "title": "Dual-Channel Communication", "text": "4G full Netcom (LTE FDD/TDD) and Ethernet (RJ45, 10/100M) dual-channel encrypted transmission to the cloud platform." },
+    { "title": "Cloud Platform Integration", "text": "Seamlessly connects to WEST-AIOT device management platform and third-party platforms via MQTT + custom JSON protocol." },
+    { "title": "Industrial Reliability", "text": "Rail-mounted design, ABS/PC housing, wide temperature range (-20\u00b0C to +70\u00b0C), CE certified for demanding industrial environments." }
+  ],
+  "video": {
+    "available": false,
+    "poster": "",
+    "src": ""
+  },
+  "specifications": [
+    { "label": "Model", "value": "WE-X280 Industrial Edge Computing Gateway" },
+    { "label": "4G Communication", "value": "LTE FDD B1/3/5/8; TDD B34/38/39/40/41; SMA female antenna" },
+    { "label": "LoRa Communication", "value": "410.125\u2013490.125MHz; 22dBm Tx; \u2212147dBm Rx sensitivity; 5km LOS range" },
+    { "label": "Ethernet", "value": "1\u00d7 RJ45, 10M/100M adaptive" },
+    { "label": "RS485", "value": "2 ports, Modbus-RTU" },
+    { "label": "I/O Expansion", "value": "1\u00d7 expansion interface, supports up to 16 I/O modules" },
+    { "label": "BLE Interface", "value": "Local configuration via Bluetooth" },
+    { "label": "TF Card Slot", "value": "External slot, supports disconnect-and-continue transmission" },
+    { "label": "Max Device Access", "value": "128 wired/wireless sensing devices" },
+    { "label": "Cloud Protocol", "value": "MQTT + custom JSON, WEST-AIOT platform compatible" },
+    { "label": "Display", "value": "1.3-inch LCD, multi-function buttons, LED indicators" },
+    { "label": "Power Supply", "value": "24V DC" },
+    { "label": "Operating Temp", "value": "\u221220\u00b0C to +70\u00b0C" },
+    { "label": "Storage Temp", "value": "\u221240\u00b0C to +80\u00b0C" },
+    { "label": "Protection Rating", "value": "IP20; ESD 4KV contact / 8KV non-contact" },
+    { "label": "Certification", "value": "CE" },
+    { "label": "Dimensions", "value": "38 \u00d7 110 \u00d7 117 mm (W\u00d7H\u00d7D)" },
+    { "label": "Weight", "value": "205g" },
+    { "label": "Housing Material", "value": "ABS/PC" },
+    { "label": "Mounting", "value": "35mm DIN rail" }
+  ],
+  "applications": [
+    { "title": "Building Energy Management", "text": "Monitor and optimize energy consumption in office buildings, commercial real estate, and factories. Connect various sensors via LoRa and RS485 for comprehensive energy monitoring and emission reduction." },
+    { "title": "Industrial IoT (IIoT)", "text": "Bridge distributed field devices to cloud SCADA and MQTT/HTTP endpoints. The edge computing engine processes data locally before secure uplink to the WEST-AIOT platform." }
+  ],
+  "package_items": [
+    { "item": "Industrial edge computing gateway (WE-X280)", "qty": 1 },
+    { "item": "24V DC power supply", "qty": 1 },
+    { "item": "4G antenna", "qty": 1 },
+    { "item": "LoRa antenna", "qty": 1 },
+    { "item": "Ethernet cable", "qty": 1 },
+    { "item": "User manual & certificate of conformity", "qty": 1 }
+  ],
+  "documents": [
+    { "label": "User Manual (English)", "file": "docs/WE-X280_User_Manual_EN.pdf" },
+    { "label": "User Manual (Chinese)", "file": "docs/WE-X280_User_Manual_CN.pdf" },
+    { "label": "MQTT Protocol (English)", "file": "docs/WE-X280_MQTT_Protocol_EN.pdf" }
+  ],
+  "contact": {
+    "address": "Room 1502, 15th Floor, Building 20, No. 487 Tianlin Road<br />Shanghai, 200233, China",
+    "phone": "+86-021-33675566",
+    "email": "ftd_sales@west-hn.com",
+    "hours": "Monday to Friday, 9:00 - 18:00"
+  }
+}

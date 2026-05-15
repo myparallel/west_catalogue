@@ -74,6 +74,10 @@ def build_hero(cfg):
     manual_pdf = cfg.get("manual_pdf", "")
     dl = os.path.basename(manual_pdf) if manual_pdf else ""
     page_num = p.get("page_number", 1)
+    manual_btn = f'<a class="btn btn-primary dl-link" href="{esc(manual_pdf)}" download="{esc(dl)}">Download Manual (PDF)</a>' if manual_pdf else ""
+    doc_note = "For technical support or customized OEM versions, email us from <a href=\"#contact\">Contact Information</a>."
+    if manual_pdf:
+        doc_note = "English PDF manual. " + doc_note
     return f"""<section class="hero wrap" id="overview">
   <div class="hero-grid">
     <div>
@@ -82,10 +86,10 @@ def build_hero(cfg):
       <p class="lead">{esc(p.get("lead",""))}</p>
       <div class="hero-actions">
         <button type="button" class="btn btn-primary btn-pdf" data-sku="{esc(p.get("sku",""))}">Download as PDF</button>
-        <a class="btn btn-primary dl-link" href="{esc(manual_pdf)}" download="{esc(dl)}">Download Manual (PDF)</a>
+        {manual_btn}
         <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote>Request Quote</button>
       </div>
-      <p class="doc-note">English PDF manual. For technical support or customized OEM versions, email us from <a href="#contact">Contact Information</a>.</p>
+      <p class="doc-note">{doc_note}</p>
     </div>
     <div class="hero-visual">
       <img src="{esc(hero_img)}" alt="{esc(p.get("name",""))}" width="800" height="800" fetchpriority="high" />
@@ -216,14 +220,22 @@ def build_package(cfg):
 
 def build_downloads(cfg):
     manual_pdf = cfg.get("manual_pdf", "")
-    if not manual_pdf:
+    documents = cfg.get("documents", [])
+    if not manual_pdf and not documents:
         return ""
-    dl = os.path.basename(manual_pdf)
+    prod_name = esc(cfg["product"].get("name",""))
+    items = ""
+    if manual_pdf:
+        dl = os.path.basename(manual_pdf)
+        items += f"""<a class="btn btn-primary dl-link" href="{esc(manual_pdf)}" download="{esc(dl)}">User Manual (PDF)</a>\n"""
+    for doc in documents:
+        fn = os.path.basename(doc.get("file",""))
+        items += f"""<a class="btn btn-secondary dl-link" href="{esc(doc['file'])}" download="{esc(fn)}">{esc(doc['label'])}</a>\n"""
     return f"""<section class="wrap" id="downloads">
   <h2 class="section-title">Downloads</h2>
-  <p class="section-sub">Access technical documentation for the {esc(cfg["product"].get("name",""))}.</p>
-  <div class="hero-actions">
-    <a class="btn btn-primary dl-link" href="{esc(manual_pdf)}" download="{esc(dl)}">Download User Manual (PDF)</a>
+  <p class="section-sub">Access technical documentation for {prod_name}.</p>
+  <div class="hero-actions" style="flex-direction:column;align-items:flex-start">
+    <div style="display:flex;flex-wrap:wrap;gap:0.5rem">{items}</div>
   </div>
 </section>"""
 

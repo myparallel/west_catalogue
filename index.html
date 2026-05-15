@@ -35,13 +35,13 @@
 
   <section class="wrap" id="products">
     <div class="catalog-toolbar">
-      <h2 class="section-title" style="margin:0">Products</h2>
+      <h2 class="section-title" style="margin:0">Product Index</h2>
       <div class="catalog-toolbar__actions">
         <button type="button" class="btn btn-secondary" id="download-all-pdf">Download All as PDF</button>
       </div>
     </div>
-    <p class="section-sub">Click a product to view details, or download individual PDFs.</p>
-    <div class="catalog-grid" id="product-list"></div>
+    <p class="section-sub">Click a product name or model to view details. Download catalogue PDF or product manual.</p>
+    <div class="catalog-index" id="product-list"></div>
   </section>
 
   <section class="wrap" id="about">
@@ -79,59 +79,52 @@ var products = [
     page: 1,
     name: "3-in-1 Soil Sensor Transmitter",
     desc: "Temperature, Moisture &amp; EC monitoring with dual 4G/LoRa connectivity.",
-    long: "Simultaneously monitors soil temperature, volumetric moisture content, and electrical conductivity (EC). Supports dual 4G and LoRaWAN for remote data backhaul.",
-    img: "products/WE-T214/images/hero_800.png",
-    tags: ["Soil", "LoRa", "4G", "IP67"]
+    manual: "WE-T214-manual.pdf"
   },
   {
     sku: "WE-W200",
     page: 2,
     name: "Professional Weather Station",
     desc: "7-in-1 environmental monitoring with solar power.",
-    long: "Measures wind speed, wind direction, rainfall, temperature, humidity, barometric pressure, and solar radiation. Solar-powered for true off-grid operation.",
-    img: "products/WE-W200/images/hero_800.png",
-    tags: ["Weather", "Solar", "LoRa", "7-in-1"]
+    manual: ""
   }
 ];
 
 var list = document.getElementById("product-list");
 document.getElementById("product-count").textContent = products.length + " product" + (products.length > 1 ? "s" : "");
 
+// Header row
+var header = document.createElement("div");
+header.className = "catalog-index__row catalog-index__header";
+header.innerHTML =
+  '<div class="catalog-index__cell catalog-index__cell--page">Page</div>' +
+  '<div class="catalog-index__cell catalog-index__cell--sku">Model</div>' +
+  '<div class="catalog-index__cell catalog-index__cell--name">Product Name</div>' +
+  '<div class="catalog-index__cell catalog-index__cell--actions">Catalogue PDF</div>' +
+  '<div class="catalog-index__cell catalog-index__cell--actions">Manual PDF</div>';
+list.appendChild(header);
+
 products.forEach(function(p) {
-  var col = document.createElement("div");
-  col.className = "catalog-card";
+  var row = document.createElement("div");
+  row.className = "catalog-index__row";
 
-  var tagsHTML = p.tags.map(function(t) { return '<span class="tag">' + t + '</span>'; }).join("");
+  var detailUrl = "products/" + p.sku + "/";
+  var pdfUrl = detailUrl + "?dl=1";
+  var manualBtn = p.manual
+    ? '<a class="catalog-index__dl" href="' + detailUrl + p.manual + '" download="' + p.manual + '" title="Download manual PDF">PDF</a>'
+    : '<span class="catalog-index__dl catalog-index__dl--na">—</span>';
 
-  col.innerHTML =
-    '<div class="catalog-card__img">' +
-      '<img src="' + p.img + '" alt="' + p.sku + '" loading="lazy" />' +
-    '</div>' +
-    '<div class="catalog-card__body">' +
-      '<div class="catalog-card__page">Page ' + p.page + '</div>' +
-      '<h3 class="catalog-card__sku">' + p.sku + '</h3>' +
-      '<h4 class="catalog-card__name">' + p.name + '</h4>' +
-      '<p class="catalog-card__desc">' + p.long + '</p>' +
-      '<div class="catalog-card__tags">' + tagsHTML + '</div>' +
-      '<div class="catalog-card__actions">' +
-        '<a class="btn btn-primary" href="products/' + p.sku + '/">View Details</a>' +
-        '<button type="button" class="btn btn-secondary btn-dl-pdf" data-sku="' + p.sku + '">Download PDF</button>' +
-      '</div>' +
-    '</div>';
+  row.innerHTML =
+    '<div class="catalog-index__cell catalog-index__cell--page">' + p.page + '</div>' +
+    '<div class="catalog-index__cell catalog-index__cell--sku"><a href="' + detailUrl + '">' + p.sku + '</a></div>' +
+    '<div class="catalog-index__cell catalog-index__cell--name"><a href="' + detailUrl + '">' + p.name + '</a></div>' +
+    '<div class="catalog-index__cell catalog-index__cell--actions"><a class="catalog-index__dl" href="' + pdfUrl + '" target="_blank" title="Download catalogue PDF">PDF</a></div>' +
+    '<div class="catalog-index__cell catalog-index__cell--actions">' + manualBtn + '</div>';
 
-  list.appendChild(col);
+  list.appendChild(row);
 });
 
-// Individual PDF download from catalog
-document.querySelectorAll(".btn-dl-pdf").forEach(function(btn) {
-  btn.addEventListener("click", function(e) {
-    e.stopPropagation();
-    var sku = btn.getAttribute("data-sku");
-    window.open("products/" + sku + "/?dl=1", "_blank");
-  });
-});
-
-// Download all as PDF - opens each product then triggers dl
+// Download all as PDF
 document.getElementById("download-all-pdf").addEventListener("click", function() {
   products.forEach(function(p) {
     window.open("products/" + p.sku + "/?dl=1", "_blank");

@@ -1338,7 +1338,7 @@ body.modal-open {
 
 .catalog-index__row {
   display: grid;
-  grid-template-columns: 48px 1fr 2.2fr 80px 80px 44px;
+  grid-template-columns: 48px 1fr 2.2fr 80px 130px;
   align-items: center;
   border-bottom: 1px solid var(--border);
   transition: background 0.12s ease;
@@ -1423,6 +1423,18 @@ body.modal-open {
   font-weight: 400;
 }
 
+.catalog-index__dl--wide {
+  min-width: 5.5rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.catalog-index__cell--docs {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
 .catalog-del-btn {
   display: inline-flex;
   width: 24px;
@@ -1453,7 +1465,7 @@ body.modal-open {
 
 @media (max-width: 700px) {
   .catalog-index__row {
-    grid-template-columns: 36px 1fr 60px 60px 40px;
+    grid-template-columns: 36px 1fr 60px 100px;
   }
   .catalog-index__cell--name {
     display: none;
@@ -1491,6 +1503,16 @@ body.modal-open {
   .catalog-index__dl {
     font-size: 0.6rem;
     padding: 0.2rem 0.25rem;
+  }
+  .catalog-index__dl--wide {
+    min-width: auto;
+    font-size: 0.6rem;
+    padding: 0.2rem 0.3rem;
+  }
+  .catalog-del-btn {
+    width: 20px;
+    height: 20px;
+    font-size: 0.85rem;
   }
 }
 

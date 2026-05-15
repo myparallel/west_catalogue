@@ -130,8 +130,7 @@ function buildTable() {
     '<div class="catalog-index__cell catalog-index__cell--sku"><span lang="en">Model</span><span lang="zh" hidden>型号</span><span class="hdr-name-mobile"><span lang="en"> / Product Name</span><span lang="zh" hidden> / 产品名称</span></span></div>' +
     '<div class="catalog-index__cell catalog-index__cell--name"><span lang="en">Product Name</span><span lang="zh" hidden>产品名称</span></div>' +
     '<div class="catalog-index__cell catalog-index__cell--actions"><span lang="en">Print</span><span lang="zh" hidden>打印</span></div>' +
-    '<div class="catalog-index__cell catalog-index__cell--actions"><span lang="en">Docs</span><span lang="zh" hidden>文档下载</span></div>' +
-    '<div class="catalog-index__cell catalog-index__cell--actions"></div>';
+    '<div class="catalog-index__cell catalog-index__cell--actions catalog-index__cell--docs"><span lang="en">Download</span><span lang="zh" hidden>下载</span></div>';
   list.appendChild(header);
 
   products.forEach(function(p) {
@@ -141,7 +140,7 @@ function buildTable() {
     var pdfUrl = detailUrl + "?dl=1";
     var lc = liveDocCount(p);
     var docsBtn = lc > 0
-      ? '<a class="catalog-index__dl" href="' + detailUrl + '#downloads"><span lang="en">Data Download</span><span lang="zh" hidden>资料下载</span> (' + lc + ')</a>'
+      ? '<a class="catalog-index__dl catalog-index__dl--wide" href="' + detailUrl + '#downloads"><span lang="en">Download</span><span lang="zh" hidden>下载</span> (' + lc + ')</a>'
       : '<span class="catalog-index__dl catalog-index__dl--na">—</span>';
 
     row.innerHTML =
@@ -149,8 +148,7 @@ function buildTable() {
       '<div class="catalog-index__cell catalog-index__cell--sku"><a href="' + detailUrl + '">' + p.sku + '</a><div class="prod-name-mobile"><a href="' + detailUrl + '">' + p.name + '</a></div></div>' +
       '<div class="catalog-index__cell catalog-index__cell--name"><a href="' + detailUrl + '">' + p.name + '</a></div>' +
       '<div class="catalog-index__cell catalog-index__cell--actions"><a class="catalog-index__dl" href="' + pdfUrl + '" target="_blank">PRINT</a></div>' +
-      '<div class="catalog-index__cell catalog-index__cell--actions">' + docsBtn + '</div>' +
-      '<div class="catalog-index__cell catalog-index__cell--actions"><button type="button" class="catalog-del-btn" data-sku="' + p.sku + '" title="Delete">&times;</button></div>';
+      '<div class="catalog-index__cell catalog-index__cell--actions catalog-index__cell--docs">' + docsBtn + '<button type="button" class="catalog-del-btn" data-sku="' + p.sku + '" title="Delete">&times;</button></div>';
 
     list.appendChild(row);
   });

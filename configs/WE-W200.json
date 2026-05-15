@@ -1,12 +1,12 @@
 {
   "product": {
     "sku": "WE-W200",
-    "name": "WE-W200 Professional Weather Station",
     "short_name": "W200",
     "brand": "WEST",
-    "manufacturer": "Hainan World Electronic Science And Technology Co., Ltd.",
-    "description": "All-in-one weather monitoring station with wind speed, direction, rainfall, and solar radiation sensors. Supports 4G and LoRa data transmission with IP67 housing.",
-    "lead": "A professional-grade weather station for precision agriculture, meteorology, and environmental monitoring. Measures wind speed, wind direction, rainfall, temperature, humidity, barometric pressure, and solar radiation with high-accuracy sensors.",
+    "name": {"en": "WE-W200 Professional Weather Station", "zh": "WE-W200 专业气象站"},
+    "manufacturer": {"en": "Hainan World Electronic Science And Technology Co., Ltd.", "zh": "海南世电科技有限公司"},
+    "description": {"en": "All-in-one weather monitoring station with wind speed, direction, rainfall, and solar radiation sensors. Supports 4G and LoRa data transmission with IP67 housing.", "zh": "一体化气象监测站，集成风速、风向、雨量、太阳辐射等传感器，支持4G和LoRa数据传输，IP67防护等级。"},
+    "lead": {"en": "A professional-grade weather station for precision agriculture, meteorology, and environmental monitoring. Measures wind speed, wind direction, rainfall, temperature, humidity, barometric pressure, and solar radiation with high-accuracy sensors.", "zh": "一款专业级气象站，适用于精准农业、气象和环境监测。采用高精度传感器测量风速、风向、雨量、温度、湿度、气压和太阳辐射。"},
     "page_number": 2,
     "og_title": "WE-W200 Professional Weather Station",
     "og_description": "All-in-one weather station with 7 environmental sensors and dual 4G/LoRa connectivity."
@@ -22,12 +22,12 @@
     { "src": "images/package.jpg", "alt": "WE-W200 standard packaging" }
   ],
   "highlights": [
-    { "title": "7-in-1 Environmental Sensing", "text": "Wind speed, wind direction, rainfall, temperature, humidity, barometric pressure, and solar radiation all in a single compact station." },
-    { "title": "Dual 4G & LoRa", "text": "Connect via 4G LTE (MQTT/HTTP) or LoRa up to 5km range. Choose your preferred backhaul for any deployment location." },
-    { "title": "Solar Powered", "text": "Built-in 20W solar panel with 12,000mAh backup battery for true off-grid operation, 365 days a year." },
-    { "title": "Industrial Durability", "text": "IP67-rated enclosure with UV-resistant coating. Operates reliably from -40\u00b0C to +85\u00b0C in extreme environments." },
-    { "title": "GNSS Positioning", "text": "Integrated GPS/GLONASS/BDS for automatic geo-tagging of weather data across distributed sensor networks." },
-    { "title": "Cloud Platform", "text": "WEST Cloud dashboard with real-time charts, alerts via email/SMS, and API access for third-party integration." }
+    {"title": {"en": "7-in-1 Environmental Sensing", "zh": "七合一环境传感"}, "text": {"en": "Wind speed, wind direction, rainfall, temperature, humidity, barometric pressure, and solar radiation all in a single compact station.", "zh": "风速、风向、雨量、温度、湿度、气压和太阳辐射，全部集成在一台紧凑型气象站中。"}},
+    {"title": {"en": "Dual 4G & LoRa", "zh": "4G与LoRa双通信"}, "text": {"en": "Connect via 4G LTE (MQTT/HTTP) or LoRa up to 5km range. Choose your preferred backhaul for any deployment location.", "zh": "通过4G LTE（MQTT/HTTP）或LoRa（最远5km）连接，根据部署位置灵活选择通信方式。"}},
+    {"title": {"en": "Solar Powered", "zh": "太阳能供电"}, "text": {"en": "Built-in 20W solar panel with 12,000mAh backup battery for true off-grid operation, 365 days a year.", "zh": "内置20W太阳能板和12000mAh备用电池，真正实现离网运行，全年365天不间断。"}},
+    {"title": {"en": "Industrial Durability", "zh": "工业级耐久性"}, "text": {"en": "IP67-rated enclosure with UV-resistant coating. Operates reliably from -40\u00b0C to +85\u00b0C in extreme environments.", "zh": "IP67防护外壳，UV防紫外涂层，在-40\u00b0C至+85\u00b0C的极端环境下可靠运行。"}},
+    {"title": {"en": "GNSS Positioning", "zh": "GNSS定位"}, "text": {"en": "Integrated GPS/GLONASS/BDS for automatic geo-tagging of weather data across distributed sensor networks.", "zh": "集成GPS/GLONASS/BDS，在分布式传感器网络中自动为气象数据添加地理标签。"}},
+    {"title": {"en": "Cloud Platform", "zh": "云平台"}, "text": {"en": "WEST Cloud dashboard with real-time charts, alerts via email/SMS, and API access for third-party integration.", "zh": "WEST云平台仪表盘，支持实时图表、邮件/SMS告警和第三方API集成。"}}
   ],
   "video": {
     "available": false,
@@ -35,30 +35,30 @@
     "src": ""
   },
   "specifications": [
-    { "label": "Wind Speed Range", "value": "0 to 60 m/s (Accuracy: ±0.3 m/s)" },
-    { "label": "Wind Direction", "value": "0 to 360\u00b0 (Accuracy: ±3\u00b0)" },
-    { "label": "Rainfall", "value": "0 to 200 mm/h (Resolution: 0.2 mm)" },
-    { "label": "Temperature Range", "value": "-40\u00b0C to +85\u00b0C (Accuracy: ±0.3\u00b0C)" },
-    { "label": "Humidity Range", "value": "0 to 100% RH (Accuracy: ±2%)" },
-    { "label": "Barometric Pressure", "value": "300 to 1100 hPa (Accuracy: ±0.5 hPa)" },
-    { "label": "Solar Radiation", "value": "0 to 2000 W/m\u00b2 (Accuracy: ±5%)" },
-    { "label": "Connectivity", "value": "4G LTE (B1/3/5/7/20/28) + LoRa 410~490MHz" },
-    { "label": "Sampling Interval", "value": "Configurable: 1 min to 24 hours" },
-    { "label": "Enclosure Rating", "value": "IP67 (Sensor head: IP68)" },
-    { "label": "Power Supply", "value": "20W Solar Panel + 12,000mAh Li-ion battery" },
-    { "label": "Dimensions", "value": "320 x 180 x 145 mm (assembled)" }
+    {"label": {"en": "Wind Speed Range", "zh": "风速范围"}, "value": {"en": "0 to 60 m/s (Accuracy: ±0.3 m/s)", "zh": "0-60 m/s（精度：±0.3 m/s）"}},
+    {"label": {"en": "Wind Direction", "zh": "风向"}, "value": {"en": "0 to 360\u00b0 (Accuracy: ±3\u00b0)", "zh": "0-360\u00b0（精度：±3\u00b0）"}},
+    {"label": {"en": "Rainfall", "zh": "雨量"}, "value": {"en": "0 to 200 mm/h (Resolution: 0.2 mm)", "zh": "0-200 mm/h（分辨率：0.2 mm）"}},
+    {"label": {"en": "Temperature Range", "zh": "温度范围"}, "value": {"en": "-40\u00b0C to +85\u00b0C (Accuracy: ±0.3\u00b0C)", "zh": "-40\u00b0C至+85\u00b0C（精度：±0.3\u00b0C）"}},
+    {"label": {"en": "Humidity Range", "zh": "湿度范围"}, "value": {"en": "0 to 100% RH (Accuracy: ±2%)", "zh": "0-100% RH（精度：±2%）"}},
+    {"label": {"en": "Barometric Pressure", "zh": "气压"}, "value": {"en": "300 to 1100 hPa (Accuracy: ±0.5 hPa)", "zh": "300-1100 hPa（精度：±0.5 hPa）"}},
+    {"label": {"en": "Solar Radiation", "zh": "太阳辐射"}, "value": {"en": "0 to 2000 W/m\u00b2 (Accuracy: ±5%)", "zh": "0-2000 W/m\u00b2（精度：±5%）"}},
+    {"label": {"en": "Connectivity", "zh": "通信方式"}, "value": {"en": "4G LTE (B1/3/5/7/20/28) + LoRa 410~490MHz", "zh": "4G LTE (B1/3/5/7/20/28) + LoRa 410~490MHz"}},
+    {"label": {"en": "Sampling Interval", "zh": "采样间隔"}, "value": {"en": "Configurable: 1 min to 24 hours", "zh": "可配置：1分钟至24小时"}},
+    {"label": {"en": "Enclosure Rating", "zh": "防护等级"}, "value": {"en": "IP67 (Sensor head: IP68)", "zh": "IP67（传感器头部：IP68）"}},
+    {"label": {"en": "Power Supply", "zh": "供电方式"}, "value": {"en": "20W Solar Panel + 12,000mAh Li-ion battery", "zh": "20W太阳能板 + 12000mAh锂电池"}},
+    {"label": {"en": "Dimensions", "zh": "外形尺寸"}, "value": {"en": "320 x 180 x 145 mm (assembled)", "zh": "320 x 180 x 145 mm（组装后）"}}
   ],
   "applications": [
-    { "title": "Precision Agriculture", "text": "Real-time microclimate monitoring for crop management. Optimize irrigation scheduling based on evapotranspiration data and wind conditions." },
-    { "title": "Meteorological Networks", "text": "Deploy dense networks of weather stations for hyper-local forecasting. LoRa backhaul enables wide-area coverage with low power consumption." }
+    {"title": {"en": "Precision Agriculture", "zh": "精准农业"}, "text": {"en": "Real-time microclimate monitoring for crop management. Optimize irrigation scheduling based on evapotranspiration data and wind conditions.", "zh": "实时微气候监测，辅助作物管理。基于蒸散数据和风向条件优化灌溉调度。"}},
+    {"title": {"en": "Meteorological Networks", "zh": "气象网络"}, "text": {"en": "Deploy dense networks of weather stations for hyper-local forecasting. LoRa backhaul enables wide-area coverage with low power consumption.", "zh": "部署密集气象站网络，实现超本地化预报。LoRa回传实现低功耗广域覆盖。"}}
   ],
   "package_items": [
-    { "item": "WE-W200 Weather Station (main unit)", "qty": 1 },
-    { "item": "Wind Speed & Direction Sensor", "qty": 1 },
-    { "item": "Rain Gauge (tipping bucket)", "qty": 1 },
-    { "item": "Solar Radiation Shield", "qty": 1 },
-    { "item": "Mounting Bracket Kit", "qty": 1 },
-    { "item": "User Manual & Certificate", "qty": 1 }
+    {"item": {"en": "WE-W200 Weather Station (main unit)", "zh": "WE-W200气象站（主机）"}, "qty": 1},
+    {"item": {"en": "Wind Speed & Direction Sensor", "zh": "风速风向传感器"}, "qty": 1},
+    {"item": {"en": "Rain Gauge (tipping bucket)", "zh": "雨量计（翻斗式）"}, "qty": 1},
+    {"item": {"en": "Solar Radiation Shield", "zh": "太阳辐射防护罩"}, "qty": 1},
+    {"item": {"en": "Mounting Bracket Kit", "zh": "安装支架套件"}, "qty": 1},
+    {"item": {"en": "User Manual & Certificate", "zh": "用户手册及合格证"}, "qty": 1}
   ],
   "manual_pdf": "",
   "contact": {

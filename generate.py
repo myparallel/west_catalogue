@@ -49,12 +49,14 @@ def build_json_ld(cfg):
     p = cfg["product"]
     images = cfg.get("images", [])
     img_list = json.dumps([img.get("src", "") for img in images])
+    name_en = t_flat(p.get("name", ""), "en")
+    desc_en = t_flat(p.get("description", ""), "en")
     return f"""{{
         "@context": "https://schema.org",
         "@type": "Product",
-        "name": {json.dumps(p.get("name",""))},
+        "name": {json.dumps(name_en)},
         "sku": {json.dumps(p.get("sku",""))},
-        "description": {json.dumps(p.get("description",""))},
+        "description": {json.dumps(desc_en)},
         "brand": {{ "@type": "Brand", "name": {json.dumps(p.get("brand",""))} }},
         "image": {img_list},
         "manufacturer": {{
@@ -190,7 +192,7 @@ def build_video(cfg):
     src = esc(video.get("src", ""))
     return f"""<section class="wrap" id="video">
   <h2 class="section-title" data-i18n="secVideo">Product Video</h2>
-  <p class="section-sub">Quick look at the {esc(cfg["product"].get("name",""))} in action.</p>
+  <p class="section-sub">Quick look at the {t_flat(cfg["product"].get("name",""))} in action.</p>
   <div class="video-container">
     <video controls preload="metadata" poster="{poster}">
       <source src="{src}" type="video/mp4" />

@@ -1,12 +1,12 @@
 {
   "product": {
     "sku": "WE-T214",
-    "name": "WE-T214 3-in-1 Soil Sensor Transmitter",
     "short_name": "T214",
     "brand": "WEST",
-    "manufacturer": "Hainan World Electronic Science And Technology Co., Ltd.",
-    "description": "Industrial soil transmitter for Temperature, Moisture, and EC monitoring with dual 4G and LoRa connectivity, IP67 enclosure, and GNSS positioning.",
-    "lead": "A rugged, field-ready transmitter for precision agriculture. Simultaneously monitors soil temperature, volumetric moisture content, and electrical conductivity (EC). Supports dual 4G and LoRa connectivity for reliable data backhaul in remote areas.",
+    "name": {"en": "WE-T214 3-in-1 Soil Sensor Transmitter", "zh": "WE-T214 三合一土壤传感器变送器"},
+    "manufacturer": {"en": "Hainan World Electronic Science And Technology Co., Ltd.", "zh": "海南世电科技有限公司"},
+    "description": {"en": "Industrial soil transmitter for Temperature, Moisture, and EC monitoring with dual 4G and LoRa connectivity, IP67 enclosure, and GNSS positioning.", "zh": "工业级土壤变送器，用于温度、湿度和电导率（EC）监测，支持4G和LoRa双通信，IP67防护等级，内置GNSS定位。"},
+    "lead": {"en": "A rugged, field-ready transmitter for precision agriculture. Simultaneously monitors soil temperature, volumetric moisture content, and electrical conductivity (EC). Supports dual 4G and LoRa connectivity for reliable data backhaul in remote areas.", "zh": "一款坚固耐用的野外型变送器，适用于精准农业。同时监测土壤温度、体积含水率和电导率（EC），支持4G和LoRa双通信，确保偏远地区数据可靠回传。"},
     "page_number": 1,
     "og_title": "WE-T214 3-in-1 Soil Sensor Transmitter",
     "og_description": "Integrated soil monitor for Temp, Moisture, and EC with dual 4G/LoRa connectivity."
@@ -22,12 +22,12 @@
     { "src": "images/package.jpg", "alt": "WE-T214 standard packaging and accessories" }
   ],
   "highlights": [
-    { "title": "3-in-1 Precise Sensing", "text": "Monitors Soil Temperature, Volumetric Moisture Content, and Electrical Conductivity (EC) simultaneously with a high-accuracy triple-probe sensor." },
-    { "title": "Dual 4G & LoRa", "text": "Flexible connectivity with 4G LTE (MQTT/HTTP) and LoRa (up to 5km range), ensuring data reporting even in extremely remote locations." },
-    { "title": "GNSS Positioning", "text": "Built-in GPS/GLONASS/BDS support for automated asset tracking and mapping of soil data across large plantations." },
-    { "title": "Ultra-long Endurance", "text": "Powered by a 19,000mAh high-capacity lithium battery or optional 40W solar panel for years of maintenance-free operation." },
-    { "title": "Rugged & Reliable", "text": "IP67-rated host and IP68-rated probe enclosure. Engineered for harsh agricultural environments from -40\u00b0C to +85\u00b0C." },
-    { "title": "Real-time LCD Display", "text": "On-site data viewing via a high-contrast display. View temperature, humidity, and EC levels directly without a mobile device." }
+    {"title": {"en": "3-in-1 Precise Sensing", "zh": "三合一精准传感"}, "text": {"en": "Monitors Soil Temperature, Volumetric Moisture Content, and Electrical Conductivity (EC) simultaneously with a high-accuracy triple-probe sensor.", "zh": "通过高精度三合一探针，同时监测土壤温度、体积含水率和电导率（EC）。"}},
+    {"title": {"en": "Dual 4G & LoRa", "zh": "4G与LoRa双通信"}, "text": {"en": "Flexible connectivity with 4G LTE (MQTT/HTTP) and LoRa (up to 5km range), ensuring data reporting even in extremely remote locations.", "zh": "灵活选择4G LTE（MQTT/HTTP）或LoRa（最远5km）通信方式，即使在偏远地区也能确保数据上报。"}},
+    {"title": {"en": "GNSS Positioning", "zh": "GNSS定位"}, "text": {"en": "Built-in GPS/GLONASS/BDS support for automated asset tracking and mapping of soil data across large plantations.", "zh": "内置GPS/GLONASS/BDS支持，自动追踪设备位置并在大型种植园中绘制土壤数据地图。"}},
+    {"title": {"en": "Ultra-long Endurance", "zh": "超长续航"}, "text": {"en": "Powered by a 19,000mAh high-capacity lithium battery or optional 40W solar panel for years of maintenance-free operation.", "zh": "采用19000mAh大容量锂电池或可选40W太阳能板供电，实现多年免维护运行。"}},
+    {"title": {"en": "Rugged & Reliable", "zh": "坚固可靠"}, "text": {"en": "IP67-rated host and IP68-rated probe enclosure. Engineered for harsh agricultural environments from -40\u00b0C to +85\u00b0C.", "zh": "主机IP67防护，探针IP68防护，专为-40\u00b0C至+85\u00b0C的严苛农业环境设计。"}},
+    {"title": {"en": "Real-time LCD Display", "zh": "实时LCD显示"}, "text": {"en": "On-site data viewing via a high-contrast display. View temperature, humidity, and EC levels directly without a mobile device.", "zh": "通过高对比度显示屏现场查看数据，无需移动设备即可直接读取温度、湿度和EC值。"}}
   ],
   "video": {
     "available": true,
@@ -35,28 +35,28 @@
     "src": "images/product-video.mp4"
   },
   "specifications": [
-    { "label": "Measured Variables", "value": "Soil Temperature, Soil Moisture, Soil Conductivity (EC)" },
-    { "label": "Temperature Range", "value": "-40\u00b0C to +85\u00b0C (Accuracy: ±0.5\u00b0C from 0-40\u00b0C)" },
-    { "label": "Moisture Range", "value": "0 to 100% Volumetric Water Content (Accuracy: ±3%)" },
-    { "label": "Conductivity (EC)", "value": "0 to 20 mS/cm (Accuracy: ±3% FS)" },
-    { "label": "LoRa Connectivity", "value": "410.125~490.125MHz; 22dBm Tx power; -147dBm sensitivity; 5km LOS range" },
-    { "label": "4G Connectivity", "value": "LTE FDD B1/3/5/7/20/28; Supports MQTT, HTTP, and WEST cloud protocols" },
-    { "label": "Positioning (GNSS)", "value": "GPS / GLONASS / BDS / Galileo / QZSS" },
-    { "label": "Power Options", "value": "9-30V DC (Typ 24V), 19,000mAh Internal Li-battery, or 40W Solar Panel" },
-    { "label": "Sampling / Reporting", "value": "Configurable from 1 minute to 18 hours" },
-    { "label": "Enclosure Rating", "value": "Transmitter Host: IP67; Sensor Probe: IP68" },
-    { "label": "Dimensions", "value": "121 x 78 x 51.4 mm (Main unit excluding antenna and cable)" },
-    { "label": "Weight", "value": "190g (Main unit)" }
+    {"label": {"en": "Measured Variables", "zh": "测量参数"}, "value": {"en": "Soil Temperature, Soil Moisture, Soil Conductivity (EC)", "zh": "土壤温度、土壤湿度、土壤电导率（EC）"}},
+    {"label": {"en": "Temperature Range", "zh": "温度范围"}, "value": {"en": "-40\u00b0C to +85\u00b0C (Accuracy: ±0.5\u00b0C from 0-40\u00b0C)", "zh": "-40\u00b0C至+85\u00b0C（精度：0-40\u00b0C范围内±0.5\u00b0C）"}},
+    {"label": {"en": "Moisture Range", "zh": "湿度范围"}, "value": {"en": "0 to 100% Volumetric Water Content (Accuracy: ±3%)", "zh": "0-100%体积含水率（精度：±3%）"}},
+    {"label": {"en": "Conductivity (EC)", "zh": "电导率（EC）"}, "value": {"en": "0 to 20 mS/cm (Accuracy: ±3% FS)", "zh": "0-20 mS/cm（精度：±3% FS）"}},
+    {"label": {"en": "LoRa Connectivity", "zh": "LoRa通信"}, "value": {"en": "410.125~490.125MHz; 22dBm Tx power; -147dBm sensitivity; 5km LOS range", "zh": "410.125~490.125MHz；22dBm发射功率；-147dBm灵敏度；5km视距"}},
+    {"label": {"en": "4G Connectivity", "zh": "4G通信"}, "value": {"en": "LTE FDD B1/3/5/7/20/28; MQTT, HTTP, WEST cloud", "zh": "LTE FDD B1/3/5/7/20/28；支持MQTT、HTTP、WEST云协议"}},
+    {"label": {"en": "Positioning (GNSS)", "zh": "定位（GNSS）"}, "value": {"en": "GPS / GLONASS / BDS / Galileo / QZSS", "zh": "GPS / GLONASS / BDS / Galileo / QZSS"}},
+    {"label": {"en": "Power Options", "zh": "供电方式"}, "value": {"en": "9-30V DC (Typ 24V), 19,000mAh Internal Li-battery, or 40W Solar Panel", "zh": "9-30V DC（典型24V），19000mAh内置锂电池，或40W太阳能板"}},
+    {"label": {"en": "Sampling / Reporting", "zh": "采样/上报周期"}, "value": {"en": "Configurable from 1 minute to 18 hours", "zh": "可配置，1分钟至18小时"}},
+    {"label": {"en": "Enclosure Rating", "zh": "防护等级"}, "value": {"en": "Transmitter Host: IP67; Sensor Probe: IP68", "zh": "变送器主机：IP67；传感器探针：IP68"}},
+    {"label": {"en": "Dimensions", "zh": "外形尺寸"}, "value": {"en": "121 x 78 x 51.4 mm (Main unit)", "zh": "121 x 78 x 51.4 mm（主机）"}},
+    {"label": {"en": "Weight", "zh": "重量"}, "value": {"en": "190g (Main unit)", "zh": "190g（主机）"}}
   ],
   "applications": [
-    { "title": "Smart Agriculture", "text": "Automated soil monitoring for greenhouse farming, orchards, and open fields to optimize irrigation cycles and fertilizer application based on real-time EC and moisture data." },
-    { "title": "Environmental Science", "text": "Long-term research on soil salinity and moisture dynamics in ecological conservation areas, leveraging LoRa for data transmission across remote terrain." }
+    {"title": {"en": "Smart Agriculture", "zh": "智慧农业"}, "text": {"en": "Automated soil monitoring for greenhouse farming, orchards, and open fields to optimize irrigation cycles and fertilizer application based on real-time EC and moisture data.", "zh": "为温室种植、果园和大田提供自动化土壤监测，基于实时EC和湿度数据优化灌溉周期和施肥方案。"}},
+    {"title": {"en": "Environmental Science", "zh": "环境科学"}, "text": {"en": "Long-term research on soil salinity and moisture dynamics in ecological conservation areas, leveraging LoRa for data transmission across remote terrain.", "zh": "在生态保护区进行土壤盐分和湿度动态的长期研究，利用LoRa实现远程地形数据传输。"}}
   ],
   "package_items": [
-    { "item": "3-in-1 Soil Sensor Transmitter (WE-T214 Host)", "qty": 1 },
-    { "item": "Soil Temperature/Moisture/EC Probe", "qty": 1 },
-    { "item": "4G / LoRa Antenna", "qty": 1 },
-    { "item": "Printed User Manual & Certificate", "qty": 1 }
+    {"item": {"en": "3-in-1 Soil Sensor Transmitter (WE-T214 Host)", "zh": "三合一土壤传感器变送器（WE-T214主机）"}, "qty": 1},
+    {"item": {"en": "Soil Temperature/Moisture/EC Probe", "zh": "土壤温度/湿度/EC探针"}, "qty": 1},
+    {"item": {"en": "4G / LoRa Antenna", "zh": "4G/LoRa天线"}, "qty": 1},
+    {"item": {"en": "Printed User Manual & Certificate", "zh": "用户手册及合格证"}, "qty": 1}
   ],
   "manual_pdf": "WE-T214-manual.pdf",
   "contact": {

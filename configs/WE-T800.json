@@ -1,12 +1,12 @@
 {
   "product": {
     "sku": "WE-T800",
-    "name": "WE-T800 Multi-Function Field Monitor",
     "short_name": "T800",
     "brand": "WEST",
-    "manufacturer": "Hainan Shidian Technology Co., Ltd.",
-    "description": "Industrial field monitor with 4G connectivity, RS485 Modbus-RTU, two analog inputs (4\u201320 mA), two digital inputs, IP68 enclosure, and MQTT/HTTP/WEST cloud protocols.",
-    "lead": "A sealed IP68 field unit for distributed monitoring: 4G backhaul, RS485 Modbus-RTU, two 4\u201320 mA analog channels, two digital inputs, and flexible power from internal Li-ion packs or 9\u201330 V DC. Built for water utilities, environmental sites, and industrial IoT where reliability matters.",
+    "name": {"en": "WE-T800 Multi-Function Field Monitor", "zh": "WE-T800 多功能现场监测仪"},
+    "manufacturer": {"en": "Hainan Shidian Technology Co., Ltd.", "zh": "海南世电科技有限公司"},
+    "description": {"en": "Industrial field monitor with 4G connectivity, RS485 Modbus-RTU, two analog inputs (4\u201320 mA), two digital inputs, IP68 enclosure, and MQTT/HTTP/WEST cloud protocols.", "zh": "工业级现场监测仪，支持4G通信、RS485 Modbus-RTU、两路模拟量输入（4-20 mA）、两路数字量输入，IP68防护，支持MQTT/HTTP/WEST云协议。"},
+    "lead": {"en": "A sealed IP68 field unit for distributed monitoring: 4G backhaul, RS485 Modbus-RTU, two 4\u201320 mA analog channels, two digital inputs, and flexible power from internal Li-ion packs or 9\u201330 V DC. Built for water utilities, environmental sites, and industrial IoT where reliability matters.", "zh": "一款密封IP68现场监测单元，适用于分布式监控：4G回传、RS485 Modbus-RTU、两路4-20 mA模拟通道、两路数字输入，内置锂电池或9-30V DC灵活供电。专为水务、环保和工业物联网等高可靠性场景设计。"},
     "og_title": "WE-T800 Multi-Function Field Monitor",
     "og_description": "IP68 4G field device: RS485, AI, DI, cloud protocols with MQTT/HTTP.",
     "page_number": 3
@@ -20,12 +20,12 @@
     { "src": "images/T800-5.png", "alt": "WE-T800 monitor view 5" }
   ],
   "highlights": [
-    { "title": "4G & Cloud-ready", "text": "LTE FDD/TDD bands supported; MQTT, HTTP, and WEST cloud protocols; 3-year cellular data plan option (100 MB/month)." },
-    { "title": "Field I/O", "text": "1\u00d7 RS485 (4800\u2013115200 bps, Modbus-RTU), 2\u00d7 AI (4\u201320 mA), 2\u00d7 DI (switch or pulse counting), 2\u00d7 configurable DC outputs (3.6 / 5 / 12 V)." },
-    { "title": "Rugged & Readable", "text": "IP68 enclosure; 60\u00d732 mm LCD with LED indicators and keypad for local readings and alarms." },
-    { "title": "Dual Power", "text": "Internal Li-ion options (114000 or 228000 mAh) with automatic handover to 9\u201330 V DC external supply." },
-    { "title": "Mobile Supervision", "text": "Bluetooth for local configuration; companion app for remote visibility." },
-    { "title": "Configurable Timing", "text": "Sampling and upload periods configurable from 10 s to 18 h to match battery life and network duty cycle." }
+    {"title": {"en": "4G & Cloud-ready", "zh": "4G与云就绪"}, "text": {"en": "LTE FDD/TDD bands supported; MQTT, HTTP, and WEST cloud protocols; 3-year cellular data plan option.", "zh": "支持LTE FDD/TDD频段；MQTT、HTTP和WEST云协议；可选3年蜂窝数据套餐。"}},
+    {"title": {"en": "Field I/O", "zh": "现场I/O接口"}, "text": {"en": "1\u00d7 RS485 (4800\u2013115200 bps, Modbus-RTU), 2\u00d7 AI (4\u201320 mA), 2\u00d7 DI (switch or pulse counting), 2\u00d7 configurable DC outputs.", "zh": "1路RS485（4800-115200 bps，Modbus-RTU），2路AI（4-20 mA），2路DI（开关或脉冲计数），2路可配置DC输出。"}},
+    {"title": {"en": "Rugged & Readable", "zh": "坚固与清晰"}, "text": {"en": "IP68 enclosure; 60\u00d732 mm LCD with LED indicators and keypad for local readings and alarms.", "zh": "IP68防护外壳；60x32 mm LCD显示屏，LED指示灯和键盘，支持本地读数与报警。"}},
+    {"title": {"en": "Dual Power", "zh": "双供电"}, "text": {"en": "Internal Li-ion options (114000 or 228000 mAh) with automatic handover to 9\u201330 V DC external supply.", "zh": "内置锂电池可选（114000或228000 mAh），自动切换至9-30V DC外部供电。"}},
+    {"title": {"en": "Mobile Supervision", "zh": "移动监控"}, "text": {"en": "Bluetooth for local configuration; companion app for remote visibility.", "zh": "蓝牙本地配置；配套APP远程查看。"}},
+    {"title": {"en": "Configurable Timing", "zh": "可配置定时"}, "text": {"en": "Sampling and upload periods configurable from 10 s to 18 h to match battery life and network duty cycle.", "zh": "采样和上传周期可配置10秒至18小时，匹配电池寿命和网络占空比。"}}
   ],
   "video": {
     "available": false,
@@ -33,29 +33,29 @@
     "src": ""
   },
   "specifications": [
-    { "label": "Model", "value": "WE-T800 multi-function monitor / RTU-style field unit" },
-    { "label": "Connectivity", "value": "4G LTE; SMA female antenna; MQTT, HTTP, WEST cloud" },
-    { "label": "LTE Bands", "value": "LTE FDD B1/3/5/8; LTE TDD B34/38/39/40/41" },
-    { "label": "RS485", "value": "1 port, 4800\u2013115200 bps, Modbus-RTU" },
-    { "label": "Analog Inputs", "value": "2\u00d7 AI, 4\u201320 mA" },
-    { "label": "Digital Inputs", "value": "2\u00d7 DI \u2014 dry contact / pulse counting" },
-    { "label": "Sensor Excitation", "value": "2\u00d7 DC output ports, 3.6 V / 5 V / 12 V selectable" },
-    { "label": "Sampling / Upload", "value": "Configurable 10 s \u2013 18 h" },
-    { "label": "Power \u2014 Battery", "value": "Internal Li-ion: 114000 mAh or 228000 mAh" },
-    { "label": "Power \u2014 External", "value": "9\u201330 V DC (typical 24 V), auto-changeover with battery" },
-    { "label": "Operating Temp", "value": "\u221220\u00b0C to +70\u00b0C" },
-    { "label": "Enclosure", "value": "Fully sealed, IP68; ABS/PC housing" },
-    { "label": "Local UI", "value": "60\u00d732 mm LCD, status LEDs, keypad, Bluetooth for provisioning" }
+    {"label": {"en": "Model", "zh": "型号"}, "value": {"en": "WE-T800 multi-function monitor / RTU-style field unit", "zh": "WE-T800 多功能监测仪/RTU式现场单元"}},
+    {"label": {"en": "Connectivity", "zh": "通信方式"}, "value": {"en": "4G LTE; SMA female antenna; MQTT, HTTP, WEST cloud", "zh": "4G LTE；SMA母头天线；MQTT、HTTP、WEST云"}},
+    {"label": {"en": "LTE Bands", "zh": "LTE频段"}, "value": {"en": "LTE FDD B1/3/5/8; LTE TDD B34/38/39/40/41", "zh": "LTE FDD B1/3/5/8；LTE TDD B34/38/39/40/41"}},
+    {"label": {"en": "RS485", "zh": "RS485"}, "value": {"en": "1 port, 4800\u2013115200 bps, Modbus-RTU", "zh": "1路，4800-115200 bps，Modbus-RTU"}},
+    {"label": {"en": "Analog Inputs", "zh": "模拟量输入"}, "value": {"en": "2\u00d7 AI, 4\u201320 mA", "zh": "2路AI，4-20 mA"}},
+    {"label": {"en": "Digital Inputs", "zh": "数字量输入"}, "value": {"en": "2\u00d7 DI \u2014 dry contact / pulse counting", "zh": "2路DI — 干接点/脉冲计数"}},
+    {"label": {"en": "Sensor Excitation", "zh": "传感器供电"}, "value": {"en": "2\u00d7 DC output ports, 3.6 V / 5 V / 12 V selectable", "zh": "2路DC输出端口，可选3.6V/5V/12V"}},
+    {"label": {"en": "Sampling / Upload", "zh": "采样/上传"}, "value": {"en": "Configurable 10 s \u2013 18 h", "zh": "可配置10秒-18小时"}},
+    {"label": {"en": "Power \u2014 Battery", "zh": "电池供电"}, "value": {"en": "Internal Li-ion: 114000 mAh or 228000 mAh", "zh": "内置锂电池：114000 mAh或228000 mAh"}},
+    {"label": {"en": "Power \u2014 External", "zh": "外部供电"}, "value": {"en": "9\u201330 V DC (typical 24 V), auto-changeover with battery", "zh": "9-30V DC（典型24V），自动切换"}},
+    {"label": {"en": "Operating Temp", "zh": "工作温度"}, "value": {"en": "\u221220\u00b0C to +70\u00b0C", "zh": "-20\u00b0C至+70\u00b0C"}},
+    {"label": {"en": "Enclosure", "zh": "防护等级"}, "value": {"en": "Fully sealed, IP68; ABS/PC housing", "zh": "全密封，IP68；ABS/PC外壳"}},
+    {"label": {"en": "Local UI", "zh": "本地界面"}, "value": {"en": "60\u00d732 mm LCD, status LEDs, keypad, Bluetooth for provisioning", "zh": "60x32 mm LCD，状态LED，键盘，蓝牙配置"}}
   ],
   "applications": [
-    { "title": "Water & Environmental Networks", "text": "Smart water and pipeline monitoring: consolidate analog, digital, and serial field devices into a single 4G-capable uplink." },
-    { "title": "Energy & Industrial IoT", "text": "Remote supervision for pumps, treatment skids, and distributed assets where Modbus-RTU sensors must be bridged to cloud SCADA or MQTT/HTTP endpoints." }
+    {"title": {"en": "Water & Environmental Networks", "zh": "水务与环境监测网络"}, "text": {"en": "Smart water and pipeline monitoring: consolidate analog, digital, and serial field devices into a single 4G-capable uplink.", "zh": "智慧水务和管道监测：将模拟、数字和串口现场设备整合到单一4G上行链路中。"}},
+    {"title": {"en": "Energy & Industrial IoT", "zh": "能源与工业物联网"}, "text": {"en": "Remote supervision for pumps, treatment skids, and distributed assets where Modbus-RTU sensors must be bridged to cloud SCADA or MQTT/HTTP endpoints.", "zh": "对泵站、处理撬块和分布式资产进行远程监控，将Modbus-RTU传感器桥接到云端SCADA或MQTT/HTTP终端。"}}
   ],
   "package_items": [
-    { "item": "Multi-function monitor (WE-T800)", "qty": 1 },
-    { "item": "Printed user manual", "qty": 1 },
-    { "item": "Cellular antenna", "qty": 1 },
-    { "item": "Certificate of conformity", "qty": 1 }
+    {"item": {"en": "Multi-function monitor (WE-T800)", "zh": "多功能监测仪（WE-T800）"}, "qty": 1},
+    {"item": {"en": "Printed user manual", "zh": "用户手册"}, "qty": 1},
+    {"item": {"en": "Cellular antenna", "zh": "蜂窝天线"}, "qty": 1},
+    {"item": {"en": "Certificate of conformity", "zh": "合格证"}, "qty": 1}
   ],
   "manual_pdf": "WE-T800-datasheet.pdf",
   "contact": {

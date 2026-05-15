@@ -205,8 +205,8 @@ def build_gallery(cfg):
       <button type="button" class="btn btn-sm btn-primary" id="gallery-save-btn" hidden><span lang="en">Save Changes</span><span lang="zh" hidden>保存修改</span></button>
     </div>
   </div>
-  <div class="gallery-empty" id="gallery-empty"{' hidden' if has_content else ''}>
-    <button type="button" class="btn btn-primary" id="gallery-empty-btn"><span lang="en">+ Upload Images</span><span lang="zh" hidden>+ 上传图片</span></button>
+  <div class="module-empty" id="gallery-empty"{' hidden' if has_content else ''}>
+    <p class="module-empty-text"><span lang="en">Pending upload</span><span lang="zh" hidden>待上传</span></p>
   </div>
   <div class="gallery-layout gallery-layout--v2" id="gallery-content"{' hidden' if not has_content else ''}>
     <div class="stage" id="gallery-stage" aria-live="polite"></div>
@@ -272,8 +272,8 @@ def build_videos(cfg):
       <button type="button" class="btn btn-sm btn-primary" id="video-save-btn" hidden><span lang="en">Save Changes</span><span lang="zh" hidden>保存修改</span></button>
     </div>
   </div>
-  <div class="video-empty" id="video-empty"{' hidden' if has_content else ''}>
-    <button type="button" class="btn btn-primary" id="video-empty-btn"><span lang="en">+ Upload Videos</span><span lang="zh" hidden>+ 上传视频</span></button>
+  <div class="module-empty" id="video-empty"{' hidden' if has_content else ''}>
+    <p class="module-empty-text"><span lang="en">Pending upload</span><span lang="zh" hidden>待上传</span></p>
   </div>
   <div class="video-area" id="video-content"{' hidden' if not has_content else ''}>
     <div class="video-player-wrap">
@@ -417,8 +417,8 @@ def build_downloads(cfg):
       <button type="button" class="btn btn-sm btn-primary" id="doc-save-btn" hidden><span lang="en">Save Changes</span><span lang="zh" hidden>保存修改</span></button>
     </div>
   </div>
-  <div class="doc-empty" id="doc-empty"{docs_empty_hidden}>
-    <button type="button" class="btn btn-primary" id="doc-empty-btn"><span lang="en">+ Upload Documents</span><span lang="zh" hidden>+ 上传文档</span></button>
+  <div class="module-empty" id="doc-empty"{docs_empty_hidden}>
+    <p class="module-empty-text"><span lang="en">Pending upload</span><span lang="zh" hidden>待上传</span></p>
   </div>
   <div class="doc-table-wrap" id="doc-content"{docs_content_hidden}>
     <table class="doc-table" id="doc-table">

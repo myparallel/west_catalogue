@@ -700,23 +700,20 @@ section:nth-of-type(even) {
    Empty State (gallery / video / docs)
    ======================================== */
 
-.gallery-empty,
-.video-empty,
-.doc-empty {
+.module-empty {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 180px;
+  min-height: 120px;
   border: 2px dashed var(--border);
   border-radius: var(--radius);
   background: var(--surface-2);
 }
 
-.gallery-empty .btn,
-.video-empty .btn,
-.doc-empty .btn {
-  font-size: 1rem;
-  padding: 0.75rem 1.5rem;
+.module-empty-text {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 
 /* ========================================

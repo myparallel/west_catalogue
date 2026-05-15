@@ -105,6 +105,7 @@
 
   function render() {
     var all = getAllImages();
+    updateHeroImage();
     // toggle empty / content
     var emptyEl = document.getElementById("gallery-empty");
     var contentEl = document.getElementById("gallery-content");
@@ -248,9 +249,33 @@
     });
   });
 
+  function updateHeroImage() {
+    var all = getAllImages();
+    var mainImg = null;
+    for (var i = 0; i < all.length; i++) {
+      if (all[i].category === "主图") {
+        mainImg = all[i].src;
+        break;
+      }
+    }
+    if (!mainImg && all.length > 0) mainImg = all[0].src;
+    if (mainImg) {
+      var heroImg = document.querySelector(".hero-visual img");
+      if (heroImg && heroImg.getAttribute("src") !== mainImg) {
+        heroImg.setAttribute("src", mainImg);
+      }
+    }
+  }
+
   // Edit / Save toggle
   if (editBtn) {
     editBtn.addEventListener("click", function() {
+      var all = getAllImages();
+      if (all.length === 0) {
+        // empty gallery → open file picker directly
+        if (fileInput) fileInput.click();
+        return;
+      }
       isEditMode = !isEditMode;
       editBtn.hidden = isEditMode;
       if (saveBtn) saveBtn.hidden = !isEditMode;
@@ -322,12 +347,6 @@
     saveBtn.addEventListener("click", function() {
       addBtn.hidden = true;
     });
-  }
-
-  // Wire empty-state upload button
-  var emptyBtn = document.getElementById("gallery-empty-btn");
-  if (emptyBtn) {
-    emptyBtn.addEventListener("click", function() { fileInput.click(); });
   }
 
   // Initial render
@@ -570,6 +589,11 @@
   // Edit / Save toggle
   if (editBtn) {
     editBtn.addEventListener("click", function() {
+      var all = getAllDocs();
+      if (all.length === 0) {
+        if (fileInput) fileInput.click();
+        return;
+      }
       isEditMode = !isEditMode;
       editBtn.hidden = isEditMode;
       if (saveBtn) saveBtn.hidden = !isEditMode;
@@ -634,12 +658,6 @@
   }
   if (saveBtn) {
     saveBtn.addEventListener("click", function() { addBtn.hidden = true; });
-  }
-
-  // Wire empty-state upload button
-  var emptyBtn = document.getElementById("doc-empty-btn");
-  if (emptyBtn) {
-    emptyBtn.addEventListener("click", function() { fileInput.click(); });
   }
 
   render();
@@ -870,6 +888,11 @@
   // Edit / Save toggle
   if (editBtn) {
     editBtn.addEventListener("click", function() {
+      var all = getAllVideos();
+      if (all.length === 0) {
+        if (fileInput) fileInput.click();
+        return;
+      }
       isEditMode = !isEditMode;
       editBtn.hidden = isEditMode;
       if (saveBtn) saveBtn.hidden = !isEditMode;
@@ -931,12 +954,6 @@
   }
   if (saveBtn) {
     saveBtn.addEventListener("click", function() { addBtn.hidden = true; });
-  }
-
-  // Wire empty-state upload button
-  var emptyBtn = document.getElementById("video-empty-btn");
-  if (emptyBtn) {
-    emptyBtn.addEventListener("click", function() { fileInput.click(); });
   }
 
   render();

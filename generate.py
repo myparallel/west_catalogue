@@ -22,11 +22,27 @@ PRODUCTS_DIR = os.path.join(ROOT, "products")
 
 
 def esc(text):
+    if text is None:
+        return ""
     return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
 
 
 def esc_js(text):
+    if text is None:
+        return ""
     return text.replace("\\", "\\\\").replace('"', '\\"').replace("'", "\\'").replace("\n", "\\n").replace("\r", "")
+
+def t(val):
+    """Generate bilingual span for a value that may be string or {en, zh}."""
+    if isinstance(val, dict) and "en" in val and "zh" in val:
+        return '<span lang="en">' + esc(val["en"]) + '</span><span lang="zh" hidden>' + esc(val["zh"]) + '</span>'
+    return esc(val)
+
+def t_flat(val, lang="en"):
+    """Extract a single language from a bilingual value."""
+    if isinstance(val, dict) and lang in val:
+        return esc(val[lang])
+    return esc(val)
 
 
 def build_json_ld(cfg):
@@ -50,22 +66,25 @@ def build_json_ld(cfg):
 
 def build_nav(cfg):
     has_video = bool(cfg.get("video", {}).get("available", False))
-    links = [
-        ("../../index.html", "Catalog", "navCatalog"),
-        ("#overview", "Overview", "navOverview"),
-        ("#highlights", "Highlights", "navHighlights"),
-        ("#gallery", "Gallery", "navGallery"),
+    pairs = [
+        ("../../index.html", "Catalog", "产品目录"),
+        ("#overview", "Overview", "产品概览"),
+        ("#highlights", "Highlights", "产品亮点"),
+        ("#gallery", "Gallery", "产品图库"),
     ]
     if has_video:
-        links.append(("#video", "Video", "navVideo"))
-    links += [
-        ("#specifications", "Specifications", "navSpecs"),
-        ("#applications", "Applications", "navApps"),
-        ("#package", "Package", "navPackage"),
-        ("#downloads", "Downloads", "navDownloads"),
-        ("#contact", "Contact", "navContact"),
+        pairs.append(("#video", "Video", "产品视频"))
+    pairs += [
+        ("#specifications", "Specifications", "技术参数"),
+        ("#applications", "Applications", "应用场景"),
+        ("#package", "Package", "包装清单"),
+        ("#downloads", "Downloads", "资料下载"),
+        ("#contact", "Contact", "联系我们"),
     ]
-    return "".join(f'<a href="{href}" data-i18n="{key}">{label}</a>' for href, label, key in links)
+    return "".join(
+        f'<a href="{href}"><span lang="en">{en}</span><span lang="zh" hidden>{zh}</span></a>'
+        for href, en, zh in pairs
+    )
 
 
 def build_docs_dropdown(cfg):
@@ -95,27 +114,28 @@ def build_hero(cfg):
     manual_pdf = cfg.get("manual_pdf", "")
     dl = os.path.basename(manual_pdf) if manual_pdf else ""
     page_num = p.get("page_number", 1)
-    manual_btn = f'<a class="btn btn-primary dl-link" href="{esc(manual_pdf)}" download="{esc(dl)}">Download Manual (PDF)</a>' if manual_pdf else ""
+    manual_btn = f'<a class="btn btn-primary dl-link" href="{esc(manual_pdf)}" download="{esc(dl)}"><span lang="en">Download Manual (PDF)</span><span lang="zh" hidden>下载手册 (PDF)</span></a>' if manual_pdf else ""
     docs_dropdown, docs_suffix = build_docs_dropdown(cfg)
-    doc_note = "For technical support or customized OEM versions, email us from <a href=\"#contact\">Contact Information</a>."
+    doc_note_en = "For technical support or customized OEM versions, email us from <a href=\"#contact\">Contact Information</a>."
+    doc_note_zh = "如需技术支持或定制OEM版本，请通过<a href=\"#contact\">联系方式</a>发送邮件。"
     if manual_pdf:
-        doc_note = "English PDF manual. " + doc_note
+        doc_note_en = "English PDF manual. " + doc_note_en
     return f"""<section class="hero wrap" id="overview">
   <div class="hero-grid">
     <div>
-      <div class="page-badge">Page {page_num}</div>
-      <h1>{esc(p.get("name",""))}</h1>
-      <p class="lead">{esc(p.get("lead",""))}</p>
+      <div class="page-badge"><span lang="en">Page {page_num}</span><span lang="zh" hidden>第 {page_num} 页</span></div>
+      <h1>{t(p.get("name",""))}</h1>
+      <p class="lead">{t(p.get("lead",""))}</p>
       <div class="hero-actions">
-        <button type="button" class="btn btn-primary btn-pdf" data-i18n="btnPrint" data-sku="{esc(p.get("sku",""))}">Print</button>
+        <button type="button" class="btn btn-primary btn-pdf"><span lang="en">Print</span><span lang="zh" hidden>打印</span></button>
         {docs_dropdown}
         {manual_btn}
-        <button type="button" class="btn btn-secondary" id="quote-open-btn" data-i18n="btnQuote" data-open-quote>Request Quote</button>
+        <button type="button" class="btn btn-secondary" id="quote-open-btn" data-open-quote><span lang="en">Request Quote</span><span lang="zh" hidden>获取报价</span></button>
       </div>
-      <p class="doc-note">{doc_note}{docs_suffix}</p>
+      <p class="doc-note"><span lang="en">{doc_note_en}</span><span lang="zh" hidden>{doc_note_zh}</span>{docs_suffix}</p>
     </div>
     <div class="hero-visual">
-      <img src="{esc(hero_img)}" alt="{esc(p.get("name",""))}" width="800" height="800" fetchpriority="high" />
+      <img src="{esc(hero_img)}" alt="{t_flat(p.get("name",""))}" width="800" height="800" fetchpriority="high" />
     </div>
   </div>
 </section>"""
@@ -126,12 +146,12 @@ def build_highlights(cfg):
     if not items:
         return ""
     cards = "".join(
-        f'<div class="card"><h3>{esc(item["title"])}</h3><p>{esc(item["text"])}</p></div>\n'
+        f'<div class="card"><h3>{t(item["title"])}</h3><p>{t(item["text"])}</p></div>\n'
         for item in items
     )
     return f"""<section class="wrap" id="highlights">
-  <h2 class="section-title" data-i18n="secHighlights">Key Highlights</h2>
-  <p class="section-sub" data-i18n="subHighlights">Precision monitoring meets rugged industrial design.</p>
+  <h2 class="section-title"><span lang="en">Key Highlights</span><span lang="zh" hidden>产品亮点</span></h2>
+  <p class="section-sub"><span lang="en">Precision monitoring meets rugged industrial design.</span><span lang="zh" hidden>精准监测与工业级设计相结合。</span></p>
   <div class="highlights">
     {cards}
   </div>
@@ -185,12 +205,12 @@ def build_specifications(cfg):
     if not specs:
         return ""
     rows = "".join(
-        f'<tr><th scope="row">{esc(s["label"])}</th><td>{esc(s["value"])}</td></tr>\n'
+        f'<tr><th scope="row">{t(s["label"])}</th><td>{t(s["value"])}</td></tr>\n'
         for s in specs
     )
     return f"""<section class="wrap" id="specifications">
-  <h2 class="section-title" data-i18n="secSpecs">Specifications</h2>
-  <p class="section-sub" data-i18n="subSpecs">Technical parameters based on the product manual.</p>
+  <h2 class="section-title"><span lang="en">Specifications</span><span lang="zh" hidden>技术参数</span></h2>
+  <p class="section-sub"><span lang="en">Technical parameters based on the product manual.</span><span lang="zh" hidden>基于产品手册的技术参数。</span></p>
   <div class="spec-table-wrap">
     <table class="spec">
       <tbody>
@@ -206,12 +226,12 @@ def build_applications(cfg):
     if not apps:
         return ""
     cards = "".join(
-        f'<div class="card"><h3>{esc(a["title"])}</h3><p>{esc(a["text"])}</p></div>\n'
+        f'<div class="card"><h3>{t(a["title"])}</h3><p>{t(a["text"])}</p></div>\n'
         for a in apps
     )
     return f"""<section class="wrap" id="applications">
-  <h2 class="section-title" data-i18n="secApps">Typical Applications</h2>
-  <p class="section-sub" data-i18n="subApps">Optimized for diverse agricultural and environmental monitoring needs.</p>
+  <h2 class="section-title"><span lang="en">Typical Applications</span><span lang="zh" hidden>典型应用场景</span></h2>
+  <p class="section-sub"><span lang="en">Optimized for diverse agricultural and environmental monitoring needs.</span><span lang="zh" hidden>适用于多种农业和环境监测需求。</span></p>
   <div class="two-col">
     {cards}
   </div>
@@ -224,14 +244,14 @@ def build_package(cfg):
         return ""
     rows = ""
     for i, item in enumerate(items, 1):
-        rows += f"<tr><td>{i}</td><td>{esc(item['item'])}</td><td>{esc(str(item['qty']))}</td></tr>\n"
+        rows += f"<tr><td>{i}</td><td>{t(item['item'])}</td><td>{esc(str(item['qty']))}</td></tr>\n"
     return f"""<section class="wrap" id="package">
-  <h2 class="section-title" data-i18n="secPackage">Standard Package</h2>
-  <p class="section-sub" data-i18n="subPackage">Standard configuration for the product.</p>
+  <h2 class="section-title"><span lang="en">Standard Package</span><span lang="zh" hidden>标准包装</span></h2>
+  <p class="section-sub"><span lang="en">Standard configuration for the product.</span><span lang="zh" hidden>产品的标准配置。</span></p>
   <div class="spec-table-wrap">
     <table class="spec">
       <thead>
-        <tr><th scope="col">#</th><th scope="col">Item</th><th scope="col">Qty</th></tr>
+        <tr><th scope="col">#</th><th scope="col"><span lang="en">Item</span><span lang="zh" hidden>名称</span></th><th scope="col"><span lang="en">Qty</span><span lang="zh" hidden>数量</span></th></tr>
       </thead>
       <tbody>
         {rows}
@@ -246,7 +266,6 @@ def build_downloads(cfg):
     documents = cfg.get("documents", [])
     if not manual_pdf and not documents:
         return ""
-    prod_name = esc(cfg["product"].get("name",""))
     items = ""
     all_docs = []
     if manual_pdf:
@@ -257,8 +276,8 @@ def build_downloads(cfg):
         fn = os.path.basename(path)
         items += f"""<a class="btn btn-secondary dl-link" href="{esc(path)}" download="{esc(fn)}">{esc(label)}</a>\n"""
     return f"""<section class="wrap" id="downloads">
-  <h2 class="section-title" data-i18n="secDownloads">Downloads</h2>
-  <p class="section-sub" data-i18n="subDownloads">Access technical documentation for the product.</p>
+  <h2 class="section-title"><span lang="en">Downloads</span><span lang="zh" hidden>资料下载</span></h2>
+  <p class="section-sub"><span lang="en">Access technical documentation for the product.</span><span lang="zh" hidden>获取产品的技术文档。</span></p>
   <div class="hero-actions" style="flex-direction:column;align-items:flex-start">
     <div style="display:flex;flex-wrap:wrap;gap:0.5rem">{items}</div>
   </div>
@@ -268,13 +287,13 @@ def build_downloads(cfg):
 def build_contact(cfg):
     c = cfg.get("contact", {})
     return f"""<section class="wrap" id="contact">
-  <h2 class="section-title" data-i18n="secContact">Contact Information</h2>
-  <p class="section-sub" data-i18n="subContact">For quotations, lead times, and technical support.</p>
+  <h2 class="section-title"><span lang="en">Contact Information</span><span lang="zh" hidden>联系方式</span></h2>
+  <p class="section-sub"><span lang="en">For quotations, lead times, and technical support.</span><span lang="zh" hidden>获取报价、交期和技术支持。</span></p>
   <address class="contact-info">
     {c.get("address","")}<br />
     <a href="tel:{esc(c.get("phone",""))}">{esc(c.get("phone",""))}</a><br />
     <a href="mailto:{esc(c.get("email",""))}">{esc(c.get("email",""))}</a><br />
-    {esc(c.get("hours",""))}
+    <span lang="en">{esc(c.get("hours",""))}</span><span lang="zh" hidden>周一至周五，9:00 - 18:00</span>
   </address>
 </section>"""
 
@@ -284,8 +303,8 @@ def build_footer(cfg):
     page_num = p.get("page_number", 1)
     return f"""<footer class="site-footer">
   <div class="wrap footer-meta">
-    <span>{esc(p.get("manufacturer",""))} &middot; SKU {esc(p.get("sku",""))}</span>
-    <span>Page {page_num} &middot; Product Catalogue</span>
+    <span>{t(p.get("manufacturer",""))} &middot; SKU {esc(p.get("sku",""))}</span>
+    <span><span lang="en">Page {page_num} &middot; Product Catalogue</span><span lang="zh" hidden>第 {page_num} 页 &middot; 产品目录</span></span>
   </div>
 </footer>"""
 
@@ -295,39 +314,39 @@ def build_quote_modal(cfg):
     return f"""<div class="quote-modal" id="quote-modal" role="dialog" aria-modal="true" aria-labelledby="quote-modal-title" aria-hidden="true">
   <div class="quote-modal__backdrop" data-close-quote tabindex="-1"></div>
   <div class="quote-modal__dialog">
-    <h2 class="quote-modal__title" id="quote-modal-title">Request a quote</h2>
-    <p class="quote-modal__lead">{esc(p.get("name",""))} - Tell us about your project.</p>
+    <h2 class="quote-modal__title" id="quote-modal-title"><span lang="en">Request a quote</span><span lang="zh" hidden">获取报价</span></h2>
+    <p class="quote-modal__lead">{t(p.get("name",""))} - <span lang="en">Tell us about your project.</span><span lang="zh" hidden">告诉我们您的项目需求。</span></p>
     <form class="quote-form" id="quote-form" novalidate>
       <div class="quote-form__row">
-        <label for="quote-name">Full name <span aria-hidden="true">*</span></label>
+        <label for="quote-name"><span lang="en">Full name</span><span lang="zh" hidden>姓名</span> <span aria-hidden="true">*</span></label>
         <input id="quote-name" name="name" type="text" autocomplete="name" required maxlength="120" />
       </div>
       <div class="quote-form__row">
-        <label for="quote-company">Company <span aria-hidden="true">*</span></label>
+        <label for="quote-company"><span lang="en">Company</span><span lang="zh" hidden">公司</span> <span aria-hidden="true">*</span></label>
         <input id="quote-company" name="company" type="text" autocomplete="organization" required maxlength="160" />
       </div>
       <div class="quote-form__row quote-form__row--half">
         <div>
-          <label for="quote-email">Work email <span aria-hidden="true">*</span></label>
+          <label for="quote-email"><span lang="en">Work email</span><span lang="zh" hidden">工作邮箱</span> <span aria-hidden="true">*</span></label>
           <input id="quote-email" name="email" type="email" autocomplete="email" required maxlength="120" />
         </div>
         <div>
-          <label for="quote-phone">Phone</label>
+          <label for="quote-phone"><span lang="en">Phone</span><span lang="zh" hidden">电话</span></label>
           <input id="quote-phone" name="phone" type="tel" autocomplete="tel" maxlength="40" />
         </div>
       </div>
       <div class="quote-form__row">
-        <label for="quote-region">Country / region <span aria-hidden="true">*</span></label>
+        <label for="quote-region"><span lang="en">Country / region</span><span lang="zh" hidden">国家/地区</span> <span aria-hidden="true">*</span></label>
         <input id="quote-region" name="region" type="text" autocomplete="country-name" required maxlength="80" />
       </div>
       <div class="quote-form__row">
-        <label for="quote-message">Application notes <span aria-hidden="true">*</span></label>
+        <label for="quote-message"><span lang="en">Application notes</span><span lang="zh" hidden">应用说明</span> <span aria-hidden="true">*</span></label>
         <textarea id="quote-message" name="message" rows="4" required maxlength="2000" placeholder="Sensor types, network requirements, project scope..."></textarea>
       </div>
       <p class="quote-form__hint" id="quote-form-hint" role="status" aria-live="polite"></p>
       <div class="quote-form__actions">
-        <button type="button" class="btn btn-secondary" data-close-quote>Cancel</button>
-        <button type="submit" class="btn btn-primary">Send</button>
+        <button type="button" class="btn btn-secondary" data-close-quote><span lang="en">Cancel</span><span lang="zh" hidden>取消</span></button>
+        <button type="submit" class="btn btn-primary"><span lang="en">Send</span><span lang="zh" hidden>发送</span></button>
       </div>
     </form>
     <button type="button" class="quote-modal__close" data-close-quote aria-label="Close dialog">&times;</button>
@@ -337,21 +356,23 @@ def build_quote_modal(cfg):
 
 def generate_html(cfg):
     p = cfg["product"]
-    title = f'{esc(p.get("name",""))} | {esc(p.get("sku",""))}'
-    meta_desc = esc(p.get("description", ""))
-    og_title = esc(p.get("og_title", p.get("name", "")))
-    og_desc = esc(p.get("og_description", p.get("description", "")))
+    name_en = t_flat(p.get("name", ""), "en")
+    name_zh = t_flat(p.get("name", ""), "zh")
+    desc_en = t_flat(p.get("description", ""), "en")
+    title = name_en + " | " + esc(p.get("sku",""))
+    meta_desc = desc_en
+    og_title = name_en
+    og_desc = t_flat(p.get("og_description", desc_en), "en")
     og_image = esc(cfg.get("hero_image") or (cfg["images"][0]["src"] if cfg.get("images") else ""))
 
     email = esc_js(cfg.get("contact", {}).get("email", ""))
-    prod_name = esc_js(p.get("name", ""))
     prod_sku = esc_js(p.get("sku", ""))
     prod_sku_short = esc_js(p.get("sku", "product"))
 
     inline_config = f"""<script>
 window.__PRODUCT_CONFIG__ = {{
     email: "{email}",
-    name: "{prod_name}",
+    name: "{esc_js(name_en)}",
     sku: "{prod_sku}"
 }};
 </script>"""
@@ -376,49 +397,17 @@ window.__PRODUCT_CONFIG__ = {{
     logo_href = "../../index.html"
 
     i18n_script = """<script>
-var i18n = {
-  zh: {
-    navCatalog:     "产品目录",
-    navOverview:    "产品概览",
-    navHighlights:  "产品亮点",
-    navGallery:     "产品图库",
-    navSpecs:       "技术参数",
-    navApps:        "应用场景",
-    navPackage:     "包装清单",
-    navDownloads:   "资料下载",
-    navContact:     "联系我们",
-    navVideo:       "产品视频",
-    btnPrint:       "打印",
-    btnQuote:       "获取报价",
-    secHighlights:  "产品亮点",
-    subHighlights:  "精准监测与工业级设计相结合。",
-    secGallery:     "产品图库",
-    subGallery:     "详细视图（滚动缩略图浏览）。",
-    secVideo:       "产品视频",
-    secSpecs:       "技术参数",
-    subSpecs:       "基于产品手册的技术参数。",
-    secApps:        "典型应用场景",
-    subApps:        "适用于多种农业和环境监测需求。",
-    secPackage:     "标准包装",
-    subPackage:     "产品的标准配置。",
-    secDownloads:   "资料下载",
-    subDownloads:   "获取产品的技术文档。",
-    secContact:     "联系方式",
-    subContact:     "获取报价、交期和技术支持。"
-  }
-};
 var currentLang = "en";
 function applyLang(lang) {
   currentLang = lang;
-  var dict = i18n[lang] || {};
-  document.querySelectorAll("[data-i18n]").forEach(function(el) {
-    var key = el.getAttribute("data-i18n");
-    if (dict[key] !== undefined) el.textContent = dict[key];
+  document.querySelectorAll("[lang]").forEach(function(el) {
+    el.hidden = el.getAttribute("lang") !== lang;
   });
   var tb = document.getElementById("lang-toggle");
   if (tb) tb.textContent = lang === "en" ? "中 / EN" : "EN / 中";
 }
 document.addEventListener("DOMContentLoaded", function() {
+  applyLang("en");
   var tb = document.getElementById("lang-toggle");
   if (tb) tb.addEventListener("click", function() { applyLang(currentLang === "en" ? "zh" : "en"); });
 });
@@ -469,7 +458,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>{title}</title>
+<title lang="en">{title}</title><title lang="zh" hidden>{esc(name_zh)} | {esc(p.get("sku",""))}</title>
 <meta name="description" content="{meta_desc}" />
 <link rel="stylesheet" href="{css_path}" />
 <meta property="og:type" content="website" />

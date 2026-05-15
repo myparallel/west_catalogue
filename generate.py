@@ -338,37 +338,22 @@ window.__PRODUCT_CONFIG__ = {{
     js_path = "../../assets/js/main.js"
     logo_href = "../../index.html"
 
-    pdf_script = f"""<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-(function() {{
-    var sku = "{prod_sku_short}";
+    pdf_script = """<script>
+(function() {
     var btns = document.querySelectorAll(".btn-pdf");
-    var filename = sku + "-catalogue.pdf";
 
-    function generatePDF() {{
-        var body = document.body;
-        body.classList.add("pdf-mode");
-        var opt = {{
-            margin:       [0.3, 0.25, 0.3, 0.25],
-            filename:     filename,
-            image:        {{ type: 'jpeg', quality: 0.95 }},
-            html2canvas:  {{ scale: 2, windowWidth: 794, useCORS: true, logging: false }},
-            jsPDF:        {{ unit: 'in', format: 'a4', orientation: 'portrait' }}
-        }};
-        var el = document.getElementById("main");
-        html2pdf().set(opt).from(el).save().then(function() {{
-            body.classList.remove("pdf-mode");
-        }});
-    }}
+    function printPage() {
+        window.print();
+    }
 
-    btns.forEach(function(b) {{
-        b.addEventListener("click", generatePDF);
-    }});
+    btns.forEach(function(b) {
+        b.addEventListener("click", printPage);
+    });
 
-    if (window.location.search.indexOf("dl=1") > -1) {{
-        setTimeout(generatePDF, 800);
-    }}
-}})();
+    if (window.location.search.indexOf("dl=1") > -1) {
+        setTimeout(printPage, 600);
+    }
+})();
 </script>"""
 
     return f"""<!DOCTYPE html>

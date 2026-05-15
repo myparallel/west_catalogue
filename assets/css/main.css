@@ -900,175 +900,13 @@ body.modal-open {
 }
 
 /* ========================================
-   PDF mode — applied before html2canvas capture
+   Print / A4 styles  (used by window.print())
    ======================================== */
-body.pdf-mode .site-header,
-body.pdf-mode .site-footer,
-body.pdf-mode .quote-modal,
-body.pdf-mode .btn-pdf,
-body.pdf-mode #quote-open-btn,
-body.pdf-mode .dl-link,
-body.pdf-mode .doc-note,
-body.pdf-mode .menu-toggle,
-body.pdf-mode .skip-link,
-body.pdf-mode .thumbs {
-  display: none !important;
+@page {
+  size: A4;
+  margin: 0.4in 0.35in;
 }
 
-body.pdf-mode {
-  background: #fff !important;
-}
-
-body.pdf-mode .wrap {
-  width: 92% !important;
-  max-width: 720px !important;
-}
-
-body.pdf-mode section {
-  padding: 0.9rem 0 !important;
-}
-
-body.pdf-mode section:nth-of-type(even) {
-  background: none !important;
-  border: none !important;
-}
-
-body.pdf-mode .hero {
-  padding: 0.3rem 0 0.6rem !important;
-}
-
-body.pdf-mode .hero-grid {
-  grid-template-columns: 1fr !important;
-  gap: 0.75rem !important;
-}
-
-body.pdf-mode .hero h1 {
-  font-size: 1.25rem !important;
-  margin-bottom: 0.2rem !important;
-}
-
-body.pdf-mode .lead {
-  font-size: 0.78rem !important;
-  margin-bottom: 0.4rem !important;
-}
-
-body.pdf-mode .hero-visual {
-  box-shadow: none !important;
-  border: 0.5pt solid #ccc !important;
-  padding: 0.35rem !important;
-}
-
-body.pdf-mode .hero-visual img {
-  max-height: 2.8in !important;
-  aspect-ratio: auto !important;
-}
-
-body.pdf-mode .section-title {
-  font-size: 1.05rem !important;
-  margin-bottom: 0.15rem !important;
-}
-
-body.pdf-mode .section-sub {
-  font-size: 0.72rem !important;
-  margin-bottom: 0.5rem !important;
-}
-
-body.pdf-mode .highlights {
-  grid-template-columns: 1fr 1fr !important;
-  gap: 0.4rem !important;
-}
-
-body.pdf-mode .card {
-  box-shadow: none !important;
-  border: 0.5pt solid #ddd !important;
-  padding: 0.45rem 0.55rem !important;
-}
-
-body.pdf-mode .card h3 {
-  font-size: 0.78rem !important;
-  margin-bottom: 0.1rem !important;
-}
-
-body.pdf-mode .card p {
-  font-size: 0.7rem !important;
-  color: #000 !important;
-}
-
-body.pdf-mode .two-col {
-  grid-template-columns: 1fr 1fr !important;
-  gap: 0.4rem !important;
-}
-
-body.pdf-mode .stage {
-  box-shadow: none !important;
-  border: 0.5pt solid #ccc !important;
-  min-height: auto !important;
-  padding: 0.25rem !important;
-}
-
-body.pdf-mode .stage img {
-  max-height: 2.8in !important;
-}
-
-body.pdf-mode .spec-table-wrap {
-  box-shadow: none !important;
-  border: 0.5pt solid #ccc !important;
-}
-
-body.pdf-mode table.spec {
-  font-size: 0.7rem !important;
-}
-
-body.pdf-mode table.spec th,
-body.pdf-mode table.spec td {
-  padding: 0.2rem 0.35rem !important;
-  border-bottom: 0.5pt solid #eee !important;
-}
-
-body.pdf-mode .page-badge {
-  background: #eee !important;
-  color: #333 !important;
-  border: 0.5pt solid #ccc !important;
-  font-size: 0.65rem !important;
-  margin-bottom: 0.3rem !important;
-}
-
-body.pdf-mode .video-container {
-  box-shadow: none !important;
-  border: 0.5pt solid #ccc !important;
-  padding: 0.25rem !important;
-}
-
-body.pdf-mode .video-container video {
-  max-height: 2.5in !important;
-}
-
-body.pdf-mode .contact-info {
-  box-shadow: none !important;
-  border: 0.5pt solid #ccc !important;
-  padding: 0.45rem 0.65rem !important;
-  font-size: 0.72rem !important;
-  line-height: 1.4 !important;
-}
-
-body.pdf-mode .contact-info a {
-  color: #000 !important;
-}
-
-body.pdf-mode a {
-  color: #000 !important;
-  text-decoration: underline !important;
-}
-
-body.pdf-mode code {
-  background: #eee !important;
-  color: #333 !important;
-  border-color: #ddd !important;
-}
-
-/* ========================================
-   Print / A4 styles
-   ======================================== */
 @media print {
   * {
     background: transparent !important;
@@ -1086,7 +924,8 @@ body.pdf-mode code {
   .menu-toggle,
   .skip-link,
   .catalog-toolbar__actions,
-  .catalog-card__actions {
+  .catalog-card__actions,
+  .thumbs {
     display: none !important;
   }
 
@@ -1095,6 +934,8 @@ body.pdf-mode code {
     color: #000 !important;
     font-size: 9.5pt;
     line-height: 1.35;
+    margin: 0;
+    padding: 0;
   }
 
   a {
@@ -1104,17 +945,18 @@ body.pdf-mode code {
 
   img {
     max-width: 100% !important;
+    max-height: 100% !important;
     page-break-inside: avoid;
   }
 
   .wrap {
     width: 100% !important;
-    max-width: 6.5in !important;
+    max-width: 6.7in !important;
     margin: 0 auto !important;
   }
 
   section {
-    padding: 0.15in 0 !important;
+    padding: 0.12in 0 !important;
     page-break-inside: avoid;
   }
 
@@ -1124,83 +966,79 @@ body.pdf-mode code {
   }
 
   .hero {
-    padding: 0 0 0.15in !important;
+    padding: 0 0 0.1in !important;
   }
 
   .hero-grid {
     grid-template-columns: 1fr !important;
-    gap: 0.2in !important;
+    gap: 0.15in !important;
   }
 
   .hero h1 {
-    font-size: 16pt !important;
-    margin: 0 0 4pt !important;
+    font-size: 14pt !important;
+    margin: 0 0 3pt !important;
   }
 
   .lead {
-    font-size: 9pt !important;
-    margin: 0 0 8pt !important;
+    font-size: 8.5pt !important;
+    margin: 0 0 6pt !important;
     max-width: none !important;
   }
 
   .hero-visual {
     border: 0.5pt solid #ccc !important;
-    padding: 4pt !important;
+    padding: 3pt !important;
   }
 
   .hero-visual img {
-    max-height: 2.8in !important;
+    max-height: 2.6in !important;
     aspect-ratio: auto !important;
   }
 
   .section-title {
-    font-size: 13pt !important;
-    margin-bottom: 2pt !important;
+    font-size: 12pt !important;
+    margin-bottom: 1pt !important;
   }
 
   .section-sub {
-    font-size: 8.5pt !important;
-    margin-bottom: 6pt !important;
+    font-size: 8pt !important;
+    margin-bottom: 4pt !important;
   }
 
   .highlights {
     grid-template-columns: 1fr 1fr !important;
-    gap: 4pt !important;
+    gap: 3pt !important;
   }
 
   .card {
     border: 0.5pt solid #ccc !important;
-    padding: 4pt 6pt !important;
+    padding: 3pt 5pt !important;
     page-break-inside: avoid;
   }
 
   .card h3 {
-    font-size: 9pt !important;
+    font-size: 8.5pt !important;
     margin-bottom: 1pt !important;
   }
 
   .card p {
-    font-size: 8pt !important;
+    font-size: 7.5pt !important;
     color: #000 !important;
   }
 
   .two-col {
     grid-template-columns: 1fr 1fr !important;
-    gap: 4pt !important;
-  }
-
-  .gallery-layout--v2 .thumbs {
-    display: none !important;
+    gap: 3pt !important;
   }
 
   .stage {
     border: 0.5pt solid #ccc !important;
-    padding: 4pt !important;
+    padding: 3pt !important;
     min-height: auto !important;
   }
 
   .stage img {
-    max-height: 3in !important;
+    max-height: 2.8in !important;
   }
 
   .spec-table-wrap {
@@ -1208,12 +1046,12 @@ body.pdf-mode code {
   }
 
   table.spec {
-    font-size: 7.5pt !important;
+    font-size: 7pt !important;
   }
 
   table.spec th,
   table.spec td {
-    padding: 2pt 4pt !important;
+    padding: 1.5pt 3pt !important;
     color: #000 !important;
     border-bottom: 0.5pt solid #ddd !important;
   }
@@ -1226,15 +1064,15 @@ body.pdf-mode code {
     background: #eee !important;
     color: #333 !important;
     border: 0.5pt solid #ccc !important;
-    font-size: 7.5pt !important;
-    margin-bottom: 4pt !important;
+    font-size: 7pt !important;
+    margin-bottom: 3pt !important;
   }
 
   .contact-info {
     border: 0.5pt solid #ccc !important;
-    padding: 4pt 8pt !important;
-    font-size: 8pt !important;
-    line-height: 1.4 !important;
+    padding: 3pt 6pt !important;
+    font-size: 7.5pt !important;
+    line-height: 1.35 !important;
   }
 
   .contact-info a {
@@ -1243,45 +1081,46 @@ body.pdf-mode code {
 
   .video-container {
     border: 0.5pt solid #ccc !important;
-    padding: 4pt !important;
+    padding: 3pt !important;
   }
 
   .video-container video {
-    max-height: 2.5in !important;
+    max-height: 2.2in !important;
   }
 
+  /* Catalogue index print */
   .catalog-index {
     border: 0.5pt solid #ccc !important;
     border-radius: 3pt !important;
   }
 
   .catalog-index__row {
-    grid-template-columns: 36pt 1fr 2fr 50pt 50pt !important;
+    grid-template-columns: 30pt 1fr 2fr 45pt 45pt !important;
     border-bottom: 0.5pt solid #ddd !important;
   }
 
   .catalog-index__header {
-    background: #f0f0f0 !important;
+    background: #eee !important;
     border-bottom: 1pt solid #999 !important;
-    font-size: 7pt !important;
+    font-size: 6.5pt !important;
   }
 
   .catalog-index__cell {
-    padding: 4pt 3pt !important;
-    font-size: 7.5pt !important;
+    padding: 3pt 2pt !important;
+    font-size: 7pt !important;
   }
 
   .catalog-index__cell--page {
-    font-size: 7pt !important;
+    font-size: 6.5pt !important;
   }
 
   .catalog-index__cell--sku {
-    font-size: 7pt !important;
+    font-size: 6.5pt !important;
   }
 
   .catalog-index__dl {
-    font-size: 6pt !important;
-    padding: 1pt 3pt !important;
+    font-size: 5.5pt !important;
+    padding: 1pt 2.5pt !important;
     background: #333 !important;
     color: #fff !important;
   }
@@ -1292,14 +1131,14 @@ body.pdf-mode code {
   }
 
   .catalog-hero {
-    padding: 0.2in 0 0.1in !important;
+    padding: 0.15in 0 0.08in !important;
     background: none !important;
     color: #000 !important;
   }
 
   .catalog-hero__title {
     color: #000 !important;
-    font-size: 18pt !important;
+    font-size: 16pt !important;
   }
 
   .catalog-hero__title span {
@@ -1308,17 +1147,12 @@ body.pdf-mode code {
 
   .catalog-hero__lead {
     color: #333 !important;
-    font-size: 9pt !important;
+    font-size: 8.5pt !important;
   }
 
   .catalog-hero__count {
     background: #eee !important;
     color: #333 !important;
-  }
-
-  body.pdf-mode .wrap {
-    width: 100% !important;
-    max-width: 6.5in !important;
   }
 }
 

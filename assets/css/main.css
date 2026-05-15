@@ -1338,7 +1338,7 @@ body.modal-open {
 
 .catalog-index__row {
   display: grid;
-  grid-template-columns: 48px 1fr 2.2fr 80px 130px;
+  grid-template-columns: 48px 1fr 2.2fr 80px 160px;
   align-items: center;
   border-bottom: 1px solid var(--border);
   transition: background 0.12s ease;
@@ -1424,7 +1424,7 @@ body.modal-open {
 }
 
 .catalog-index__dl--wide {
-  min-width: 5.5rem;
+  min-width: 7.5rem;
   text-align: center;
   white-space: nowrap;
 }

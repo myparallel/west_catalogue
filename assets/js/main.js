@@ -103,8 +103,14 @@
     return result;
   }
 
+  function updateSectionVis() {
+    var sec = document.getElementById("gallery");
+    if (sec) sec.hidden = (getAllImages().length === 0);
+  }
+
   function render() {
     var all = getAllImages();
+    updateSectionVis();
     var catTabs = catsWrap.querySelectorAll("button");
     catTabs.forEach(function(b) {
       b.classList.toggle("is-active", b.getAttribute("data-cat") === currentFilter);
@@ -428,9 +434,15 @@
     document.body.removeChild(a);
   }
 
+  function updateDocSectionVis() {
+    var sec = document.getElementById("downloads");
+    if (sec) sec.hidden = (getAllDocs().length === 0);
+  }
+
   function render() {
     var all = getAllDocs();
     updateHeroSection();
+    updateDocSectionVis();
     // update cat tabs
     catsWrap.querySelectorAll("button").forEach(function(b) {
       b.classList.toggle("is-active", b.getAttribute("data-cat") === currentFilter);
@@ -588,6 +600,290 @@
   addBtn.hidden = true;
   addBtn.innerHTML = '<span lang="en">+ Add Document</span><span lang="zh" hidden>+ 添加文档</span>';
   var actions = document.querySelector(".doc-toolbar-actions");
+  if (actions) {
+    actions.insertBefore(addBtn, saveBtn);
+  }
+  if (typeof currentLang !== "undefined") {
+    addBtn.querySelectorAll("[lang]").forEach(function(el) {
+      el.hidden = el.getAttribute("lang") !== currentLang;
+    });
+  }
+  addBtn.addEventListener("click", function() { fileInput.click(); });
+  if (editBtn) {
+    editBtn.addEventListener("click", function() { addBtn.hidden = false; });
+  }
+  if (saveBtn) {
+    saveBtn.addEventListener("click", function() { addBtn.hidden = true; });
+  }
+
+  render();
+})();
+
+/* ========================================
+   Video Manager
+   ======================================== */
+(function () {
+  var DATA_SCRIPT = document.getElementById("video-data");
+  if (!DATA_SCRIPT) return;
+
+  var CONFIG_VIDEOS = [];
+  try { CONFIG_VIDEOS = JSON.parse(DATA_SCRIPT.textContent); } catch(e) {}
+
+  var STORAGE_KEY = "videos_WEX280";
+  var playerWrap = document.getElementById("video-player");
+  var placeholder = document.getElementById("video-placeholder");
+  var listWrap = document.getElementById("video-list");
+  var catsWrap = document.getElementById("video-cats");
+  var editBtn = document.getElementById("video-edit-btn");
+  var saveBtn = document.getElementById("video-save-btn");
+  var fileInput = document.getElementById("video-file-input");
+
+  if (!listWrap || !catsWrap) return;
+
+  var currentFilter = "全部";
+  var isEditMode = false;
+
+  function loadStorage() {
+    try { var raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : {}; } catch(e) { return {}; }
+  }
+  function saveStorage(d) { localStorage.setItem(STORAGE_KEY, JSON.stringify(d)); }
+
+  function setDeleted(file) {
+    var d = loadStorage();
+    if (!d.deleted) d.deleted = [];
+    if (d.deleted.indexOf(file) === -1) d.deleted.push(file);
+    saveStorage(d);
+  }
+  function isDeleted(file) {
+    var d = loadStorage();
+    return d.deleted && d.deleted.indexOf(file) !== -1;
+  }
+  function getCatOverride(file) {
+    var d = loadStorage();
+    return d.categories && d.categories[file] ? d.categories[file] : null;
+  }
+  function setCatOverride(file, cat) {
+    var d = loadStorage();
+    if (!d.categories) d.categories = {};
+    d.categories[file] = cat;
+    saveStorage(d);
+  }
+  function getAdded() {
+    var d = loadStorage();
+    return d.added || [];
+  }
+  function addVideo(v) {
+    var d = loadStorage();
+    if (!d.added) d.added = [];
+    d.added.push(v);
+    saveStorage(d);
+  }
+  function removeAdded(file) {
+    var d = loadStorage();
+    if (!d.added) return;
+    d.added = d.added.filter(function(x) { return x.file !== file; });
+    saveStorage(d);
+  }
+
+  function getAllVideos() {
+    var result = [];
+    CONFIG_VIDEOS.forEach(function(v) {
+      if (!isDeleted(v.file)) {
+        var cat = getCatOverride(v.file) || v.category;
+        result.push({ label: v.label, file: v.file, poster: v.poster || "", category: cat, builtin: true });
+      }
+    });
+    getAdded().forEach(function(v) {
+      result.push({ label: v.label, file: v.file, poster: v.poster || "", category: v.category || "产品概览", builtin: false });
+    });
+    return result;
+  }
+
+  function playVideo(src, poster, label) {
+    if (playerWrap) {
+      playerWrap.querySelector("source").src = src;
+      playerWrap.poster = poster || "";
+      playerWrap.load();
+      playerWrap.play().catch(function(){});
+      playerWrap.hidden = false;
+    }
+    if (placeholder) placeholder.hidden = true;
+  }
+
+  function updateVideoSectionVis() {
+    var sec = document.getElementById("video");
+    if (sec) sec.hidden = (getAllVideos().length === 0);
+  }
+
+  function render() {
+    var all = getAllVideos();
+    updateVideoSectionVis();
+    // update cat tabs
+    if (catsWrap) {
+      catsWrap.querySelectorAll("button").forEach(function(b) {
+        b.classList.toggle("is-active", b.getAttribute("data-cat") === currentFilter);
+      });
+    }
+    var filtered = all.filter(function(v) {
+      return currentFilter === "全部" || v.category === currentFilter;
+    });
+    var groups = {};
+    var catOrder = ["产品概览","使用说明","安装指引","操作演示","其他"];
+    filtered.forEach(function(v) {
+      var c = v.category || "产品概览";
+      if (!groups[c]) groups[c] = [];
+      groups[c].push(v);
+    });
+    var html = "";
+    catOrder.forEach(function(cat) {
+      var items = groups[cat];
+      if (!items) return;
+      var lis = "";
+      items.forEach(function(v, i) {
+        var src = v.file.replace(/"/g,"&quot;");
+        var poster = (v.poster||"").replace(/"/g,"&quot;");
+        var label = (v.label||"").replace(/"/g,"&quot;");
+        lis += '<li class="vlist-item" data-src="' + src + '" data-poster="' + poster + '" data-label="' + label + '" data-category="' + cat.replace(/"/g,"&quot;") + '" data-builtin="' + v.builtin + '">';
+        lis += '<span class="vlist-num">' + (i+1) + '</span>';
+        lis += '<span class="vlist-label">' + label + '</span>';
+        if (isEditMode) {
+          lis += '<span class="vlist-actions">' +
+            '<select class="vlist-cat-select">' +
+            '<option value="产品概览"' + (cat==="产品概览"?" selected":"") + '>产品概览 / Overview</option>' +
+            '<option value="使用说明"' + (cat==="使用说明"?" selected":"") + '>使用说明 / Instructions</option>' +
+            '<option value="安装指引"' + (cat==="安装指引"?" selected":"") + '>安装指引 / Installation</option>' +
+            '<option value="操作演示"' + (cat==="操作演示"?" selected":"") + '>操作演示 / Demo</option>' +
+            '<option value="其他"' + (cat==="其他"?" selected":"") + '>其他 / Other</option>' +
+            '</select>' +
+            '<button type="button" class="vlist-del-btn" title="Delete">&times;</button></span>';
+        }
+        lis += '</li>\n';
+      });
+      html += '<ul class="vlist-group" data-category="' + cat.replace(/"/g,"&quot;") + '">' +
+        '<li class="vlist-group-header">' + cat + '</li>' +
+        lis + '</ul>\n';
+    });
+    listWrap.innerHTML = html;
+
+    // bind events
+    listWrap.querySelectorAll(".vlist-item").forEach(function(item) {
+      item.addEventListener("click", function(e) {
+        if (e.target.closest(".vlist-actions")) return;
+        var src = item.getAttribute("data-src");
+        var poster = item.getAttribute("data-poster");
+        var label = item.getAttribute("data-label");
+        playVideo(src, poster, label);
+      });
+      if (isEditMode) {
+        var sel = item.querySelector(".vlist-cat-select");
+        if (sel) {
+          sel.addEventListener("change", function() {
+            var newCat = sel.value;
+            var file = item.getAttribute("data-src");
+            var builtin = item.getAttribute("data-builtin") === "true";
+            if (builtin) {
+              setCatOverride(file, newCat);
+            } else {
+              var added = getAdded();
+              added = added.map(function(v) {
+                if (v.file === file) v.category = newCat;
+                return v;
+              });
+              var store = loadStorage();
+              store.added = added;
+              saveStorage(store);
+            }
+            render();
+          });
+        }
+        var delBtn = item.querySelector(".vlist-del-btn");
+        if (delBtn) {
+          delBtn.addEventListener("click", function(e) {
+            e.stopPropagation();
+            var file = item.getAttribute("data-src");
+            var builtin = item.getAttribute("data-builtin") === "true";
+            if (builtin) {
+              setDeleted(file);
+            } else {
+              removeAdded(file);
+            }
+            render();
+          });
+        }
+      }
+    });
+
+    // auto-play first visible if none playing
+    if (!playerWrap || playerWrap.hidden !== false) {
+      var first = listWrap.querySelector(".vlist-item");
+      if (first && first.getAttribute("data-src")) {
+        playVideo(first.getAttribute("data-src"), first.getAttribute("data-poster"), first.getAttribute("data-label"));
+      }
+    }
+  }
+
+  // Category filter tabs
+  if (catsWrap) {
+    catsWrap.querySelectorAll("button").forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        currentFilter = btn.getAttribute("data-cat");
+        if (playerWrap) { playerWrap.hidden = true; }
+        if (placeholder) placeholder.hidden = false;
+        render();
+      });
+    });
+  }
+
+  // Edit / Save toggle
+  if (editBtn) {
+    editBtn.addEventListener("click", function() {
+      isEditMode = !isEditMode;
+      editBtn.hidden = isEditMode;
+      if (saveBtn) saveBtn.hidden = !isEditMode;
+      render();
+    });
+  }
+  if (saveBtn) {
+    saveBtn.addEventListener("click", function() {
+      isEditMode = false;
+      editBtn.hidden = false;
+      saveBtn.hidden = true;
+      render();
+    });
+  }
+
+  // Add video via file input
+  if (fileInput) {
+    fileInput.addEventListener("change", function() {
+      var files = fileInput.files;
+      for (var i = 0; i < files.length; i++) {
+        (function(file) {
+          var label = file.name;
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            addVideo({
+              label: label,
+              file: e.target.result,
+              poster: "",
+              category: "产品概览"
+            });
+            render();
+          };
+          reader.readAsDataURL(file);
+        })(files[i]);
+      }
+      fileInput.value = "";
+    });
+  }
+
+  // Add video button
+  var addBtn = document.createElement("button");
+  addBtn.type = "button";
+  addBtn.className = "btn btn-sm";
+  addBtn.id = "video-add-btn";
+  addBtn.hidden = true;
+  addBtn.innerHTML = '<span lang="en">+ Add Video</span><span lang="zh" hidden>+ 添加视频</span>';
+  var actions = document.querySelector(".video-actions");
   if (actions) {
     actions.insertBefore(addBtn, saveBtn);
   }

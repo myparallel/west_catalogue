@@ -29,11 +29,9 @@
     { "title": "Rugged & Reliable", "text": "IP67-rated host and IP68-rated probe enclosure. Engineered for harsh agricultural environments from -40\u00b0C to +85\u00b0C." },
     { "title": "Real-time LCD Display", "text": "On-site data viewing via a high-contrast display. View temperature, humidity, and EC levels directly without a mobile device." }
   ],
-  "video": {
-    "available": true,
-    "poster": "Asset/hero_800.png",
-    "src": "Asset/product-video.mp4"
-  },
+  "videos": [
+    {"label": "Product Video", "file": "Asset/product-video.mp4", "poster": "Asset/hero_800.png", "category": "产品概览"}
+  ],
   "specifications": [
     { "label": "Measured Variables", "value": "Soil Temperature, Soil Moisture, Soil Conductivity (EC)" },
     { "label": "Temperature Range", "value": "-40\u00b0C to +85\u00b0C (Accuracy: \u00b10.5\u00b0C from 0-40\u00b0C)" },

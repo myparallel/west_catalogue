@@ -697,6 +697,204 @@ section:nth-of-type(even) {
 }
 
 /* ========================================
+   Video Manager
+   ======================================== */
+
+.video-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.video-cats {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.video-cats button {
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.video-cats button:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.video-cats button.is-active {
+  background: var(--blue);
+  color: var(--white);
+  border-color: var(--blue);
+}
+
+.video-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.video-area {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 1rem;
+  align-items: start;
+}
+
+.video-player-wrap {
+  background: #000;
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.video-player {
+  width: 100%;
+  max-height: 420px;
+  display: block;
+}
+
+.video-placeholder {
+  color: #999;
+  font-size: 0.9rem;
+  text-align: center;
+  position: absolute;
+  margin: 0;
+}
+
+.video-list {
+  max-height: 420px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--white);
+}
+
+.vlist-group {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.vlist-group-header {
+  padding: 0.5rem 0.75rem;
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: var(--blue-hover);
+  background: var(--blue-soft);
+  border-bottom: 1px solid var(--blue-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.vlist-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+.vlist-item:last-child {
+  border-bottom: none;
+}
+
+.vlist-item:hover {
+  background: var(--blue-soft);
+}
+
+.vlist-num {
+  width: 1.5rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.78rem;
+  flex-shrink: 0;
+}
+
+.vlist-label {
+  flex: 1;
+  font-size: 0.85rem;
+  color: var(--text);
+  word-break: break-word;
+  line-height: 1.3;
+}
+
+.vlist-actions {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.vlist-cat-select {
+  padding: 0.15rem 0.3rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 0.72rem;
+  background: var(--white);
+  color: var(--text);
+}
+
+.vlist-del-btn {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 50%;
+  background: #dc2626;
+  color: #fff;
+  font-size: 0.85rem;
+  line-height: 1;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s ease;
+}
+
+.vlist-del-btn:hover {
+  background: #b91c1c;
+}
+
+@media (max-width: 800px) {
+  .video-area {
+    grid-template-columns: 1fr;
+  }
+  .video-list {
+    max-height: 200px;
+  }
+}
+
+@media (max-width: 700px) {
+  .video-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .video-cats {
+    justify-content: center;
+  }
+  .video-actions {
+    justify-content: center;
+  }
+}
+
+/* ========================================
    Document Manager
    ======================================== */
 
@@ -1616,13 +1814,18 @@ body.modal-open {
     color: #000 !important;
   }
 
-  .video-container {
+  .video-player-wrap {
     border: 0.5pt solid #ccc !important;
-    padding: 3pt !important;
   }
 
-  .video-container video {
+  .video-player {
     max-height: 2.2in !important;
+  }
+
+  .video-toolbar,
+  .video-list,
+  .video-actions {
+    display: none !important;
   }
 
   /* Catalogue index print */

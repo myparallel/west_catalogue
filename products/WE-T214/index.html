@@ -111,14 +111,42 @@
   <input type="file" id="gallery-file-input" accept="image/*" multiple style="display:none" />
 </section>
 <section class="wrap" id="video">
-  <h2 class="section-title" data-i18n="secVideo">Product Video</h2>
-  <p class="section-sub">Quick look at the WE-T214 3-in-1 Soil Sensor Transmitter in action.</p>
-  <div class="video-container">
-    <video controls preload="metadata" poster="images/hero_800.png">
-      <source src="images/product-video.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+  <h2 class="section-title"><span lang="en">Videos</span><span lang="zh" hidden>产品视频</span></h2>
+  <p class="section-sub"><span lang="en">Product videos and demonstrations.</span><span lang="zh" hidden>产品视频与演示。</span></p>
+  <div class="video-toolbar">
+    <div class="video-cats" id="video-cats">
+      <button type="button" class="is-active" data-cat="全部"><span lang="en">All</span><span lang="zh" hidden>全部</span></button>
+<button type="button" data-cat="产品概览"><span lang="en">Overview</span><span lang="zh" hidden>产品概览</span></button>
+<button type="button" data-cat="使用说明"><span lang="en">Instructions</span><span lang="zh" hidden>使用说明</span></button>
+<button type="button" data-cat="安装指引"><span lang="en">Installation</span><span lang="zh" hidden>安装指引</span></button>
+<button type="button" data-cat="操作演示"><span lang="en">Demo</span><span lang="zh" hidden>操作演示</span></button>
+<button type="button" data-cat="其他"><span lang="en">Other</span><span lang="zh" hidden>其他</span></button>
+
+    </div>
+    <div class="video-actions">
+      <button type="button" class="btn btn-sm" id="video-edit-btn"><span lang="en">Edit Videos</span><span lang="zh" hidden>编辑视频</span></button>
+      <button type="button" class="btn btn-sm btn-primary" id="video-save-btn" hidden><span lang="en">Save Changes</span><span lang="zh" hidden>保存修改</span></button>
+    </div>
   </div>
+  <div class="video-area">
+    <div class="video-player-wrap">
+      <video class="video-player" id="video-player" controls preload="metadata">
+        <source src="" type="video/mp4" />
+      </video>
+      <p class="video-placeholder" id="video-placeholder"><span lang="en">Select a video to play</span><span lang="zh" hidden>选择一个视频播放</span></p>
+    </div>
+    <div class="video-list" id="video-list">
+      <ul class="vlist-group" data-category="产品概览">
+  <li class="vlist-group-header"><span lang="en">Overview</span><span lang="zh" hidden>产品概览</span></li>
+  <li class="vlist-item" data-src="images/product-video.mp4" data-poster="images/hero_800.png" data-label="Product Overview" data-category="产品概览">
+  <span class="vlist-num">1</span>
+  <span class="vlist-label">Product Overview</span>
+</li>
+</ul>
+
+    </div>
+  </div>
+  <input type="file" id="video-file-input" accept="video/mp4,video/webm,video/ogg" multiple style="display:none" />
 </section>
 <section class="wrap" id="specifications">
   <h2 class="section-title"><span lang="en">Specifications</span><span lang="zh" hidden>技术参数</span></h2>
@@ -277,6 +305,7 @@ window.__PRODUCT_CONFIG__ = {
 };
 </script>
 <script id="gallery-data" type="application/json">[{"src": "images/hero_800.png", "alt": "WE-T214 full set with sensor probe", "category": "\u4e3b\u56fe"}, {"src": "images/back.png", "alt": "WE-T214 host back view and antenna", "category": "\u4e3b\u56fe"}, {"src": "images/interface.jpg", "alt": "WE-T214 interface and connector labels", "category": "\u7ec6\u8282"}, {"src": "images/dimensions.png", "alt": "WE-T214 host dimensions", "category": "\u7ec6\u8282"}, {"src": "images/display.jpg", "alt": "WE-T214 LCD screen with real-time readings", "category": "\u7ec6\u8282"}, {"src": "images/app.png", "alt": "Soil Parameter Tester mobile app interface", "category": "\u5176\u4ed6"}, {"src": "images/package.jpg", "alt": "WE-T214 standard packaging and accessories", "category": "\u5176\u4ed6"}]</script>
+<script id="video-data" type="application/json">[{"label": "Product Overview", "file": "images/product-video.mp4", "poster": "images/hero_800.png", "category": "\u4ea7\u54c1\u6982\u89c8"}]</script>
 <script id="doc-data" type="application/json">[{"label": "User Manual (PDF)", "file": "WE-T214-manual.pdf", "category": "\u7528\u6237\u624b\u518c", "format": "PDF"}]</script>
 <script>
 var currentLang = "en";

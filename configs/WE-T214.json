@@ -29,11 +29,9 @@
     {"title": {"en": "Rugged & Reliable", "zh": "坚固可靠"}, "text": {"en": "IP67-rated host and IP68-rated probe enclosure. Engineered for harsh agricultural environments from -40\u00b0C to +85\u00b0C.", "zh": "主机IP67防护，探针IP68防护，专为-40\u00b0C至+85\u00b0C的严苛农业环境设计。"}},
     {"title": {"en": "Real-time LCD Display", "zh": "实时LCD显示"}, "text": {"en": "On-site data viewing via a high-contrast display. View temperature, humidity, and EC levels directly without a mobile device.", "zh": "通过高对比度显示屏现场查看数据，无需移动设备即可直接读取温度、湿度和EC值。"}}
   ],
-  "video": {
-    "available": true,
-    "poster": "images/hero_800.png",
-    "src": "images/product-video.mp4"
-  },
+  "videos": [
+    {"label": "Product Overview", "file": "images/product-video.mp4", "poster": "images/hero_800.png", "category": "产品概览"}
+  ],
   "specifications": [
     {"label": {"en": "Measured Variables", "zh": "测量参数"}, "value": {"en": "Soil Temperature, Soil Moisture, Soil Conductivity (EC)", "zh": "土壤温度、土壤湿度、土壤电导率（EC）"}},
     {"label": {"en": "Temperature Range", "zh": "温度范围"}, "value": {"en": "-40\u00b0C to +85\u00b0C (Accuracy: ±0.5\u00b0C from 0-40\u00b0C)", "zh": "-40\u00b0C至+85\u00b0C（精度：0-40\u00b0C范围内±0.5\u00b0C）"}},

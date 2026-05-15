@@ -67,7 +67,7 @@ def build_json_ld(cfg):
 
 
 def build_nav(cfg):
-    has_video = bool(cfg.get("video", {}).get("available", False))
+    has_video = bool(cfg.get("videos", [])) or bool(cfg.get("video", {}).get("available", False))
     pairs = [
         ("../../index.html", "Catalog", "产品目录"),
         ("#overview", "Overview", "产品概览"),
@@ -90,13 +90,14 @@ def build_nav(cfg):
 
 
 DOC_CATEGORIES = ["全部", "用户手册", "规格书", "使用说明", "支持文档", "操作指引"]
+VIDEO_CATEGORIES = ["全部", "产品概览", "使用说明", "安装指引", "操作演示", "其他"]
 DOC_FORMATS = {"pdf":"PDF","png":"图片","jpg":"图片","jpeg":"图片","gif":"图片","webp":"图片","doc":"WORD","docx":"WORD","xls":"EXCEL","xlsx":"EXCEL","md":"MARKDOWN","markdown":"MARKDOWN"}
 
-# Bilingual category mappings: {zh: en}
 BILINGUAL_CATS = {
     "全部": "All", "主图": "Main", "细节": "Detail", "其他": "Other",
     "用户手册": "User Manual", "规格书": "Specification",
-    "使用说明": "Instructions", "支持文档": "Support", "操作指引": "Guide"
+    "使用说明": "Instructions", "支持文档": "Support", "操作指引": "Guide",
+    "产品概览": "Overview", "安装指引": "Installation", "操作演示": "Demo"
 }
 
 def biling_btn(text, active=False, extra_attrs=""):
@@ -225,22 +226,80 @@ def gallery_script(cfg):
     return f"""<script id="gallery-data" type="application/json">{json.dumps(data)}</script>"""
 
 
-def build_video(cfg):
-    video = cfg.get("video", {})
-    if not video.get("available"):
+def build_videos(cfg):
+    videos = cfg.get("videos", [])
+    # convert legacy single video config
+    old_video = cfg.get("video", {})
+    if old_video.get("available") and not videos:
+        videos = [{"label": "Product Video", "file": old_video["src"], "poster": old_video.get("poster",""), "category": "产品概览"}]
+    if not videos:
         return ""
-    poster = esc(video.get("poster", ""))
-    src = esc(video.get("src", ""))
+    vids = videos
+    for v in vids:
+        if "category" not in v:
+            v["category"] = "产品概览"
+    vid_cats = VIDEO_CATEGORIES[1:]
+    cat_html = ""
+    for cat in vid_cats:
+        cat_vids = [v for v in vids if v.get("category") == cat]
+        if not cat_vids:
+            continue
+        items = ""
+        for i, v in enumerate(cat_vids, 1):
+            poster = esc(v.get("poster", ""))
+            src = esc(v["file"])
+            label = esc(v.get("label", ""))
+            items += f"""<li class="vlist-item" data-src="{src}" data-poster="{poster}" data-label="{label}" data-category="{esc(cat)}">
+  <span class="vlist-num">{i}</span>
+  <span class="vlist-label">{label}</span>
+</li>\n"""
+        cat_en = BILINGUAL_CATS.get(cat, cat)
+        cat_html += f"""<ul class="vlist-group" data-category="{esc(cat)}">
+  <li class="vlist-group-header"><span lang="en">{esc(cat_en)}</span><span lang="zh" hidden>{esc(cat)}</span></li>
+  {items}</ul>\n"""
+    tabs = ""
+    for i, cat in enumerate(VIDEO_CATEGORIES):
+        tabs += biling_btn(cat, active=(i==0))
     return f"""<section class="wrap" id="video">
-  <h2 class="section-title" data-i18n="secVideo">Product Video</h2>
-  <p class="section-sub">Quick look at the {t_flat(cfg["product"].get("name",""))} in action.</p>
-  <div class="video-container">
-    <video controls preload="metadata" poster="{poster}">
-      <source src="{src}" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+  <h2 class="section-title"><span lang="en">Videos</span><span lang="zh" hidden>产品视频</span></h2>
+  <p class="section-sub"><span lang="en">Product videos and demonstrations.</span><span lang="zh" hidden>产品视频与演示。</span></p>
+  <div class="video-toolbar">
+    <div class="video-cats" id="video-cats">
+      {tabs}
+    </div>
+    <div class="video-actions">
+      <button type="button" class="btn btn-sm" id="video-edit-btn"><span lang="en">Edit Videos</span><span lang="zh" hidden>编辑视频</span></button>
+      <button type="button" class="btn btn-sm btn-primary" id="video-save-btn" hidden><span lang="en">Save Changes</span><span lang="zh" hidden>保存修改</span></button>
+    </div>
   </div>
+  <div class="video-area">
+    <div class="video-player-wrap">
+      <video class="video-player" id="video-player" controls preload="metadata">
+        <source src="" type="video/mp4" />
+      </video>
+      <p class="video-placeholder" id="video-placeholder"><span lang="en">Select a video to play</span><span lang="zh" hidden>选择一个视频播放</span></p>
+    </div>
+    <div class="video-list" id="video-list">
+      {cat_html}
+    </div>
+  </div>
+  <input type="file" id="video-file-input" accept="video/mp4,video/webm,video/ogg" multiple style="display:none" />
 </section>"""
+
+def build_video_script(cfg):
+    videos = cfg.get("videos", [])
+    old_video = cfg.get("video", {})
+    if old_video.get("available") and not videos:
+        videos = [{"label": "Product Video", "file": old_video["src"], "poster": old_video.get("poster",""), "category": "产品概览"}]
+    data = []
+    for v in videos:
+        data.append({
+            "label": v.get("label", ""),
+            "file": v["file"],
+            "poster": v.get("poster", ""),
+            "category": v.get("category", "产品概览")
+        })
+    return f"""<script id="video-data" type="application/json">{json.dumps(data)}</script>"""
 
 
 def build_specifications(cfg):
@@ -481,7 +540,8 @@ window.__PRODUCT_CONFIG__ = {{
     highlights = build_highlights(cfg)
     gallery = build_gallery(cfg)
     gallery_data_script = gallery_script(cfg)
-    video = build_video(cfg)
+    videos = build_videos(cfg)
+    video_data_script = build_video_script(cfg)
     specs = build_specifications(cfg)
     apps = build_applications(cfg)
     pkg = build_package(cfg)
@@ -590,7 +650,7 @@ document.addEventListener("DOMContentLoaded", function() {
 {hero}
 {highlights}
 {gallery}
-{video}
+{videos}
 {specs}
 {apps}
 {pkg}
@@ -603,6 +663,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 {inline_config}
 {gallery_data_script}
+{video_data_script}
 {doc_data_script}
 {i18n_script}
 {pdf_script}
